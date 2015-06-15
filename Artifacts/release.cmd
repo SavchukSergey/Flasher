@@ -1,12 +1,11 @@
 @echo off
 set flashersourcepath=../MicroFlasher.Wpf/Bin/Debug
-set flashertargetpath=release
+set flashertargetpath=release/flasher
 
 rd release /S /Q
 md release
 
 cd release
-md atma
 md flasher
 cd ..
 
