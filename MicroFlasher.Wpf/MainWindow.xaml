@@ -1,0 +1,110 @@
+﻿<Window x:Class="MicroFlasher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:commands="clr-namespace:MicroFlasher.Commands"
+        xmlns:views="clr-namespace:MicroFlasher.Views" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:MicroFlasher.Models"
+        xmlns:converters="clr-namespace:MicroFlasher.Converters"
+        mc:Ignorable="d"
+        Title="Flasher"
+        Height="700" Width="740"
+        MinWidth="740" MinHeight="700"
+        Padding="10" WindowStartupLocation="CenterScreen"
+        Icon="Icons/main.png"
+        d:DataContext="{d:DesignInstance models:FlasherModel}">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="OpenFlashCommand" />
+        <CommandBinding Command="ApplicationCommands.Save" Executed="SaveCommand" />
+        <CommandBinding Command="commands:FlasherCommands.OpenEeprom" Executed="OpenEepromCommand" />
+        <CommandBinding Command="commands:FlasherCommands.ReadDevice" Executed="ReadDeviceCommand" />
+        <CommandBinding Command="commands:FlasherCommands.WriteDevice" Executed="WriteDeviceCommand" />
+        <CommandBinding Command="commands:FlasherCommands.VerifyDevice" Executed="VerifyDeviceCommand" />
+        <CommandBinding Command="commands:FlasherCommands.EraseDevice" Executed="EraseDeviceCommand" />
+        <CommandBinding Command="commands:FlasherCommands.WriteLockBits" Executed="WriteLockBitsCommand" />
+        <CommandBinding Command="commands:FlasherCommands.WriteFuseBits" Executed="WriteFuseBitsCommand" />
+        <CommandBinding Command="commands:FlasherCommands.LockBits" Executed="LockBitsCommand" />
+        <CommandBinding Command="commands:FlasherCommands.FuseBits" Executed="FuseBitsCommand" />
+        <CommandBinding Command="commands:FlasherCommands.ResetDevice" Executed="ResetDevice" />
+        <CommandBinding Command="commands:FlasherCommands.Settings" Executed="SettingsCommand" />
+        <CommandBinding Command="commands:FlasherCommands.SerialMonitor" Executed="SerialMonitor" />
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="M" Modifiers="Control" Command="commands:FlasherCommands.SerialMonitor"/>
+        <KeyBinding Key="L" Modifiers="Control" Command="commands:FlasherCommands.LockBits"/>
+        <KeyBinding Key="F" Modifiers="Control" Command="commands:FlasherCommands.FuseBits"/>
+        <KeyBinding Key="R" Modifiers="Control" Command="commands:FlasherCommands.ReadDevice"/>
+        <KeyBinding Key="W" Modifiers="Control" Command="commands:FlasherCommands.WriteDevice"/>
+        <KeyBinding Key="V" Modifiers="Control" Command="commands:FlasherCommands.VerifyDevice"/>
+    </Window.InputBindings>
+    <Window.Resources>
+        <converters:GridLengthConverter x:Key="GridLengthConverter" />
+    </Window.Resources>
+    <DockPanel LastChildFill="True" x:Name="Root" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+            <Menu VerticalAlignment="Top">
+                <MenuItem Header="File">
+                    <MenuItem Header="Open Flash..." Command="ApplicationCommands.Open" />
+                    <MenuItem Header="Open Eeprom..." Command="commands:FlasherCommands.OpenEeprom" />
+                    <MenuItem Header="Save..." Command="ApplicationCommands.Save" />
+                </MenuItem>
+                <MenuItem Header="Device">
+                    <MenuItem Header="Read" Command="commands:FlasherCommands.ReadDevice" InputGestureText="Ctrl+R" />
+                    <MenuItem Header="Write" Command="commands:FlasherCommands.WriteDevice" InputGestureText="Ctrl+W" />
+                    <MenuItem Header="Verify" Command="commands:FlasherCommands.VerifyDevice" InputGestureText="Ctrl+V" />
+                    <MenuItem Header="Erase" Command="commands:FlasherCommands.EraseDevice" />
+                    <MenuItem Header="Lock Bits" Command="commands:FlasherCommands.LockBits" InputGestureText="Ctrl+L" />
+                    <MenuItem Header="Fuse Bits" Command="commands:FlasherCommands.FuseBits" InputGestureText="Ctrl+F" />
+                    <Separator />
+                    <MenuItem Header="Reset Device" Command="commands:FlasherCommands.ResetDevice" />
+                    <Separator />
+                    <MenuItem Header="Serial Monitor" Command="commands:FlasherCommands.SerialMonitor" InputGestureText="Ctrl+M" />
+                </MenuItem>
+                <MenuItem Header="Settings" Command="commands:FlasherCommands.Settings" />
+            </Menu>
+            <views:AppToolBar />
+        </StackPanel>
+        <StatusBar DockPanel.Dock="Bottom" >
+            <StatusBar.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="5,0,5,0" />
+                </Style>
+            </StatusBar.Resources>
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>FLASH size:</TextBlock>
+                    <TextBlock Text="{Binding Path=FlashHexBoard.Size}" />
+                </StackPanel>
+            </StatusBarItem>
+            <Separator />
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>EEPROM size:</TextBlock>
+                    <TextBlock Text="{Binding Path=EepromHexBoard.Size}" />
+                </StackPanel>
+            </StatusBarItem>
+            <Separator />
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Device:</TextBlock>
+                    <TextBlock Text="{Binding Path=Config.Device.Name}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid Background="SlateGray">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{Binding Path=FlashHexBoard.Size, Mode=OneWay, Converter={StaticResource GridLengthConverter}, ConverterParameter=3}" />
+                    <RowDefinition Height="{Binding Path=EepromHexBoard.Size, Mode=OneWay, Converter={StaticResource GridLengthConverter}, ConverterParameter=1}" />
+                    <RowDefinition Height="{Binding Path=FusesHexBoard.Size, Mode=OneWay, Converter={StaticResource GridLengthConverter}, ConverterParameter=1}" />
+                    <RowDefinition Height="{Binding Path=LocksHexBoard.Size, Mode=OneWay, Converter={StaticResource GridLengthConverter}, ConverterParameter=1}" />
+                </Grid.RowDefinitions>
+
+                <views:HexBoardView Grid.Row="0" DataContext="{Binding Path=FlashHexBoard}" Title="FLASH" Background="{Binding ElementName=Root, Path=Background}"/>
+                <views:HexBoardView Grid.Row="1" DataContext="{Binding Path=EepromHexBoard}" Title="EEPROM" Background="{Binding ElementName=Root, Path=Background}"/>
+                <views:HexBoardView Grid.Row="2" DataContext="{Binding Path=FusesHexBoard}" Title="FUSES" Background="{Binding ElementName=Root, Path=Background}"/>
+                <views:HexBoardView Grid.Row="3" DataContext="{Binding Path=LocksHexBoard}" Title="LOCKS" Background="{Binding ElementName=Root, Path=Background}"/>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>

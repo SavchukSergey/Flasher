@@ -1,0 +1,76 @@
+﻿<Grid x:Class="MicroFlasher.Views.HexBoardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:hex="clr-namespace:MicroFlasher.Hex;assembly=MicroFlasher"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="Grid" d:DataContext="{d:DesignInstance hex:HexBoard }">
+    <Grid.Resources>
+        <Style x:Key="ByteStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#008000" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="15,0,0,0">
+        <TextBlock Text="{Binding Title, ElementName=Grid}" VerticalAlignment="Center" FontSize="20" />
+        <Button Click="ButtonBase_OnClick" Content="Clear" Style="{StaticResource HexBoardButton}"/>
+    </StackPanel>
+
+    <DataGrid Grid.Row="1" ItemsSource="{Binding Path=Lines}" IsReadOnly="True" AutoGenerateColumns="False"
+                  FontFamily="Consolas" 
+                  FontWeight="Bold"
+                  CanUserResizeColumns="False"
+                  CanUserSortColumns="false"
+                  CanUserResizeRows="false"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  VerticalScrollBarVisibility="Visible"
+                  HorizontalGridLinesBrush="#a0a0a0"
+                  VerticalGridLinesBrush="#a0a0a0"
+                  AreRowDetailsFrozen="False"
+                  >
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Address" Binding="{Binding Path=Address, StringFormat=X4}" Foreground="#800000">
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Padding" Value="0, 0, 10, 0"/>
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+            <DataGridTextColumn Header="00" Binding="{Binding Path=Bytes[0].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="01" Binding="{Binding Path=Bytes[1].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="02" Binding="{Binding Path=Bytes[2].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="03" Binding="{Binding Path=Bytes[3].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="04" Binding="{Binding Path=Bytes[4].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="05" Binding="{Binding Path=Bytes[5].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="06" Binding="{Binding Path=Bytes[6].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="07" Binding="{Binding Path=Bytes[7].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="08" Binding="{Binding Path=Bytes[8].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="09" Binding="{Binding Path=Bytes[9].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="0A" Binding="{Binding Path=Bytes[10].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="0B" Binding="{Binding Path=Bytes[11].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="0C" Binding="{Binding Path=Bytes[12].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="0D" Binding="{Binding Path=Bytes[13].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="0E" Binding="{Binding Path=Bytes[14].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+            <DataGridTextColumn Header="0F" Binding="{Binding Path=Bytes[15].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
+
+            <DataGridTextColumn Binding="{Binding Path=Characters}" Width="*" Foreground="#ff00ff">
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Padding" Value="10, 0, 10, 0"/>
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</Grid>

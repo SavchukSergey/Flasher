@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="MicroFlasher.Views.AppToolBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:commands="clr-namespace:MicroFlasher.Commands"
+             mc:Ignorable="d" 
+             d:DesignHeight="64" d:DesignWidth="650">
+    <UserControl.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="MinWidth" Value="50" />
+        </Style>
+        <Style TargetType="Image">
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="32" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
+    <ToolBarTray Orientation="Horizontal">
+        <ToolBar>
+            <Button Command="ApplicationCommands.Open">
+                <StackPanel>
+                    <Image Source="../Icons/open.png" />
+                    <TextBlock>Open</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Command="ApplicationCommands.Save">
+                <StackPanel>
+                    <Image Source="../Icons/save.png" />
+                    <TextBlock>Save</TextBlock>
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <ToolBar>
+            <Button Command="commands:FlasherCommands.ReadDevice">
+                <StackPanel>
+                    <Image Source="../Icons/read.png" />
+                    <TextBlock>Read Device</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Command="commands:FlasherCommands.WriteDevice">
+                <StackPanel>
+                    <Image Source="../Icons/write.png" />
+                    <TextBlock>Write Device</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Command="commands:FlasherCommands.VerifyDevice">
+                <StackPanel>
+                    <Image Source="../Icons/verify.png" />
+                    <TextBlock>Verify Device</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Command="commands:FlasherCommands.EraseDevice">
+                <StackPanel>
+                    <Image Source="../Icons/erase.png" />
+                    <TextBlock>Erase Device</TextBlock>
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <ToolBar>
+            <Button Command="commands:FlasherCommands.LockBits">
+                <StackPanel>
+                    <Image Source="../Icons/lock-bits.png" />
+                    <TextBlock>Lock Bits</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Command="commands:FlasherCommands.FuseBits">
+                <StackPanel>
+                    <Image Source="../Icons/fuse-bits.png" />
+                    <TextBlock>Fuse Bits</TextBlock>
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <ToolBar>
+            <Button Command="commands:FlasherCommands.Settings">
+                <StackPanel>
+                    <Image Source="../Icons/settings.png" />
+                    <TextBlock>Settings</TextBlock>
+                </StackPanel>
+            </Button>
+        </ToolBar>
+    </ToolBarTray>
+
+</UserControl>

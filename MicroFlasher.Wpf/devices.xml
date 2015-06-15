@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<devices>
+  <device name="ATmega48a" ram="512" signature="1e9205">
+    <flash size="4096" page="64" />
+    <eeprom size="256" />
+  </device>
+  <device name="ATmega48pa" ram="512" signature="1e920a">
+    <flash size="4096" page="64" />
+    <eeprom size="256" />
+  </device>
+  <device name="ATmega88a" ram="1024" signature="1e930a">
+    <flash size="8192" page="64" />
+    <eeprom size="512" />
+  </device>
+  <device name="ATmega88pa" ram="1024" signature="1e930f">
+    <flash size="8192" page="64" />
+    <eeprom size="512" />
+  </device>
+  <device name="ATmega168a" eeprom="512" ram="1024" signature="1e9406">
+    <flash size="16384" page="128" />
+    <eeprom size="512" />
+  </device>
+  <device name="ATmega168pa" ram="1024" signature="1e940b">
+    <flash size="16384" page="128" />
+    <eeprom size="512" />
+  </device>
+  <device name="ATmega328" ram="2048" signature="1e9514" stkCode="0x86">
+    <flash size="32768" page="128" />
+    <eeprom size="1024" />
+    <lockBits>
+      <group>
+        <deviceBit bit="0" name="LB1" />
+        <deviceBit bit="1" name="LB2" />
+        <deviceBit bit="2" name="BLB01" />
+        <deviceBit bit="3" name="BLB02" />
+        <deviceBit bit="4" name="BLB11" />
+        <deviceBit bit="5" name="BLB12" />
+      </group>
+    </lockBits>
+    <fuseBits>
+      <group name="Clock Selection">
+        <deviceBit bit="3" name="CKSEL3" />
+        <deviceBit bit="2" name="CKSEL2" />
+        <deviceBit bit="1" name="CKSEL1" />
+        <deviceBit bit="0" name="CKSEL0" />
+      </group>
+      <group>
+        <deviceBit bit="4" name="SUT0" />
+        <deviceBit bit="5" name="SUT1" />
+        <deviceBit bit="6" name="CKOUT" />
+        <deviceBit bit="7" name="CKDIV8" />
+
+        <deviceBit bit="3" name="EESAVE" address="1" />
+        <deviceBit bit="4" name="WDTON" address="1" />
+        <deviceBit bit="5" name="SPIEN" address="1" />
+        <deviceBit bit="6" name="DWEN" address="1" />
+        <deviceBit bit="7" name="RSTDISBL" address="1" />
+      </group>
+      <group name="Boot settings">
+        <deviceBit bit="0" name="BOOTRST" address="1" />
+        <deviceBit bit="1" name="BOOTSZ0" address="1" />
+        <deviceBit bit="2" name="BOOTSZ1" address="1" />
+      </group>
+      <group name="Brown-out detection">
+        <deviceBit bit="2" name="BODLEVEL2" address="2" />
+        <deviceBit bit="1" name="BODLEVEL1" address="2" />
+        <deviceBit bit="0" name="BODLEVEL0" address="2" />
+      </group>
+    </fuseBits>
+  </device>
+  <device name="ATmega328p" ram="2048" signature="1e950f" stkCode="0x86">
+    <flash size="32768" page="128" />
+    <eeprom size="1024" />
+    <lockBits>
+      <group name="Lock Bits">
+        <deviceBit bit="0" name="LB1" />
+        <deviceBit bit="1" name="LB2" />
+        <deviceBit bit="2" name="BLB01" />
+        <deviceBit bit="3" name="BLB02" />
+        <deviceBit bit="4" name="BLB11" />
+        <deviceBit bit="5" name="BLB12" />
+      </group>
+    </lockBits>
+    <fuseBits>
+      <group name="Clock Selection">
+        <deviceBit bit="3" name="CKSEL3" />
+        <deviceBit bit="2" name="CKSEL2" />
+        <deviceBit bit="1" name="CKSEL1" />
+        <deviceBit bit="0" name="CKSEL0" />
+      </group>
+      <group name="Clock Fuses">
+        <deviceBit bit="5" name="SUT1" />
+        <deviceBit bit="4" name="SUT0" />
+        <deviceBit bit="6" name="CKOUT" />
+        <deviceBit bit="7" name="CKDIV8" />
+      </group>
+      <group name="Fuses">
+        <deviceBit bit="3" name="EESAVE" address="1" />
+        <deviceBit bit="4" name="WDTON" address="1" />
+        <deviceBit bit="5" name="SPIEN" address="1" />
+        <deviceBit bit="6" name="DWEN" address="1" />
+        <deviceBit bit="7" name="RSTDISBL" address="1" />
+      </group>
+      <group name="Boot settings">
+        <deviceBit bit="2" name="BOOTSZ1" address="1" />
+        <deviceBit bit="1" name="BOOTSZ0" address="1" />
+        <deviceBit bit="0" name="BOOTRST" address="1" />
+      </group>
+
+      <group name="Brown-out detection">
+        <deviceBit bit="2" name="BODLEVEL2" address="2" />
+        <deviceBit bit="1" name="BODLEVEL1" address="2" />
+        <deviceBit bit="0" name="BODLEVEL0" address="2" />
+      </group>
+    </fuseBits>
+  </device>
+
+
+  <device name="ATtiny11" signature="1e9005">
+  </device>
+
+  <device name="ATtiny12" signature="1e9005">
+  </device>
+
+  <device name="ATtiny15" signature="1e9006">
+  </device>
+
+  <device name="ATtiny22" signature="1e9106">
+  </device>
+
+  <device name="ATtiny26" signature="1e9109">
+  </device>
+
+  <device name="ATtiny28" signature="1e9107">
+  </device>
+
+  <device name="AT90S1200" signature="1e9001">
+  </device>
+
+  <device name="AT90S2313" signature="1e9101">
+  </device>
+
+  <device name="AT90S2323" signature="1e9102">
+  </device>
+
+  <device name="AT90S2333" signature="1e9105">
+  </device>
+
+  <device name="AT90S2343" signature="1e9103">
+  </device>
+
+  <device name="AT90S4414" signature="1e9201">
+  </device>
+
+  <device name="AT90S4433" signature="1e9203">
+  </device>
+
+  <device name="AT90S4434" signature="1e9202">
+  </device>
+
+  <device name="AT90S8515" signature="1e9301">
+  </device>
+
+  <device name="AT90S8535" signature="1e9303">
+  </device>
+
+
+  <device name="ATmega8" signature="1e9307">
+    <fuseBits>
+      <group name="Clock Selection">
+        <deviceBit bit="3" name="CKSEL3" />
+        <deviceBit bit="2" name="CKSEL2" />
+        <deviceBit bit="1" name="CKSEL1" />
+        <deviceBit bit="0" name="CKSEL0" />
+      </group>
+      <group>
+        <deviceBit bit="4" name="SUT0" />
+        <deviceBit bit="5" name="SUT1" />
+
+        <deviceBit bit="3" name="EESAVE" address="1" />
+        <deviceBit bit="4" name="CKOPT" address="1" />
+        <deviceBit bit="5" name="SPIEN" address="1" />
+        <deviceBit bit="6" name="WDTON" address="1" />
+        <deviceBit bit="7" name="RSTDISBL" address="1" />
+      </group>
+      <group name="Boot settings">
+        <deviceBit bit="0" name="BOOTRST" address="1" />
+        <deviceBit bit="1" name="BOOTSZ0" address="1" />
+        <deviceBit bit="2" name="BOOTSZ1" address="1" />
+      </group>
+      <group name="Brown-out detection">
+        <deviceBit bit="7" name="BODLEVEL" address="0" />
+        <deviceBit bit="6" name="BODEN" address="2" />
+      </group>
+    </fuseBits>
+  </device>
+
+  <device name="ATmega8515" signature="1e9306">
+  </device>
+
+  <device name="ATmega8535" signature="1e9308">
+  </device>
+
+  <device name="ATmega161" signature="1e9401">
+  </device>
+
+  <device name="ATmega163" signature="1e9402">
+  </device>
+
+  <device name="ATmega16" signature="1e9403">
+  </device>
+
+  <device name="ATmega162" signature="1e9404">
+  </device>
+
+  <device name="ATmega169" signature="1e9405">
+  </device>
+
+  <device name="ATmega323" signature="1e9501">
+  </device>
+
+  <device name="ATmega32" signature="1e9502">
+  </device>
+
+  <device name="ATmega64" signature="1e9602">
+  </device>
+
+  <device name="ATmega103" signature="1e9701">
+  </device>
+
+  <device name="ATmega128" signature="1e9702">
+  </device>
+
+  <device name="AT89551" signature="1e5106">
+  </device>
+
+  <device name="AT89552" signature="1e5206">
+  </device>
+
+  <device name="AT86RF401" signature="1e9181">
+  </device>
+
+  <device name="PIC16F628" ram="224" stkCode="0x01">
+    <flash size="4096" />
+    <eeprom size="128" />
+
+    <lockBits page="2" location="flash">
+      <group name="Code protection">
+        <deviceBit bit="5" name="Flash Program Memory Code Protection" address="0x400f" inverse="true" code="CP" >
+          <description>
+            0 = Code protection off
+            1 = 0000h to 07FFh code protected
+          </description>
+        </deviceBit>
+        <deviceBit bit="0" name="Data Code Protection" address="0x400f" inverse="true" code="CPD" >
+          <description>
+            0 = Data memory code protection off
+            1 = Data memory code protected
+          </description>
+        </deviceBit>
+
+        <deviceBit bit="0" name="Low byte of configuration word" address="0x400e" hidden="true" />
+      </group>
+    </lockBits>
+
+    <fuseBits page="2" location="flash">
+
+      <group name="Fuses">
+        <deviceBit bit="7" name="Low Voltage Programming Enabled" address="0x400e" code="LVP">
+          <description>
+            1 = RB4/PGM pin has PGM function, Low Voltage Programming enabled
+            0 = RB4/PGM is digital input, HV on MCLR must be used for programming
+          </description>
+        </deviceBit>
+        <deviceBit bit="6" name="Brown-out Detect Reset Enabled" address="0x400e" code="BODEN">
+          <description>
+            1 = BOD Reset enabled
+            0 = BOD Reset disabled
+          </description>
+        </deviceBit>
+        <deviceBit bit="5" name="RA5/MCLR Pin Function Select bit" address="0x400e" code="MCLRE">
+          <description>
+            1 = RA5/MCLR pin function is MCLR
+            0 = RA5/MCLR pin function is digital input, MCLR internally tied to VDD
+          </description>
+        </deviceBit>
+        <deviceBit bit="3" name="Power-up Timer Enabled" address="0x400e" inverse="true" code="PWRTEN">
+          <description>
+            1 = PWRT enabled
+            0 = PWRT disabled
+          </description>
+        </deviceBit>
+        <deviceBit bit="2" name="Watchdog Timer Enabled" address="0x400e" code="WDTEN" >
+          <description>
+            1 = WDT enabled
+            0 = WDT disabled
+          </description>
+        </deviceBit>
+
+        <deviceBit bit="0" name="High byte of configuration word" address="0x400f" hidden="true" />
+      </group>
+
+      <group name="Oscillator Selection">
+        <deviceBit bit="4" name="FOSC2" address="0x400e" />
+        <deviceBit bit="1" name="FOSC1" address="0x400e" />
+        <deviceBit bit="0" name="FOSC0" address="0x400e" />
+      </group>
+
+    </fuseBits>
+
+  </device>
+
+</devices>

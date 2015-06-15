@@ -1,0 +1,12 @@
+/references/*/
+/packages/*/
+/MicroFlasher.v12.suo
+/MicroFlasher.sln.DotSettings.user
+
+/MicroFlasher/bin/
+/MicroFlasher/obj/
+/MicroFlasher/*.user
+/MicroFlasher/Icons/Thumbs.db
+/MicroFlasher.Wpf/bin/
+/MicroFlasher.Wpf/obj/
+/Artifacts/release/

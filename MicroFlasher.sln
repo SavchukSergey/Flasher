@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40418.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "artifacts", "artifacts", "{478F1F1C-402E-4AB4-8313-BF46553D3A5D}"
+	ProjectSection(SolutionItems) = preProject
+		Artifacts\release.cmd = Artifacts\release.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{464B2743-1464-4B77-AC89-74732AAC8094}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroFlasher.Wpf", "MicroFlasher.Wpf\MicroFlasher.Wpf.csproj", "{15EF3696-CF7A-4AD2-AE4F-AEF418DB09D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroFlasher", "MicroFlasher\MicroFlasher.csproj", "{0C30F079-3B8D-4B53-92F8-6ABF036C430F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15EF3696-CF7A-4AD2-AE4F-AEF418DB09D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15EF3696-CF7A-4AD2-AE4F-AEF418DB09D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15EF3696-CF7A-4AD2-AE4F-AEF418DB09D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15EF3696-CF7A-4AD2-AE4F-AEF418DB09D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C30F079-3B8D-4B53-92F8-6ABF036C430F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C30F079-3B8D-4B53-92F8-6ABF036C430F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C30F079-3B8D-4B53-92F8-6ABF036C430F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C30F079-3B8D-4B53-92F8-6ABF036C430F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

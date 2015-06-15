@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:MicroFlasher.Converters"
+                    xmlns:io="clr-namespace:MicroFlasher.IO;assembly=MicroFlasher">
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <Style TargetType="DataGrid">
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    <Style x:Key="HexBoardButton" TargetType="Button">
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <Style x:Key="DialogContainer" TargetType="Panel">
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <Style TargetType="ComboBox">
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <Style TargetType="CheckBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="4,0,0,0" />
+    </Style>
+    <converters:ProgressStateConverter x:Key="ProgressStateConverter" />
+    <x:Array x:Key="OuputComPins" Type="io:ComPinType">
+        <io:ComPinType>Rts</io:ComPinType>
+        <io:ComPinType>Dtr</io:ComPinType>
+        <io:ComPinType>TxD</io:ComPinType>
+    </x:Array>
+    <x:Array x:Key="InputComPins" Type="io:ComPinType">
+        <io:ComPinType>Cts</io:ComPinType>
+        <io:ComPinType>CD</io:ComPinType>
+        <io:ComPinType>Dsr</io:ComPinType>
+        <io:ComPinType>None</io:ComPinType>
+    </x:Array>
+
+</ResourceDictionary>
