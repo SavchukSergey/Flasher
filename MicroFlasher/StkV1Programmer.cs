@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using MicroFlasher.Devices;
 using MicroFlasher.STKv1;
 
@@ -20,6 +21,8 @@ namespace MicroFlasher {
             _client.Open();
             if (_useReset) {
                 _client.ResetDevice();
+            } else {
+                Thread.Sleep(1500);
             }
             _client.GetSyncLoop();
             _client.SetDeviceParameters(new StkV1DeviceParameters {
