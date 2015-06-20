@@ -134,6 +134,56 @@
   <device name="ATtiny28" signature="1e9107">
   </device>
 
+  <device name="ATtiny2313" signature="1E910A" ram="128" stkCode="0x86">
+    <flash size="2048" page="32" />
+    <eeprom size="128" />
+    <lockBits>
+      <group name="Lock Bits">
+        <deviceBit bit="0" name="LB1" />
+        <deviceBit bit="1" name="LB2" />
+      </group>
+    </lockBits>
+
+
+    <fuseBits>
+      <group name="Fuse Extended Byte">
+        <deviceBit bit="0" name="SELFPRGEN" address="2">
+          <description>
+            Self Programming Enable
+          </description>
+        </deviceBit>
+      </group>
+      <group name="Clock Selection">
+        <deviceBit bit="3" name="CKSEL3" />
+        <deviceBit bit="2" name="CKSEL2" />
+        <deviceBit bit="1" name="CKSEL1" />
+        <deviceBit bit="0" name="CKSEL0" />
+        <deviceBit bit="7" name="CKDIV8" />
+        <deviceBit bit="6" name="CKOUT" />
+      </group>
+      <group>
+        <deviceBit bit="5" name="SUT1" />
+        <deviceBit bit="4" name="SUT0" />
+
+        <deviceBit bit="7" name="DWEN" address="1">
+          <description>
+            debugWire Enable
+          </description>
+        </deviceBit>
+        <deviceBit bit="6" name="EESAVE" address="1" />
+
+        <deviceBit bit="5" name="SPIEN" address="1" />
+        <deviceBit bit="4" name="WDTON" address="1" />
+        <deviceBit bit="0" name="RSTDISBL" address="1" />
+      </group>
+      <group name="Brown-out detection">
+        <deviceBit bit="3" name="BODLEVEL2" address="1" />
+        <deviceBit bit="2" name="BODLEVEL1" address="1" />
+        <deviceBit bit="1" name="BODLEVEL0" address="1" />
+      </group>
+    </fuseBits>
+  </device>
+
   <device name="AT90S1200" signature="1e9001">
   </device>
 
@@ -165,7 +215,19 @@
   </device>
 
 
-  <device name="ATmega8" signature="1e9307">
+  <device name="ATmega8" signature="1e9307" ram="1024" stkCode="0x86">
+    <flash size="8192" page="64" />
+    <eeprom size="512" />
+    <lockBits>
+      <group name="Lock Bits">
+        <deviceBit bit="0" name="LB1" />
+        <deviceBit bit="1" name="LB2" />
+        <deviceBit bit="2" name="BLB01" />
+        <deviceBit bit="3" name="BLB02" />
+        <deviceBit bit="4" name="BLB11" />
+        <deviceBit bit="5" name="BLB12" />
+      </group>
+    </lockBits>
     <fuseBits>
       <group name="Clock Selection">
         <deviceBit bit="3" name="CKSEL3" />
