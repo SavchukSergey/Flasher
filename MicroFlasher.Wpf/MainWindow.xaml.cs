@@ -24,7 +24,7 @@ namespace MicroFlasher {
 
         private void OpenFlashCommand(object sender, ExecutedRoutedEventArgs e) {
             var dlg = new OpenFileDialog {
-                Filter = "Intel Hex File (.hex)|*.hex"
+                Filter = "Intel Hex File|*.hex;*.eep|All Files|*.*"
             };
 
             var result = dlg.ShowDialog();
@@ -40,7 +40,7 @@ namespace MicroFlasher {
 
         private void OpenEepromCommand(object sender, ExecutedRoutedEventArgs e) {
             var dlg = new OpenFileDialog {
-                Filter = "Intel Hex File (.hex)|*.hex"
+                Filter = "Intel Hex File|*.hex;*.eep|All Files|*.*"
             };
 
             var result = dlg.ShowDialog();
@@ -56,7 +56,7 @@ namespace MicroFlasher {
 
         private void SaveCommand(object sender, ExecutedRoutedEventArgs e) {
             var dlg = new SaveFileDialog {
-                Filter = "Intel Hex File (.hex)|*.hex"
+                Filter = "Intel Hex File|*.hex;*.eep|All Files|*.*"
             };
 
             var result = dlg.ShowDialog();
