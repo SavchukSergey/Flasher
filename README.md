@@ -21,7 +21,7 @@ To program device with bootloader, i.e. arduino board, make sure you toggled "Us
 If you use intermediate controller to program other ("target") device. Please uncheck "Use Reset" option.
 
 ### Microchip devices
-There is stk500 protocol implementation for PIC microcontrollers (see related projects).
+There is stk500 protocol implementation for PIC microcontrollers (see [FlasherCore](https://github.com/SavchukSergey/FlasherCore)).
 Make sure you have selected proper devices in settings menu. This will switch intermediate controller into PIC programming state.
 
 ## Com Bit Bang
