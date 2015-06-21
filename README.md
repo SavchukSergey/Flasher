@@ -12,7 +12,7 @@ Currently there are two protocols implemented stk500 v1 and bit bang.
 Flasher has stk500v1 protocol implemented.
 Stk500 protocol implies that you have either intermediate controller or you have a bootloader on target controller. The board must be connected via COM port (physical or virtual).
 This protocol was used for programming stk500 boards (1st version) and also is used by arduino boards.
-For more information about protocol see AVR061
+For more information about protocol see [AVR061](http://www.atmel.com/Images/doc2525.pdf)
 
 ### Bootloader
 To program device with bootloader, i.e. arduino board, make sure you toggled "Use Reset" checkbox settings in order to make your device's bootloader run and intercept incoming requests.
