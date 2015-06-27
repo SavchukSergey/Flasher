@@ -95,12 +95,16 @@ namespace MicroFlasher {
 
         private void SettingsCommand(object sender, ExecutedRoutedEventArgs e) {
             var settings = FlasherConfig.Read();
+            var oldDevice = settings.Device.Name;
             var dlg = new SettingsWindow {
                 DataContext = settings,
                 Owner = this
             };
             if (dlg.ShowDialog() ?? false) {
                 settings.Save();
+                if (settings.Device.Name != oldDevice) {
+                    Model.ClearAll();
+                }
                 Model.ReloadConfig();
             }
         }

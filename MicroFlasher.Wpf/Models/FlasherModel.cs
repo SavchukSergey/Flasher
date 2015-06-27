@@ -340,5 +340,11 @@ namespace MicroFlasher.Models {
             return programmerConfig.CreateProgrammer(device);
         }
 
+        public void ClearAll() {
+            FlashHexBoard.Clear();
+            EepromHexBoard.Clear();
+            FusesHexBoard.Clear();
+            LocksHexBoard.Clear();
+        }
     }
 }
