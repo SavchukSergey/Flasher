@@ -119,6 +119,7 @@ namespace MicroFlasher.Hex {
         }
 
         public HexBlocks SplitBlocks(int pageSize = 1) {
+            pageSize = Math.Max(1, pageSize);
             var res = new HexBlocks();
             var blockStart = 0;
             var address = 0;
