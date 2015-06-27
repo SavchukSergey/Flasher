@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using MicroFlasher.IO;
 using MicroFlasher.Models;
+using MicroFlasher.Views.Operations;
 
 namespace MicroFlasher.Views.SerialMonitor {
     /// <summary>
@@ -108,7 +109,7 @@ namespace MicroFlasher.Views.SerialMonitor {
 
         private bool _altMode;
         private int? _altChar;
-        
+
         private void MessageToSend_OnPreviewKeyDown(object sender, KeyEventArgs e) {
             if (e.Key == Key.System) {
                 var digit = GetDigit(e.SystemKey);
@@ -172,6 +173,22 @@ namespace MicroFlasher.Views.SerialMonitor {
             }
         }
 
+        private void ResetDevice(object sender, ExecutedRoutedEventArgs e) {
+            try {
+                _channel.Close();
+                var dlg = new ResetDeviceWindow {
+                    DataContext = new FlasherOperationModel(Model),
+                    Owner = this
+                };
+                dlg.ShowDialog();
+            } finally {
+                _channel.Open();
+            }
+        }
+
+        protected FlasherModel Model {
+            get { return (FlasherModel)DataContext; }
+        }
 
     }
 }
