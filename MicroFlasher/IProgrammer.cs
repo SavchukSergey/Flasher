@@ -3,7 +3,7 @@
 namespace MicroFlasher {
     public interface IProgrammer : IDisposable {
 
-        void Start();
+        ProgrammingSession Start();
 
         void Stop();
 

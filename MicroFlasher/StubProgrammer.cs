@@ -12,7 +12,8 @@ namespace MicroFlasher {
         public void Dispose() {
         }
 
-        public void Start() {
+        public ProgrammingSession Start() {
+            return new ProgrammingSession(this);
         }
 
         public void Stop() {

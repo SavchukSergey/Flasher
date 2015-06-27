@@ -17,7 +17,7 @@ namespace MicroFlasher {
             _useReset = useReset;
         }
 
-        public void Start() {
+        public ProgrammingSession Start() {
             _client.Open();
             if (_useReset) {
                 _client.ResetDevice();
@@ -49,6 +49,7 @@ namespace MicroFlasher {
                 ResetDisable = 0
             });
             _client.EnterProgramMode();
+            return new ProgrammingSession(this);
         }
 
         public void Stop() {

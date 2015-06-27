@@ -20,9 +20,9 @@ namespace MicroFlasher {
             _inner.Dispose();
         }
 
-        public void Start() {
+        public ProgrammingSession Start() {
             _deviceOperation.CurrentState = "Entering programming mode";
-            _inner.Start();
+            return _inner.Start();
         }
 
         public void Stop() {

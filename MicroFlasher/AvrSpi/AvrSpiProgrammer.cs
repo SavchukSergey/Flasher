@@ -10,9 +10,10 @@
             _client.Dispose();
         }
 
-        public void Start() {
+        public ProgrammingSession Start() {
             _client.Open();
             _client.StartProgram();
+            return new ProgrammingSession(this);
         }
 
         public void Stop() {
