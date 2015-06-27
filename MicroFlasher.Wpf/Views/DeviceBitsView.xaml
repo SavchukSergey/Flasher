@@ -11,7 +11,7 @@
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                     <StackPanel Orientation="Vertical" Margin="5">
-                        <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="16" Margin="5" />
+                    <TextBlock Text="{Binding Path=Name}" ToolTip="{Binding Path=Description}" FontWeight="Bold" FontSize="16" Margin="5" />
                         <ItemsControl ItemsSource="{Binding Path=VisibleBits}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>

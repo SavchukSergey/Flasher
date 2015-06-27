@@ -14,6 +14,8 @@ namespace MicroFlasher.Devices {
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public int StartAddress {
             get {
                 return _bits.Count == 0 ? 0 : _bits.Min(item => item.Address);
@@ -33,8 +35,10 @@ namespace MicroFlasher.Devices {
         public static DeviceBitsGroup From(XElement xBits) {
             var res = new DeviceBitsGroup();
             var xName = xBits.Attribute("name");
+            var xDescription = xBits.Element("description");
             res.Name = xName != null ? xName.Value : "";
-            foreach (var xBit in xBits.Elements()) {
+            res.Description = xDescription != null ? xDescription.Value.Trim() : "";
+            foreach (var xBit in xBits.Elements("deviceBit")) {
                 res.Bits.Add(DeviceBit.From(xBit));
             }
             return res;

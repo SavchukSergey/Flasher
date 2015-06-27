@@ -39,12 +39,15 @@
     </lockBits>
     <fuseBits>
       <group name="Clock Selection">
+        <description>
+          Clock Mode Selection
+        </description>
         <deviceBit bit="3" name="CKSEL3" />
         <deviceBit bit="2" name="CKSEL2" />
         <deviceBit bit="1" name="CKSEL1" />
         <deviceBit bit="0" name="CKSEL0" />
       </group>
-      <group>
+      <group name="Clock Fuses">
         <deviceBit bit="4" name="SUT0" />
         <deviceBit bit="5" name="SUT1" />
         <deviceBit bit="6" name="CKOUT" />
