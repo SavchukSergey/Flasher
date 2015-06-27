@@ -5,6 +5,7 @@ using MicroFlasher.Views;
 using MicroFlasher.Views.Operations;
 using MicroFlasher.Views.SerialMonitor;
 using Atmega.Hex;
+using MicroFlasher.Commands;
 using Microsoft.Win32;
 
 namespace MicroFlasher {
@@ -82,6 +83,9 @@ namespace MicroFlasher {
                     Owner = this
                 };
                 dlg.ShowDialog();
+                if (_model.Config.AutoVerify) {
+                    VerifyDeviceCommand(this, null);
+                }
             }
         }
 

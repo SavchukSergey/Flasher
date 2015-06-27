@@ -19,6 +19,9 @@
             <Button Content="Cancel" Command="Close" IsCancel="True" />
         </StackPanel>
         <TabControl>
+            <TabItem Header="General">
+                <settings:GeneralSettingsView />
+            </TabItem>
             <TabItem Header="Connection">
                 <settings:ConnectionView />
             </TabItem>

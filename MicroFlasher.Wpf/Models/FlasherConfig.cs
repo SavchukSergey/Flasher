@@ -23,6 +23,8 @@ namespace MicroFlasher.Models {
             get { return _comBitBang; }
         }
 
+        public bool AutoVerify { get; set; }
+
         public FlasherConfig()
             : base(string.Empty) {
             _stkv1 = new StkV1Config("StkV1.");
@@ -64,6 +66,7 @@ namespace MicroFlasher.Models {
             _stkv1.ReadFromConfig();
             _comBitBang.ReadFromConfig();
             _stub.ReadFromConfig();
+            AutoVerify = GetConfigBool(false, "Verify");
 
             ProgrammerTypes.Clear();
             ProgrammerTypes.Add(new KeyValuePair<ProgrammerType, string>(ProgrammerType.StkV1, "STK v1"));
@@ -86,6 +89,7 @@ namespace MicroFlasher.Models {
         public override void Save() {
             UpdateConfig(ProgrammerType.ToString(), "ProgrammerType");
             UpdateConfig(Device.Name, "DeviceName");
+            UpdateConfigBool("Verify", AutoVerify);
             _stkv1.Save();
             _comBitBang.Save();
             _stub.Save();
