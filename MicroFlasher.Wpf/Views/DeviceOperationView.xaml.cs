@@ -5,8 +5,10 @@ namespace MicroFlasher.Views {
     /// Interaction logic for DeviceOperationView.xaml
     /// </summary>
     public partial class DeviceOperationView : UserControl {
+
         public DeviceOperationView() {
             InitializeComponent();
         }
+
     }
 }

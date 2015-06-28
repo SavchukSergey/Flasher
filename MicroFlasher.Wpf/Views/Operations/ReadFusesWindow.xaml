@@ -6,7 +6,8 @@
         xmlns:models="clr-namespace:MicroFlasher.Models"
         xmlns:operations="clr-namespace:MicroFlasher.Views.Operations"
         mc:Ignorable="d"
-        Title="Reading Fuses" Height="142" Width="300"
+        Title="Reading Fuses"
+        SizeToContent="Height" Width="300"
         Icon="../../Icons/read.png"
         d:DataContext="{d:DesignInstance models:FlasherOperationModel }">
     <operations:BaseDeviceOperationWindow.TaskbarItemInfo>

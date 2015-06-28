@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace MicroFlasher {
     public class DeviceOperation {
@@ -79,5 +80,8 @@ namespace MicroFlasher {
         public CancellationToken CancellationToken {
             get { return _cancellationTokenSource.Token; }
         }
+
+        public virtual TimeSpan ExecutionTime { get; set; }
+
     }
 }

@@ -7,8 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance flasher:DeviceOperation}">
     <StackPanel Orientation="Vertical" x:Name="OperationView" >
-        <TextBlock>Progress:</TextBlock>
-        <ProgressBar Minimum="0" Maximum="100" Value="{Binding Path=Progress, Mode=OneWay}" Height="50" />
+        <ProgressBar Minimum="0" Maximum="100" Value="{Binding Path=Progress, Mode=OneWay}" Height="50" Margin="0,5,0,5" />
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+            <TextBlock Margin="0,0,10,0">Execution time:</TextBlock>
+            <TextBlock Text="{Binding Path=ExecutionTime, StringFormat=mm\\:ss\\.f}" />
+        </StackPanel>
         <TextBlock Text="{Binding CurrentState}" />
     </StackPanel>
 </UserControl>

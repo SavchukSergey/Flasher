@@ -6,7 +6,8 @@
         xmlns:models="clr-namespace:MicroFlasher.Models"
         xmlns:operations="clr-namespace:MicroFlasher.Views.Operations"
         mc:Ignorable="d"
-        Title="Reseting Device" Height="142" Width="300"
+        Title="Reseting Device" 
+        SizeToContent="Height" Width="300"
         Icon="../../Icons/reset.png"
         d:DataContext="{d:DesignInstance models:FlasherOperationModel }">
     <operations:BaseDeviceOperationWindow.TaskbarItemInfo>
