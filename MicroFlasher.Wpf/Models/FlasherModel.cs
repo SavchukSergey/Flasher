@@ -13,6 +13,8 @@ namespace MicroFlasher.Models {
         private HexBoard _fusesHexBoard = new HexBoard();
         private HexBoard _locksHexBoard = new HexBoard();
 
+        private const int MAX_EEPROM_BLOCK_SIZE = 32;
+
         public FlasherModel() {
             _eepromHexBoard[0] = null;
             _flashHexBoard[0] = null;
@@ -166,7 +168,7 @@ namespace MicroFlasher.Models {
             var device = Config.Device;
 
             var flashBlocks = FlashHexBoard.SplitBlocks(device.Flash.PageSize);
-            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize);
+            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize, MAX_EEPROM_BLOCK_SIZE);
 
             op.FlashSize += flashBlocks.TotalBytes;
             op.EepromSize += eepromBlocks.TotalBytes;

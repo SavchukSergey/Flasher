@@ -118,7 +118,7 @@ namespace MicroFlasher.Hex {
             return res;
         }
 
-        public HexBlocks SplitBlocks(int pageSize = 1) {
+        public HexBlocks SplitBlocks(int pageSize = 1, int maxBlockSize = int.MaxValue) {
             pageSize = Math.Max(1, pageSize);
             var res = new HexBlocks();
             var blockStart = 0;
@@ -136,7 +136,7 @@ namespace MicroFlasher.Hex {
                     }
                 }
 
-                if (bt.Address != address) {
+                if (bt.Address != address || bytes.Count > maxBlockSize) {
                     if (bytes.Count > 0) {
                         res.Blocks.Add(new HexBlock {
                             Address = blockStart,
