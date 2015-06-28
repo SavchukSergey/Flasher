@@ -302,6 +302,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Icons\clear.png" />
     <Resource Include="Icons\serial-monitor.png" />
     <Resource Include="Icons\main.ico" />
     <Resource Include="Icons\reset.png" />

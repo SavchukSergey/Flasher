@@ -14,7 +14,13 @@
                     <TextBlock>Reset</TextBlock>
                 </StackPanel>
             </Button>
-          
+            <Button Command="commands:FlasherCommands.ClearLog">
+                <StackPanel>
+                    <Image Source="../../Icons/clear.png" />
+                    <TextBlock>Clear Log</TextBlock>
+                </StackPanel>
+            </Button>
+
         </ToolBar>
        
     </ToolBarTray>

@@ -13,6 +13,7 @@
         >
     <Window.CommandBindings>
         <CommandBinding Command="commands:FlasherCommands.ResetDevice" Executed="ResetDevice" />
+        <CommandBinding Command="commands:FlasherCommands.ClearLog" Executed="ClearLog" />
     </Window.CommandBindings>    
     <Window.Resources>
         <Style x:Key="MyMessage" TargetType="Paragraph">
@@ -64,7 +65,7 @@
                 <ContextMenu>
                     <MenuItem Header="Copy" Command="Copy" />
                     <Separator />
-                    <MenuItem Click="ClearLog" Header="Clear" />
+                    <MenuItem Header="Clear" Command="commands:FlasherCommands.ClearLog" />
                 </ContextMenu>
             </RichTextBox.ContextMenu>
             <FlowDocument></FlowDocument>
