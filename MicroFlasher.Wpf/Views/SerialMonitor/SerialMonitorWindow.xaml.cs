@@ -19,6 +19,7 @@ namespace MicroFlasher.Views.SerialMonitor {
         private readonly CancellationTokenSource _source = new CancellationTokenSource();
 
         private Run _receivedRun;
+        private Run _runToFocus;
 
         private DateTime _receivedDateTime;
         private readonly TimeSpan _threshold = TimeSpan.FromMilliseconds(500);
@@ -40,19 +41,21 @@ namespace MicroFlasher.Views.SerialMonitor {
         }
 
         private void SendMessage(string content) {
-            var para = new Paragraph(new Run(content)) { Style = _myStyle };
+            var run = new Run(content);
+            var para = new Paragraph(run) { Style = _myStyle };
             MessageLog.Document.Blocks.Add(para);
             foreach (var ch in content) {
                 _channel.SendByte((byte)ch);
                 _bytesSent++;
             }
+            _runToFocus = run;
             FlushReceived();
             RefreshStatus();
         }
 
         private void FlushReceived() {
             if (_receivedRun != null && _receivedRun.Text.Length > 0) {
-                _receivedRun.BringIntoView();
+                _runToFocus = _receivedRun;
                 _receivedRun = null;
             }
         }
@@ -78,7 +81,8 @@ namespace MicroFlasher.Views.SerialMonitor {
         private void Navigate(Dispatcher disp) {
             while (!_source.IsCancellationRequested) {
                 disp.Invoke(() => {
-                    var run = _receivedRun;
+                    var run = _runToFocus;
+                    _runToFocus = null;
                     if (run != null && run.Text.Length > 0) {
                         run.BringIntoView();
                     }
@@ -113,6 +117,7 @@ namespace MicroFlasher.Views.SerialMonitor {
                             MessageLog.Document.Blocks.Add(para);
                         }
                         _receivedRun.Text += (char)bt;
+                        _runToFocus = _receivedRun;
                         RefreshStatus();
                     }
                 });
