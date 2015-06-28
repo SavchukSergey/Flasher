@@ -190,5 +190,10 @@ namespace MicroFlasher.Views.SerialMonitor {
             get { return (FlasherModel)DataContext; }
         }
 
+        private void MessageToSend_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
+            if (e.NewFocus == null || !e.NewFocus.Equals(MessageLog)) {
+                ((FrameworkElement)sender).Focus();
+            }
+        }
     }
 }

@@ -33,6 +33,7 @@
                      PreviewKeyDown="MessageToSend_OnPreviewKeyDown"
                      PreviewKeyUp="MessageToSend_OnPreviewKeyUp"
                      KeyDown="MessageToSend_OnKeyDown"
+                     LostKeyboardFocus="MessageToSend_OnLostKeyboardFocus"
                      ToolTip="Enter message to be sent" />
         </DockPanel>
         <RichTextBox x:Name="MessageLog" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="5" 
