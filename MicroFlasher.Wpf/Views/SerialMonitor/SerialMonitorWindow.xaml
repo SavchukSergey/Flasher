@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:MicroFlasher.Views"
         xmlns:commands="clr-namespace:MicroFlasher.Commands"
+        xmlns:serialMonitor="clr-namespace:MicroFlasher.Views.SerialMonitor"
         Title="Serial Monitor"
         Height="300" Width="500"
         MinHeight="300" MinWidth="500"
@@ -25,7 +26,7 @@
         </Style>
     </Window.Resources>
     <DockPanel LastChildFill="True">
-        <views:MonitorToolBar DockPanel.Dock="Top" />
+        <serialMonitor:MonitorToolBar DockPanel.Dock="Top" />
         <DockPanel LastChildFill="True" DockPanel.Dock="Bottom">
             <Button Content="Send" HorizontalAlignment="Center" DockPanel.Dock="Right" Click="Button_Click" />
             <TextBox x:Name="MessageToSend" VerticalContentAlignment="Center"

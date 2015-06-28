@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace MicroFlasher.Views {
+namespace MicroFlasher.Views.SerialMonitor {
     /// <summary>
     /// Interaction logic for MonitorToolBar.xaml
     /// </summary>

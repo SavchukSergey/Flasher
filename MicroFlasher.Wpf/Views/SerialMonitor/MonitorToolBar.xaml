@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MicroFlasher.Views.MonitorToolBar"
+﻿<UserControl x:Class="MicroFlasher.Views.SerialMonitor.MonitorToolBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,25 +6,11 @@
              xmlns:commands="clr-namespace:MicroFlasher.Commands"
              mc:Ignorable="d" 
              d:DesignHeight="64" d:DesignWidth="650">
-    <UserControl.Resources>
-        <Style TargetType="StackPanel">
-            <Setter Property="Orientation" Value="Vertical" />
-            <Setter Property="MinWidth" Value="50" />
-        </Style>
-        <Style TargetType="Image">
-            <Setter Property="Width" Value="32" />
-            <Setter Property="Height" Value="32" />
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
-    </UserControl.Resources>
-
     <ToolBarTray Orientation="Horizontal">
         <ToolBar>
             <Button Command="commands:FlasherCommands.ResetDevice">
                 <StackPanel>
-                    <Image Source="../Icons/reset.png" />
+                    <Image Source="../../Icons/reset.png" />
                     <TextBlock>Reset</TextBlock>
                 </StackPanel>
             </Button>
