@@ -38,6 +38,13 @@
             </Style>
         </Style.Resources>
     </Style>
+    <Style TargetType="StatusBar">
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="5,0,5,0" />
+            </Style>
+        </Style.Resources>
+    </Style>
     <converters:ProgressStateConverter x:Key="ProgressStateConverter" />
     <x:Array x:Key="OuputComPins" Type="io:ComPinType">
         <io:ComPinType>Rts</io:ComPinType>

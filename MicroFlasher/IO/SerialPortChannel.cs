@@ -37,5 +37,7 @@ namespace MicroFlasher.IO {
         public byte ReceiveByte() {
             return (byte)_port.ReadByte();
         }
+
+        public string Name { get { return _port.PortName; } }
     }
 }

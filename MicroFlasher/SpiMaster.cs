@@ -16,6 +16,8 @@ namespace MicroFlasher {
             _misoPin = misoPin;
         }
 
+        public string Name { get { return _port.PortName; } }
+
         public void Open() {
             _port.Open();
         }

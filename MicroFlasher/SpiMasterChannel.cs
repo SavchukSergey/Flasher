@@ -35,5 +35,7 @@ namespace MicroFlasher {
         public byte ReceiveByte() {
             return _received;
         }
+
+        public string Name { get { return string.Format("Spi at {0}", _master.Name); } }
     }
 }

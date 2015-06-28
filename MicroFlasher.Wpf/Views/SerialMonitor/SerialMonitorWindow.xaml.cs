@@ -25,6 +25,9 @@ namespace MicroFlasher.Views.SerialMonitor {
         private Style _myStyle;
         private Style _otherStyle;
 
+        private int _bytesReceived = 0;
+        private int _bytesSent = 0;
+
         public SerialMonitorWindow() {
             InitializeComponent();
         }
@@ -41,8 +44,10 @@ namespace MicroFlasher.Views.SerialMonitor {
             MessageLog.Document.Blocks.Add(para);
             foreach (var ch in content) {
                 _channel.SendByte((byte)ch);
+                _bytesSent++;
             }
             FlushReceived();
+            RefreshStatus();
         }
 
         private void FlushReceived() {
@@ -60,6 +65,7 @@ namespace MicroFlasher.Views.SerialMonitor {
         private async void SerialMonitorWindow_OnLoaded(object sender, RoutedEventArgs e) {
             _channel = FlasherConfig.Read().GetProgrammerConfig().CreateChannel();
             _channel.Open();
+            RefreshStatus();
             _myStyle = (Style)Resources["MyMessage"];
             _otherStyle = (Style)Resources["OtherMessage"];
             var disp = Dispatcher;
@@ -71,6 +77,7 @@ namespace MicroFlasher.Views.SerialMonitor {
                 byte? bt;
                 try {
                     bt = _channel.ReceiveByte();
+                    _bytesReceived++;
                 } catch (Exception) {
                     bt = null;
                 }
@@ -91,6 +98,7 @@ namespace MicroFlasher.Views.SerialMonitor {
                             MessageLog.Document.Blocks.Add(para);
                         }
                         _receivedRun.Text += (char)bt;
+                        RefreshStatus();
                     }
                 });
             }
@@ -104,6 +112,7 @@ namespace MicroFlasher.Views.SerialMonitor {
 
         private void ClearLog(object sender, RoutedEventArgs e) {
             MessageLog.Document.Blocks.Clear();
+            MessageToSend.Focus();
         }
 
 
@@ -195,5 +204,14 @@ namespace MicroFlasher.Views.SerialMonitor {
                 ((FrameworkElement)sender).Focus();
             }
         }
+
+        private void RefreshStatus() {
+            if (_channel != null) {
+                ChannelName.Text = _channel.Name;
+            }
+            BytesReceived.Text = _bytesReceived.ToString();
+            BytesSent.Text = _bytesSent.ToString();
+        }
+
     }
 }

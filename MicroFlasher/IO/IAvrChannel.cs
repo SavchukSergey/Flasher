@@ -13,5 +13,6 @@ namespace MicroFlasher.IO {
 
         byte ReceiveByte();
 
+        string Name { get; }
     }
 }
