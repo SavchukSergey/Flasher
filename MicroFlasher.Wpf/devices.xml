@@ -28,7 +28,7 @@
     <flash size="32768" page="128" />
     <eeprom size="1024" />
     <lockBits>
-      <group>
+      <group name="Lock Bits">
         <deviceBit bit="0" name="LB1" />
         <deviceBit bit="1" name="LB2" />
         <deviceBit bit="2" name="BLB01" />
@@ -157,6 +157,9 @@
         </deviceBit>
       </group>
       <group name="Clock Selection">
+        <description>
+          Clock Mode Selection
+        </description>
         <deviceBit bit="3" name="CKSEL3" />
         <deviceBit bit="2" name="CKSEL2" />
         <deviceBit bit="1" name="CKSEL1" />

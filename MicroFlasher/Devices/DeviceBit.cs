@@ -43,7 +43,7 @@ namespace MicroFlasher.Devices {
                         .Split(new []{'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries)
                         .Select(s=> s.Trim())
                         .ToArray()
-                    ) : ""
+                    ) : null
             };
         }
 
