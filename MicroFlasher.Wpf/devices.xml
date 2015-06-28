@@ -19,10 +19,94 @@
   <device name="ATmega168a" eeprom="512" ram="1024" signature="1e9406">
     <flash size="16384" page="128" />
     <eeprom size="512" />
+    <lockBits>
+      <group name="Lock Bits">
+        <deviceBit bit="0" name="LB1" />
+        <deviceBit bit="1" name="LB2" />
+        <deviceBit bit="2" name="BLB01" />
+        <deviceBit bit="3" name="BLB02" />
+        <deviceBit bit="4" name="BLB11" />
+        <deviceBit bit="5" name="BLB12" />
+      </group>
+    </lockBits>
+    <fuseBits>
+      <group name="Clock Selection">
+        <deviceBit bit="3" name="CKSEL3" />
+        <deviceBit bit="2" name="CKSEL2" />
+        <deviceBit bit="1" name="CKSEL1" />
+        <deviceBit bit="0" name="CKSEL0" />
+      </group>
+      <group name="Clock Fuses">
+        <deviceBit bit="5" name="SUT1" />
+        <deviceBit bit="4" name="SUT0" />
+        <deviceBit bit="6" name="CKOUT" />
+        <deviceBit bit="7" name="CKDIV8" />
+      </group>
+      <group name="Fuses">
+        <deviceBit bit="3" name="EESAVE" address="1" />
+        <deviceBit bit="4" name="WDTON" address="1" />
+        <deviceBit bit="5" name="SPIEN" address="1" />
+        <deviceBit bit="6" name="DWEN" address="1" />
+        <deviceBit bit="7" name="RSTDISBL" address="1" />
+      </group>
+      <group name="Boot settings">
+        <deviceBit bit="2" name="BOOTSZ1" address="2" />
+        <deviceBit bit="1" name="BOOTSZ0" address="2" />
+        <deviceBit bit="0" name="BOOTRST" address="2" />
+      </group>
+
+      <group name="Brown-out detection">
+        <deviceBit bit="2" name="BODLEVEL2" address="1" />
+        <deviceBit bit="1" name="BODLEVEL1" address="1" />
+        <deviceBit bit="0" name="BODLEVEL0" address="1" />
+      </group>
+    </fuseBits>
   </device>
   <device name="ATmega168pa" ram="1024" signature="1e940b">
     <flash size="16384" page="128" />
     <eeprom size="512" />
+    <lockBits>
+      <group name="Lock Bits">
+        <deviceBit bit="0" name="LB1" />
+        <deviceBit bit="1" name="LB2" />
+        <deviceBit bit="2" name="BLB01" />
+        <deviceBit bit="3" name="BLB02" />
+        <deviceBit bit="4" name="BLB11" />
+        <deviceBit bit="5" name="BLB12" />
+      </group>
+    </lockBits>
+    <fuseBits>
+      <group name="Clock Selection">
+        <deviceBit bit="3" name="CKSEL3" />
+        <deviceBit bit="2" name="CKSEL2" />
+        <deviceBit bit="1" name="CKSEL1" />
+        <deviceBit bit="0" name="CKSEL0" />
+      </group>
+      <group name="Clock Fuses">
+        <deviceBit bit="5" name="SUT1" />
+        <deviceBit bit="4" name="SUT0" />
+        <deviceBit bit="6" name="CKOUT" />
+        <deviceBit bit="7" name="CKDIV8" />
+      </group>
+      <group name="Fuses">
+        <deviceBit bit="3" name="EESAVE" address="1" />
+        <deviceBit bit="4" name="WDTON" address="1" />
+        <deviceBit bit="5" name="SPIEN" address="1" />
+        <deviceBit bit="6" name="DWEN" address="1" />
+        <deviceBit bit="7" name="RSTDISBL" address="1" />
+      </group>
+      <group name="Boot settings">
+        <deviceBit bit="2" name="BOOTSZ1" address="2" />
+        <deviceBit bit="1" name="BOOTSZ0" address="2" />
+        <deviceBit bit="0" name="BOOTRST" address="2" />
+      </group>
+
+      <group name="Brown-out detection">
+        <deviceBit bit="2" name="BODLEVEL2" address="1" />
+        <deviceBit bit="1" name="BODLEVEL1" address="1" />
+        <deviceBit bit="0" name="BODLEVEL0" address="1" />
+      </group>
+    </fuseBits>
   </device>
   <device name="ATmega328" ram="2048" signature="1e9514" stkCode="0x86">
     <flash size="32768" page="128" />
@@ -123,6 +207,40 @@
   </device>
 
   <device name="ATtiny12" signature="1e9005">
+  </device>
+  
+  <device name="ATtiny13" signature="1e9007" ram="64" stkCode="0x86">
+    <flash size="1024" page="32" />
+    <eeprom size="64" />
+    <lockBits>
+      <group name="Lock Bits">
+        <deviceBit bit="0" name="LB1" />
+        <deviceBit bit="1" name="LB2" />
+      </group>
+    </lockBits>
+    <fuseBits>
+      <group name="Clock Selection">
+        <deviceBit bit="1" name="CKSEL1" />
+        <deviceBit bit="0" name="CKSEL0" />
+      </group>
+      <group name="Start-up time">
+		<deviceBit bit="3" name="SUT1" />
+        <deviceBit bit="2" name="SUT0" />
+      </group>
+      <group>
+		<deviceBit bit="4" name="CKDIV8" />
+		<deviceBit bit="5" name="WDTON" />
+        <deviceBit bit="6" name="EESAVE" />
+		<deviceBit bit="7" name="SPIEN" />
+      </group>
+      <group name="Fuse High Byte">
+		<deviceBit bit="0" name="RSTDISBL" address="1" />
+		<deviceBit bit="1" name="BODLEVEL0" address="1" />
+		<deviceBit bit="2" name="BODLEVEL1" address="1" />
+        <deviceBit bit="3" name="DWEN" address="1" />
+        <deviceBit bit="4" name="SELFPRGEN" address="1" />
+      </group>
+    </fuseBits>
   </device>
 
   <device name="ATtiny15" signature="1e9006">
@@ -378,8 +496,8 @@
 
   </device>
 
-  <!-- Добавление PIC16F676, не проверено полностью. Осторожно, калибровочная константа будет стерта-->
-  <device name="PIC16F676" ram="64" stkCode="0x01">
+<!-- Добавление PIC16F676, не проверено полностью. Осторожно, калибровочная константа будет стерта-->
+<device name="PIC16F676" ram="64" stkCode="0x01">
     <flash size="2048" />
     <eeprom size="128" />
 
@@ -387,21 +505,21 @@
       <group name="Code protection">
         <deviceBit bit="7" name="Code protection" address="0x400e" inverse="true" code="CP" >
           <description>
-            Check = Program Memory code protection is enabled
-            Uncheck = Program Memory code protection is disabled
+			Check = Program Memory code protection is enabled
+			Uncheck = Program Memory code protection is disabled
           </description>
         </deviceBit>
         <deviceBit bit="0" name="Data Code Protection" address="0x400f" inverse="true" code="CPD" >
           <description>
             Check = Data memory code protected
-            Uncheck = Data memory code protection off
+			Uncheck = Data memory code protection off
           </description>
         </deviceBit>
 
         <deviceBit bit="0" name="Low byte of configuration word" address="0x400e" hidden="true" />
       </group>
     </lockBits>
-
+	
     <fuseBits page="2" location="flash">
       <group name="Fuses">
         <deviceBit bit="6" name="BOD" address="0x400e" code="BODEN">
@@ -410,45 +528,45 @@
             Uncheck = Brown-out Detect Disabled
           </description>
         </deviceBit>
-        <deviceBit bit="5" name="MCLR" address="0x400e" code="MCLRE">
+		<deviceBit bit="5" name="MCLR" address="0x400e" code="MCLRE">
           <description>
             Check = RA3/MCLR pin function is MCLR
             Uncheck = RA3/MCLR pin function is digital input, MCLR internally tied to VDD
           </description>
-        </deviceBit>
-        <deviceBit bit="4" name="PWRT" address="0x400e" inverse="true" code="PWRTEN">
+		</deviceBit>
+		<deviceBit bit="4" name="PWRT" address="0x400e" inverse="true" code="PWRTEN">
           <description>
             Check = Power-up Timer Enabled
             Uncheck = Power-up Timer Disabled
           </description>
-        </deviceBit>
-        <deviceBit bit="3" name="WDT" address="0x400e" code="WDTEN" >
+		</deviceBit>
+		<deviceBit bit="3" name="WDT" address="0x400e" code="WDTEN" >
           <description>
             Check = Watchdog Timer Enable
             Uncheck = Watchdog Timer Disabled
           </description>
-        </deviceBit>
+		</deviceBit>
 
-        <deviceBit bit="0" name="High byte of configuration word" address="0x400f" hidden="true" />
+		<deviceBit bit="0" name="High byte of configuration word" address="0x400f" hidden="true" />
       </group>
 
       <group name="Oscillator Selection">
-        <description>
-          111 = RC CLKOUT
-          110 = RC GP4 I/O
-          101 = INTOSC CLKOUT
-          100 = INTOSC GP4 I/O
-          011 = EC GP4 I/O
-          010 = HS High speed crystal/resonator
-          001 = XT Crystal/resonator
-          000 = LP Low power crystal
-        </description>
+		  <description>
+111 = RC CLKOUT
+110 = RC GP4 I/O
+101 = INTOSC CLKOUT
+100 = INTOSC GP4 I/O
+011 = EC GP4 I/O
+010 = HS High speed crystal/resonator
+001 = XT Crystal/resonator
+000 = LP Low power crystal
+		  </description>
         <deviceBit bit="2" name="FOSC2" address="0x400e" />
         <deviceBit bit="1" name="FOSC1" address="0x400e" />
         <deviceBit bit="0" name="FOSC0" address="0x400e" />
       </group>
-
-      <group name="Bandgap">
+	  
+	  <group name="Bandgap">
         <deviceBit bit="5" name="BG1" address="0x400f" code="Bandgap">
           <description>
             Bandgap Calibration bits for BOD and POR voltage
@@ -459,13 +577,12 @@
             Bandgap Calibration bits for BOD and POR voltage
           </description>
         </deviceBit>
-      </group>
+	  </group>
 
     </fuseBits>
 
   </device>
-  <!-- Добавление PIC12F629, не проверено полностью. Осторожно, калибровочная константа будет стерта-->
-  <device name="PIC12F629" ram="64" stkCode="0x01">
+<!-- Добавление PIC12F629, не проверено полностью. Осторожно, калибровочная константа будет стерта-->  <device name="PIC12F629" ram="64" stkCode="0x01">
     <flash size="2048" />
     <eeprom size="128" />
 
@@ -473,21 +590,21 @@
       <group name="Code protection">
         <deviceBit bit="7" name="Flash Program Memory Code Protection" address="0x400e" inverse="true" code="CP" >
           <description>
-            Check = Program Memory code protection is enabled
-            Uncheck = Program Memory code protection is disabled
+			Check = Program Memory code protection is enabled
+			Uncheck = Program Memory code protection is disabled
           </description>
         </deviceBit>
         <deviceBit bit="0" name="Data Code Protection" address="0x400f" inverse="true" code="CPD" >
           <description>
-            Check = Data memory code protection is enabled
-            Uncheck = Data memory code protection is disabled
+			Check = Data memory code protection is enabled
+			Uncheck = Data memory code protection is disabled
           </description>
         </deviceBit>
 
         <deviceBit bit="0" name="Low byte of configuration word" address="0x400e" hidden="true" />
       </group>
     </lockBits>
-
+	
     <fuseBits page="2" location="flash">
       <group name="Fuses">
         <deviceBit bit="6" name="BOD" address="0x400e" code="BODEN">
@@ -496,45 +613,45 @@
             Uncheck = Brown-out Detect Disabled
           </description>
         </deviceBit>
-        <deviceBit bit="5" name="MCLR" address="0x400e" code="MCLRE">
+		<deviceBit bit="5" name="MCLR" address="0x400e" code="MCLRE">
           <description>
             Check = GP3/MCLR pin function is MCLR
             Uncheck = GP3/MCLR pin function is digital input, MCLR internally tied to VDD
           </description>
-        </deviceBit>
-        <deviceBit bit="4" name="PWRT" address="0x400e" inverse="true" code="PWRTEN">
+		</deviceBit>
+		<deviceBit bit="4" name="PWRT" address="0x400e" inverse="true" code="PWRTEN">
           <description>
             Check = Power-up Timer Enabled
             Uncheck = Power-up Timer Disabled
           </description>
-        </deviceBit>
-        <deviceBit bit="3" name="WDT" address="0x400e" code="WDTEN" >
+		</deviceBit>
+		<deviceBit bit="3" name="WDT" address="0x400e" code="WDTEN" >
           <description>
             Check = Watchdog Timer Enabled
             Uncheck = Watchdog Timer Disabled
           </description>
-        </deviceBit>
+		</deviceBit>
 
-        <deviceBit bit="0" name="High byte of configuration word" address="0x400f" hidden="true" />
+		<deviceBit bit="0" name="High byte of configuration word" address="0x400f" hidden="true" />
       </group>
 
       <group name="Oscillator Selection">
-        <description>
-          111 = RC CLKOUT
-          110 = RC GP4 I/O
-          101 = INTOSC CLKOUT
-          100 = INTOSC GP4 I/O
-          011 = EC GP4 I/O
-          010 = HS High speed crystal/resonator
-          001 = XT Crystal/resonator
-          000 = LP Low power crystal
-        </description>
+		  <description>
+111 = RC CLKOUT
+110 = RC GP4 I/O
+101 = INTOSC CLKOUT
+100 = INTOSC GP4 I/O
+011 = EC GP4 I/O
+010 = HS High speed crystal/resonator
+001 = XT Crystal/resonator
+000 = LP Low power crystal
+		  </description>
         <deviceBit bit="2" name="FOSC2" address="0x400e" />
         <deviceBit bit="1" name="FOSC1" address="0x400e" />
         <deviceBit bit="0" name="FOSC0" address="0x400e" />
       </group>
-
-      <group name="Bandgap">
+	  
+	  <group name="Bandgap">
         <deviceBit bit="5" name="BG1" address="0x400f" code="Bandgap">
           <description>
             Bandgap Calibration bits for BOD and POR voltage
@@ -545,12 +662,12 @@
             Bandgap Calibration bits for BOD and POR voltage
           </description>
         </deviceBit>
-      </group>
+	  </group>
 
     </fuseBits>
 
   </device>
-  <!-- Добавление PIC12F675, не проверено полностью. Осторожно, калибровочная константа будет стерта.
+<!-- Добавление PIC12F675, не проверено полностью. Осторожно, калибровочная константа будет стерта.
 Полная копия PIC12F629-->
   <device name="PIC12F675" ram="64" stkCode="0x01">
     <flash size="2048" />
@@ -560,21 +677,21 @@
       <group name="Code protection">
         <deviceBit bit="7" name="Flash Program Memory Code Protection" address="0x400e" inverse="true" code="CP" >
           <description>
-            Check = Program Memory code protection is enabled
-            Uncheck = Program Memory code protection is disabled
+			Check = Program Memory code protection is enabled
+			Uncheck = Program Memory code protection is disabled
           </description>
         </deviceBit>
         <deviceBit bit="0" name="Data Code Protection" address="0x400f" inverse="true" code="CPD" >
           <description>
-            Check = Data memory code protection is enabled
-            Uncheck = Data memory code protection is disabled
+			Check = Data memory code protection is enabled
+			Uncheck = Data memory code protection is disabled
           </description>
         </deviceBit>
 
         <deviceBit bit="0" name="Low byte of configuration word" address="0x400e" hidden="true" />
       </group>
     </lockBits>
-
+	
     <fuseBits page="2" location="flash">
       <group name="Fuses">
         <deviceBit bit="6" name="BOD" address="0x400e" code="BODEN">
@@ -583,45 +700,45 @@
             Uncheck = Brown-out Detect Disabled
           </description>
         </deviceBit>
-        <deviceBit bit="5" name="MCLR" address="0x400e" code="MCLRE">
+		<deviceBit bit="5" name="MCLR" address="0x400e" code="MCLRE">
           <description>
             Check = GP3/MCLR pin function is MCLR
             Uncheck = GP3/MCLR pin function is digital input, MCLR internally tied to VDD
           </description>
-        </deviceBit>
-        <deviceBit bit="4" name="PWRT" address="0x400e" inverse="true" code="PWRTEN">
+		</deviceBit>
+		<deviceBit bit="4" name="PWRT" address="0x400e" inverse="true" code="PWRTEN">
           <description>
             Check = Power-up Timer Enabled
             Uncheck = Power-up Timer Disabled
           </description>
-        </deviceBit>
-        <deviceBit bit="3" name="WDT" address="0x400e" code="WDTEN" >
+		</deviceBit>
+		<deviceBit bit="3" name="WDT" address="0x400e" code="WDTEN" >
           <description>
             Check = Watchdog Timer Enabled
             Uncheck = Watchdog Timer Disabled
           </description>
-        </deviceBit>
+		</deviceBit>
 
-        <deviceBit bit="0" name="High byte of configuration word" address="0x400f" hidden="true" />
+		<deviceBit bit="0" name="High byte of configuration word" address="0x400f" hidden="true" />
       </group>
 
       <group name="Oscillator Selection">
-        <description>
-          111 = RC CLKOUT
-          110 = RC GP4 I/O
-          101 = INTOSC CLKOUT
-          100 = INTOSC GP4 I/O
-          011 = EC GP4 I/O
-          010 = HS High speed crystal/resonator
-          001 = XT Crystal/resonator
-          000 = LP Low power crystal
-        </description>
+		  <description>
+111 = RC CLKOUT
+110 = RC GP4 I/O
+101 = INTOSC CLKOUT
+100 = INTOSC GP4 I/O
+011 = EC GP4 I/O
+010 = HS High speed crystal/resonator
+001 = XT Crystal/resonator
+000 = LP Low power crystal
+		  </description>
         <deviceBit bit="2" name="FOSC2" address="0x400e" />
         <deviceBit bit="1" name="FOSC1" address="0x400e" />
         <deviceBit bit="0" name="FOSC0" address="0x400e" />
       </group>
-
-      <group name="Bandgap">
+	  
+	  <group name="Bandgap">
         <deviceBit bit="5" name="BG1" address="0x400f" code="Bandgap">
           <description>
             Bandgap Calibration bits for BOD and POR voltage
@@ -632,13 +749,13 @@
             Bandgap Calibration bits for BOD and POR voltage
           </description>
         </deviceBit>
-      </group>
+	  </group>
 
     </fuseBits>
 
   </device>
-  <!-- Добавление PIC12F683, не проверено полностью. Осторожно, калибровочная константа будет стерта.-->
-  <device name="PIC12F683" ram="128" stkCode="0x01">
+<!-- Добавление PIC12F683, не проверено полностью. Осторожно, калибровочная константа будет стерта.-->
+   <device name="PIC12F683" ram="128" stkCode="0x01">
     <flash size="4096" />
     <eeprom size="256" />
 
@@ -646,14 +763,14 @@
       <group name="Code protection">
         <deviceBit bit="6" name="Flash Program Memory Code Protection" address="0x400e" inverse="true" code="CP" >
           <description>
-            Check = Program Memory code protection is enabled
-            Uncheck = Program Memory code protection is disabled
+			Check = Program Memory code protection is enabled
+			Uncheck = Program Memory code protection is disabled
           </description>
         </deviceBit>
         <deviceBit bit="7" name="Data Code Protection" address="0x400e" inverse="true" code="CPD" >
           <description>
-            Check = Data memory code protection is enabled
-            Uncheck = Data memory code protection is disabled
+			Check = Data memory code protection is enabled
+			Uncheck = Data memory code protection is disabled
           </description>
         </deviceBit>
 
@@ -664,64 +781,64 @@
     <fuseBits page="2" location="flash">
       <group name="Fuses">
 
-        <deviceBit bit="3" name="FCMEN" address="0x400f" code="FCMENE">
+	    <deviceBit bit="3" name="FCMEN" address="0x400f" code="FCMENE">
           <description>
             Check = Fail-Safe Clock Monitor is enabled
             Uncheck = Fail-Safe Clock Monitor is disabled
           </description>
-        </deviceBit>
-        <deviceBit bit="2" name="IESO" address="0x400f" code="IESOE">
+		</deviceBit>
+		<deviceBit bit="2" name="IESO" address="0x400f" code="IESOE">
           <description>
             Check = Internal External Switchover mode is enabled
             Uncheck = Internal External Switchover mode is disabled
           </description>
-        </deviceBit>
+		</deviceBit>
 
-        <deviceBit bit="5" name="MCLR" address="0x400e" code="MCLRE">
+		<deviceBit bit="5" name="MCLR" address="0x400e" code="MCLRE">
           <description>
             Check = GP3/MCLR pin function is MCLR
             Uncheck = GP3/MCLR pin function is digital input, MCLR internally tied to VDD
           </description>
-        </deviceBit>
-        <deviceBit bit="4" name="PWRT" address="0x400e" inverse="true" code="PWRTEN">
+		</deviceBit>
+		<deviceBit bit="4" name="PWRT" address="0x400e" inverse="true" code="PWRTEN">
           <description>
             Check = Power-up Timer Enabled
             Uncheck = Power-up Timer Disabled
           </description>
-        </deviceBit>
-        <deviceBit bit="3" name="WDT" address="0x400e" code="WDTEN" >
+		</deviceBit>
+		<deviceBit bit="3" name="WDT" address="0x400e" code="WDTEN" >
           <description>
             Check = Watchdog Timer Enabled
             Uncheck = Watchdog Timer Disabled
           </description>
-        </deviceBit>
+		</deviceBit>
 
-        <deviceBit bit="0" name="High byte of configuration word" address="0x400f" hidden="true" />
+		<deviceBit bit="0" name="High byte of configuration word" address="0x400f" hidden="true" />
       </group>
 
       <group name="Oscillator Selection">
-        <description>
-          111 = RC CLKOUT
-          110 = RC GP4 I/O
-          101 = INTOSC CLKOUT
-          100 = INTOSC GP4 I/O
-          011 = EC GP4 I/O
-          010 = HS High speed crystal/resonator
-          001 = XT Crystal/resonator
-          000 = LP Low power crystal
-        </description>
+		  <description>
+111 = RC CLKOUT
+110 = RC GP4 I/O
+101 = INTOSC CLKOUT
+100 = INTOSC GP4 I/O
+011 = EC GP4 I/O
+010 = HS High speed crystal/resonator
+001 = XT Crystal/resonator
+000 = LP Low power crystal
+		  </description>
         <deviceBit bit="2" name="FOSC2" address="0x400e" />
         <deviceBit bit="1" name="FOSC1" address="0x400e" />
         <deviceBit bit="0" name="FOSC0" address="0x400e" />
       </group>
 
-      <group name="Brown-out Detect Selection bits">
-        <description>
-          11 = BOD enabled
-          10 = BOD enabled during operation and disabled in Sleep
-          01 = BOD controlled by SBODEN bit (PCON.4)
-          00 = BOD disabled
-        </description>
+	  <group name="Brown-out Detect Selection bits">
+		  <description>
+11 = BOD enabled
+10 = BOD enabled during operation and disabled in Sleep
+01 = BOD controlled by SBODEN bit (PCON.4)
+00 = BOD disabled
+		  </description>
         <deviceBit bit="1" name="BODEN1" address="0x400f" code="BODEN">
           <description>
             Brown-out Detect Selection bits
@@ -732,60 +849,59 @@
             Brown-out Detect Selection bits
           </description>
         </deviceBit>
-      </group>
+	  </group>
 
-      <group name="Brown-out Detect">
-        <description>
-          000 = Reserved
-          001 = Lowest BOD voltage
-          111 = Highest BOD voltage
-        </description>
-        <deviceBit bit="2" name="BOD2" address="0x4010" code="BOD">
+	  <group name="Brown-out Detect">
+		  <description>
+000 = Reserved
+001 = Lowest BOD voltage
+111 = Highest BOD voltage
+		  </description>
+		<deviceBit bit="2" name="BOD2" address="0x400f" code="BOD">
           <description>
             BOD Calibration bits
           </description>
         </deviceBit>
-        <deviceBit bit="1" name="BOD1" address="0x4010" code="BOD">
+        <deviceBit bit="1" name="BOD1" address="0x400f" code="BOD">
           <description>
             BOD Calibration bits
           </description>
         </deviceBit>
-        <deviceBit bit="0" name="BOD0" address="0x4010" code="BOD">
+        <deviceBit bit="0" name="BOD0" address="0x400f" code="BOD">
           <description>
             BOD Calibration bits
           </description>
         </deviceBit>
-      </group>
-      <group name="POR Calibration bits">
-        <description>
-          00 = Lowest POR voltage
-          11 = Highest POR voltage
-        </description>
-        <deviceBit bit="4" name="POR1" address="0x4010" code="BODEN">
+	  </group>
+	  <group name="POR Calibration bits">
+		  <description>
+00 = Lowest POR voltage
+11 = Highest POR voltage
+		  </description>
+        <deviceBit bit="4" name="POR1" address="0x400f" code="BODEN">
           <description>
             POR Calibration bits
           </description>
         </deviceBit>
-        <deviceBit bit="3" name="POR0" address="0x4010" code="BODEN">
+        <deviceBit bit="3" name="POR0" address="0x400f" code="BODEN">
           <description>
             POR Calibration bits
           </description>
         </deviceBit>
-      </group>
-      <group name="Internal Oscillator Calibration bits">
-        <description>
-          0111111 = Maximum frequency
-          0000000 = Center frequency
-          1000000 = Minimum frequency
-        </description>
-        <deviceBit bit="4" name="FCAL6" address="0x4011" code="FCAL" />
-        <deviceBit bit="3" name="FCAL5" address="0x4011" code="FCAL" />
-        <deviceBit bit="2" name="FCAL4" address="0x4011" code="FCAL" />
-        <deviceBit bit="1" name="FCAL3" address="0x4011" code="FCAL" />
-        <deviceBit bit="0" name="FCAL2" address="0x4011" code="FCAL" />
-        <deviceBit bit="7" name="FCAL1" address="0x4010" code="FCAL" />
-        <deviceBit bit="6" name="FCAL0" address="0x4010" code="FCAL" />
-      </group>
+	  </group>
+	  <group name="Internal Oscillator Calibration bits">
+		  <description>
+0111111= Maximum frequency
+0000000= Center frequency
+1000000= Minimum frequency
+		  </description>
+        <deviceBit bit="3" name="FCAL5" address="0x400f" code="FCAL" />
+        <deviceBit bit="2" name="FCAL4" address="0x400f" code="FCAL" />
+        <deviceBit bit="1" name="FCAL3" address="0x400f" code="FCAL" />
+        <deviceBit bit="0" name="FCAL2" address="0x400f" code="FCAL" />
+        <deviceBit bit="7" name="FCAL1" address="0x400f" code="FCAL" />
+        <deviceBit bit="6" name="FCAL0" address="0x400f" code="FCAL" />
+	  </group>
 
     </fuseBits>
 
