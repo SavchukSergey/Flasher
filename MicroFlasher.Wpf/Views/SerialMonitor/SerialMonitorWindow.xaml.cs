@@ -25,8 +25,8 @@ namespace MicroFlasher.Views.SerialMonitor {
         private Style _myStyle;
         private Style _otherStyle;
 
-        private int _bytesReceived = 0;
-        private int _bytesSent = 0;
+        private int _bytesReceived;
+        private int _bytesSent;
 
         public SerialMonitorWindow() {
             InitializeComponent();
@@ -52,7 +52,7 @@ namespace MicroFlasher.Views.SerialMonitor {
 
         private void FlushReceived() {
             if (_receivedRun != null && _receivedRun.Text.Length > 0) {
-                MessageLog.ScrollToEnd();
+                _receivedRun.BringIntoView();
                 _receivedRun = null;
             }
         }
@@ -69,7 +69,22 @@ namespace MicroFlasher.Views.SerialMonitor {
             _myStyle = (Style)Resources["MyMessage"];
             _otherStyle = (Style)Resources["OtherMessage"];
             var disp = Dispatcher;
-            await Task.Run(() => Listen(disp));
+            var t1 = Task.Run(() => Listen(disp));
+            var t2 = Task.Run(() => Navigate(disp));
+            await t1;
+            await t2;
+        }
+
+        private void Navigate(Dispatcher disp) {
+            while (!_source.IsCancellationRequested) {
+                disp.Invoke(() => {
+                    var run = _receivedRun;
+                    if (run != null && run.Text.Length > 0) {
+                        run.BringIntoView();
+                    }
+                });
+                Thread.Sleep(200);
+            }
         }
 
         private void Listen(Dispatcher disp) {

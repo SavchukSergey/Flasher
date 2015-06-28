@@ -59,16 +59,17 @@
                      LostKeyboardFocus="MessageToSend_OnLostKeyboardFocus"
                      ToolTip="Enter message to be sent" />
         </DockPanel>
-        <RichTextBox x:Name="MessageLog" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="5" 
-                     FontFamily="Consolas" FontSize="16" >
-            <RichTextBox.ContextMenu>
+
+        <FlowDocumentScrollViewer x:Name="MessageLog" >
+            <FlowDocumentScrollViewer.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Copy" Command="Copy" />
                     <Separator />
                     <MenuItem Header="Clear" Command="commands:FlasherCommands.ClearLog" />
                 </ContextMenu>
-            </RichTextBox.ContextMenu>
-            <FlowDocument></FlowDocument>
-        </RichTextBox>
+            </FlowDocumentScrollViewer.ContextMenu>
+            <FlowDocument FontFamily="Consolas" FontSize="16" PagePadding="5">
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
     </DockPanel>
 </Window>
