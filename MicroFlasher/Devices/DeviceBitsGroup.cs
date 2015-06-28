@@ -37,7 +37,7 @@ namespace MicroFlasher.Devices {
             var xName = xBits.Attribute("name");
             var xDescription = xBits.Element("description");
             res.Name = xName != null ? xName.Value : "";
-            res.Description = xDescription != null ? xDescription.Value.Trim() : null;
+            res.Description = DeviceInfoUtils.FormatDescription(xDescription);
             foreach (var xBit in xBits.Elements("deviceBit")) {
                 res.Bits.Add(DeviceBit.From(xBit));
             }

@@ -37,13 +37,7 @@ namespace MicroFlasher.Devices {
                 Inverse = xInverse != null && xInverse.Value.ToLowerInvariant() == "true",
                 Hidden = xHidden != null && xHidden.Value.ToLowerInvariant() == "true",
                 Constant = xConstant != null ? new bool?(xConstant.Value == "1") : null,
-                Description = xDescription != null ?
-                    string.Join("\r\n", 
-                    xDescription.Value.Trim()
-                        .Split(new []{'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(s=> s.Trim())
-                        .ToArray()
-                    ) : null
+                Description = DeviceInfoUtils.FormatDescription(xDescription)
             };
         }
 

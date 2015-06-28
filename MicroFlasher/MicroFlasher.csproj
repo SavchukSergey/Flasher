@@ -57,6 +57,7 @@
     <Compile Include="Devices\DeviceEepromParameters.cs" />
     <Compile Include="Devices\DeviceFlashParameters.cs" />
     <Compile Include="Devices\DeviceInfo.cs" />
+    <Compile Include="Devices\DeviceInfoUtils.cs" />
     <Compile Include="Hex\HexBlock.cs" />
     <Compile Include="Hex\HexBlocks.cs" />
     <Compile Include="Hex\HexBoard.cs" />

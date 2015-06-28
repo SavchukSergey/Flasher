@@ -10,7 +10,7 @@
     <ItemsControl ItemsSource="{Binding Path=Groups}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <StackPanel Orientation="Vertical" Margin="5" ToolTip="{Binding Path=Description}">
+                <StackPanel Orientation="Vertical" Margin="5" ToolTip="{Binding Path=Description}" Background="Transparent">
                     <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="16" Margin="5" />
                     <ItemsControl ItemsSource="{Binding Path=VisibleBits}">
                         <ItemsControl.ItemsPanel>
