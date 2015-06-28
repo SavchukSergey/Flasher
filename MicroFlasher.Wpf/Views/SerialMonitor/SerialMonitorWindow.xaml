@@ -41,6 +41,8 @@
                      FontFamily="Consolas" FontSize="16" >
             <RichTextBox.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="Copy" Command="Copy" />
+                    <Separator />
                     <MenuItem Click="ClearLog" Header="Clear" />
                 </ContextMenu>
             </RichTextBox.ContextMenu>
