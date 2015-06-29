@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -212,6 +213,9 @@ namespace MicroFlasher.Views.SerialMonitor {
         }
 
         private void MessageToSend_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
+            if (e.NewFocus is ContextMenu) {
+                return;
+            }
             if (e.NewFocus == null || !e.NewFocus.Equals(MessageLog)) {
                 ((FrameworkElement)sender).Focus();
             }
