@@ -66,8 +66,8 @@ namespace MicroFlasher.Views.SerialMonitor {
                     _bytesSent++;
                 }
             }
-            _runToFocus = run;
             FlushReceived();
+            _runToFocus = run;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
@@ -135,7 +135,6 @@ namespace MicroFlasher.Views.SerialMonitor {
             MessageLog.Document.Blocks.Clear();
             MessageToSend.Focus();
         }
-
 
         private void ResetDevice(object sender, ExecutedRoutedEventArgs e) {
             lock (_channelSync) {
@@ -212,13 +211,15 @@ namespace MicroFlasher.Views.SerialMonitor {
         #region channel operations
 
         private void CloseChannel() {
-            var ch = _channel;
-            _channel = null;
-            if (ch != null) {
-                if (ch.IsOpen) {
-                    ch.Close();
+            lock (_channelSync) {
+                var ch = _channel;
+                _channel = null;
+                if (ch != null) {
+                    if (ch.IsOpen) {
+                        ch.Close();
+                    }
+                    ch.Dispose();
                 }
-                ch.Dispose();
             }
         }
 
