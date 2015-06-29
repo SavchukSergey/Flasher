@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,18 +17,28 @@ namespace MicroFlasher.Views.SerialMonitor {
     public partial class SerialMonitorWindow : Window {
 
         private IAvrChannel _channel;
+
         private readonly CancellationTokenSource _source = new CancellationTokenSource();
 
         private Run _receivedRun;
         private Run _runToFocus;
+        private StringBuilder _receivedBuffer;
 
         private DateTime _receivedDateTime;
         private readonly TimeSpan _threshold = TimeSpan.FromMilliseconds(500);
+
         private Style _myStyle;
         private Style _otherStyle;
+        private Style _noneStyle;
 
         private int _bytesReceived;
         private int _bytesSent;
+
+        private Task _listenTask;
+
+        private DispatcherTimer _statusTimer;
+        private DispatcherTimer _navigateTimer;
+        private DispatcherTimer _flushTimer;
 
         public SerialMonitorWindow() {
             InitializeComponent();
@@ -41,23 +52,19 @@ namespace MicroFlasher.Views.SerialMonitor {
         }
 
         private void SendMessage(string content) {
+            var channel = GetChannel();
+            var style = channel != null ? _myStyle : _noneStyle;
             var run = new Run(content);
-            var para = new Paragraph(run) { Style = _myStyle };
+            var para = new Paragraph(run) { Style = style };
             MessageLog.Document.Blocks.Add(para);
-            foreach (var ch in content) {
-                _channel.SendByte((byte)ch);
-                _bytesSent++;
+            if (channel != null) {
+                foreach (var ch in content) {
+                    channel.SendByte((byte)ch);
+                    _bytesSent++;
+                }
             }
             _runToFocus = run;
             FlushReceived();
-            RefreshStatus();
-        }
-
-        private void FlushReceived() {
-            if (_receivedRun != null && _receivedRun.Text.Length > 0) {
-                _runToFocus = _receivedRun;
-                _receivedRun = null;
-            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
@@ -65,68 +72,59 @@ namespace MicroFlasher.Views.SerialMonitor {
             MessageToSend.Text = "";
         }
 
-        private async void SerialMonitorWindow_OnLoaded(object sender, RoutedEventArgs e) {
-            _channel = FlasherConfig.Read().GetProgrammerConfig().CreateChannel();
-            _channel.Open();
-            RefreshStatus();
+        private void SerialMonitorWindow_OnLoaded(object sender, RoutedEventArgs e) {
             _myStyle = (Style)Resources["MyMessage"];
             _otherStyle = (Style)Resources["OtherMessage"];
-            var disp = Dispatcher;
-            var t1 = Task.Run(() => Listen(disp));
-            var t2 = Task.Run(() => Navigate(disp));
-            await t1;
-            await t2;
+            _noneStyle = (Style)Resources["NoneMessage"];
+            GetChannel();
+            _listenTask = Task.Run(() => ListenLoop());
+
+            _statusTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(50) };
+            _statusTimer.Tick += StatusTimerTick;
+            _statusTimer.Start();
+
+            _navigateTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(50) };
+            _navigateTimer.Tick += NavigateTimerTick;
+            _navigateTimer.Start();
+
+            _flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(50) };
+            _flushTimer.Tick += FlushTimerTick;
+            _flushTimer.Start();
         }
 
-        private void Navigate(Dispatcher disp) {
+        private void ListenLoop() {
             while (!_source.IsCancellationRequested) {
-                disp.Invoke(() => {
-                    var run = _runToFocus;
-                    _runToFocus = null;
-                    if (run != null && run.Text.Length > 0) {
-                        run.BringIntoView();
+                var bt = ReadByte();
+
+                if (bt.HasValue) {
+                    _receivedDateTime = DateTime.UtcNow;
+
+                    var sb = _receivedBuffer;
+                    if (sb == null) {
+                        sb = new StringBuilder();
+                        _receivedBuffer = sb;
                     }
-                });
-                Thread.Sleep(200);
-            }
-        }
-
-        private void Listen(Dispatcher disp) {
-            while (!_source.IsCancellationRequested) {
-                byte? bt;
-                try {
-                    bt = _channel.ReceiveByte();
-                    _bytesReceived++;
-                } catch (Exception) {
-                    bt = null;
+                    sb.Append((char)bt);
                 }
-
-                var ts = DateTime.UtcNow;
-                var delta = ts - _receivedDateTime;
-                _receivedDateTime = ts;
-
-                disp.Invoke(() => {
-                    if (delta > _threshold) {
-                        FlushReceived();
-                    }
-
-                    if (bt.HasValue) {
-                        if (_receivedRun == null) {
-                            _receivedRun = new Run();
-                            var para = new Paragraph(_receivedRun) { Style = _otherStyle };
-                            MessageLog.Document.Blocks.Add(para);
-                        }
-                        _receivedRun.Text += (char)bt;
-                        _runToFocus = _receivedRun;
-                        RefreshStatus();
-                    }
-                });
             }
         }
 
         protected override void OnClosed(EventArgs e) {
-            _channel.Dispose();
             _source.Cancel();
+
+            _statusTimer.Tick -= StatusTimerTick;
+            _statusTimer.Stop();
+
+            _navigateTimer.Tick -= NavigateTimerTick;
+            _navigateTimer.Stop();
+
+            _flushTimer.Tick -= FlushTimerTick;
+            _flushTimer.Stop();
+
+            _listenTask.Wait();
+
+            CloseChannel();
+
             base.OnClosed(e);
         }
 
@@ -134,7 +132,6 @@ namespace MicroFlasher.Views.SerialMonitor {
             MessageLog.Document.Blocks.Clear();
             MessageToSend.Focus();
         }
-
 
         private bool _altMode;
         private int? _altChar;
@@ -149,7 +146,6 @@ namespace MicroFlasher.Views.SerialMonitor {
                 }
             }
         }
-
 
         private void MessageToSend_OnPreviewKeyUp(object sender, KeyEventArgs e) {
             if (e.Key == Key.LeftAlt || e.Key == Key.RightAlt) {
@@ -203,16 +199,12 @@ namespace MicroFlasher.Views.SerialMonitor {
         }
 
         private void ResetDevice(object sender, ExecutedRoutedEventArgs e) {
-            try {
-                _channel.Close();
-                var dlg = new ResetDeviceWindow {
-                    DataContext = new FlasherOperationModel(Model),
-                    Owner = this
-                };
-                dlg.ShowDialog();
-            } finally {
-                _channel.Open();
-            }
+            CloseChannel();
+            var dlg = new ResetDeviceWindow {
+                DataContext = new FlasherOperationModel(Model),
+                Owner = this
+            };
+            dlg.ShowDialog();
         }
 
         protected FlasherModel Model {
@@ -225,13 +217,98 @@ namespace MicroFlasher.Views.SerialMonitor {
             }
         }
 
-        private void RefreshStatus() {
-            if (_channel != null) {
-                ChannelName.Text = _channel.Name;
-            }
+        private void StatusTimerTick(object sender, EventArgs e) {
+            ChannelName.Text = _channel != null && _channel.IsOpen ? _channel.Name : "---";
             BytesReceived.Text = _bytesReceived.ToString();
             BytesSent.Text = _bytesSent.ToString();
         }
 
+        private void NavigateTimerTick(object sender, EventArgs e) {
+            var run = _runToFocus;
+            _runToFocus = null;
+            if (run != null && run.Text.Length > 0) {
+                run.BringIntoView();
+            }
+        }
+
+        private void FlushTimerTick(object sender, EventArgs e) {
+            var ts = DateTime.UtcNow;
+            var delta = ts - _receivedDateTime;
+
+            ReceivedSync();
+
+            if (delta > _threshold) {
+                FlushReceived();
+            }
+        }
+
+        private void ReceivedSync() {
+            if (_receivedBuffer != null) {
+                if (_receivedRun == null) {
+                    _receivedRun = new Run();
+                    var para = new Paragraph(_receivedRun) { Style = _otherStyle };
+                    MessageLog.Document.Blocks.Add(para);
+                }
+                if (_receivedRun.Text.Length != _receivedBuffer.Length) {
+                    _receivedRun.Text = _receivedBuffer.ToString();
+                    _runToFocus = _receivedRun;
+                }
+            }
+
+        }
+
+        private void FlushReceived() {
+            ReceivedSync();
+            _runToFocus = _receivedRun;
+            _receivedRun = null;
+            _receivedBuffer = null;
+        }
+
+
+        #region channel operations
+
+        private void CloseChannel() {
+            var ch = _channel;
+            _channel = null;
+            if (ch != null) {
+                if (ch.IsOpen) {
+                    ch.Close();
+                }
+                ch.Dispose();
+            }
+        }
+
+        private IAvrChannel GetChannel() {
+            try {
+                if (_channel == null) {
+                    _channel = FlasherConfig.Read().GetProgrammerConfig().CreateChannel();
+                }
+                if (!_channel.IsOpen) {
+                    _channel.Open();
+                }
+                return _channel;
+            } catch (Exception) {
+                return null;
+            }
+        }
+
+        private byte? ReadByte() {
+            var channel = GetChannel();
+            if (channel == null) {
+                Thread.Sleep(50);
+                return null;
+            }
+            byte? bt;
+            try {
+                bt = channel.ReceiveByte();
+                _bytesReceived++;
+            } catch (Exception) {
+                bt = null;
+            }
+
+            return bt;
+        }
+
+        #endregion
     }
 }

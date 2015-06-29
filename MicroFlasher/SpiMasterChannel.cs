@@ -37,5 +37,7 @@ namespace MicroFlasher {
         }
 
         public string Name { get { return string.Format("Spi at {0}", _master.Name); } }
+
+        public bool IsOpen { get { return _master.IsOpen; } }
     }
 }

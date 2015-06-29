@@ -39,5 +39,8 @@ namespace MicroFlasher.IO {
         }
 
         public string Name { get { return _port.PortName; } }
+
+        public bool IsOpen { get { return _port.IsOpen; } }
+
     }
 }

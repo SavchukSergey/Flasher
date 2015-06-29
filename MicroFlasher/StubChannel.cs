@@ -4,13 +4,17 @@ using MicroFlasher.IO;
 namespace MicroFlasher {
     public class StubChannel : IAvrChannel {
 
+        private bool _isOpen;
+
         public void Dispose() {
         }
 
         public void Open() {
+            _isOpen = true;
         }
 
         public void Close() {
+            _isOpen = false;
         }
 
         public void ToggleReset(bool val) {
@@ -25,5 +29,8 @@ namespace MicroFlasher {
         }
 
         public string Name { get { return "Stub"; } }
+
+        public bool IsOpen { get { return _isOpen; } }
+
     }
 }
