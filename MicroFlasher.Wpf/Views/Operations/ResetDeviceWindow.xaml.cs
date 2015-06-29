@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace MicroFlasher.Views.Operations {
     /// <summary>
@@ -11,17 +10,9 @@ namespace MicroFlasher.Views.Operations {
             InitializeComponent();
         }
 
-        protected override Task<bool> Execute(DeviceOperation op) {
-            var settings = Model.Config;
-            using (var channel = settings.GetProgrammerConfig().CreateChannel()) {
-                channel.Open();
-                channel.ToggleReset(true);
-                Thread.Sleep(100);
-                channel.ToggleReset(false);
-                Thread.Sleep(100);
-                channel.Close();
-            }
-            return Task.FromResult(true);
+        protected override async Task<bool> Execute(DeviceOperation op) {
+            await Model.ResetDeviceAsync();
+            return true;
         }
     }
 }

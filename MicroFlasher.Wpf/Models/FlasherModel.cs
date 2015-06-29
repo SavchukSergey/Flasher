@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Atmega.Hex;
 using MicroFlasher.Hex;
@@ -347,6 +348,18 @@ namespace MicroFlasher.Models {
             EepromHexBoard.Clear();
             FusesHexBoard.Clear();
             LocksHexBoard.Clear();
+        }
+
+        public async Task ResetDeviceAsync() {
+            var settings = Config;
+            using (var channel = settings.GetProgrammerConfig().CreateChannel()) {
+                channel.Open();
+                channel.ToggleReset(true);
+                await Task.Delay(100);
+                channel.ToggleReset(false);
+                await Task.Delay(100);
+                channel.Close();
+            }
         }
     }
 }
