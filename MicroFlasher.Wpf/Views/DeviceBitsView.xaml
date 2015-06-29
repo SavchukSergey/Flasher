@@ -4,28 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:devices="clr-namespace:MicroFlasher.Devices;assembly=MicroFlasher"
+             xmlns:views="clr-namespace:MicroFlasher.Views"
+             Loaded="DeviceBitsView_OnLoaded"
+             DataContextChanged="DeviceBitsView_OnDataContextChanged"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance devices:DeviceBits}">
-
-    <ItemsControl ItemsSource="{Binding Path=Groups}">
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <StackPanel Orientation="Vertical" Margin="5" ToolTip="{Binding Path=Description}" Background="Transparent">
-                    <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="16" Margin="5" />
-                    <ItemsControl ItemsSource="{Binding Path=VisibleBits}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Value, Mode=TwoWay}" Margin="5" ToolTip="{Binding Path=Description}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
+    <StackPanel Orientation="Vertical">
+        <ItemsControl ItemsSource="{Binding Path=Groups}" CheckBox.Checked="OnCheckChanged" CheckBox.Unchecked="OnCheckChanged"  >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Margin="5" ToolTip="{Binding Path=Description}" Background="Transparent">
+                        <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" FontSize="16" Margin="5" />
+                        <ItemsControl ItemsSource="{Binding Path=VisibleBits}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Value, Mode=TwoWay}" Margin="5" ToolTip="{Binding Path=Description}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Separator />
+        <views:HexBoardView x:Name="BoardView" Title="PREVIEW" MaxHeight="120" CanClear="False" ShowCharacters="False" />
+    </StackPanel>
 </UserControl>

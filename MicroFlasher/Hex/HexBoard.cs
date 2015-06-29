@@ -34,6 +34,7 @@ namespace MicroFlasher.Hex {
         public byte? this[int address] {
             get {
                 var line = FindLine(address);
+                if (line == null) return null;
                 return line.Bytes[address % 16].Value;
             }
             set {

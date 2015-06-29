@@ -6,7 +6,7 @@
         Loaded="LockBitsWindow_OnLoaded"
         Icon="../Icons/lock-bits.png"
         Title="Lock Bits"
-        MinHeight="250" MaxHeight="300" Width="400">
+        MinHeight="250" MaxHeight="300" Width="600">
 
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="CloseCommand" />
