@@ -64,6 +64,7 @@
     <Compile Include="Converters\GridLengthConverter.cs" />
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\ProgressStateConverter.cs" />
+    <Compile Include="Models\AboutModel.cs" />
     <Compile Include="Models\BaseProgrammerConfig.cs" />
     <Compile Include="Models\ComBitBangConfig.cs" />
     <Compile Include="Models\ComBitBangPinConfig.cs" />
@@ -75,6 +76,9 @@
     <Compile Include="Models\BaseConfig.cs" />
     <Compile Include="Models\FlasherConfig.cs" />
     <Compile Include="Models\StkV1Config.cs" />
+    <Compile Include="Views\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\SpecialCharsTextBox.xaml.cs">
       <DependentUpon>SpecialCharsTextBox.xaml</DependentUpon>
     </Compile>
@@ -165,6 +169,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AppResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -309,6 +317,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Icons\about.png" />
     <Resource Include="Icons\clear.png" />
     <Resource Include="Icons\serial-monitor.png" />
     <Resource Include="Icons\main.ico" />

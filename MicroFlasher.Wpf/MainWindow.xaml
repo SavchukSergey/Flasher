@@ -28,6 +28,7 @@
         <CommandBinding Command="commands:FlasherCommands.ResetDevice" Executed="ResetDevice" />
         <CommandBinding Command="commands:FlasherCommands.Settings" Executed="SettingsCommand" />
         <CommandBinding Command="commands:FlasherCommands.SerialMonitor" Executed="SerialMonitor" />
+        <CommandBinding Command="commands:FlasherCommands.About" Executed="AboutCommand" />
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Key="M" Modifiers="Control" Command="commands:FlasherCommands.SerialMonitor"/>
@@ -61,6 +62,7 @@
                     <MenuItem Header="Serial Monitor" Command="commands:FlasherCommands.SerialMonitor" InputGestureText="Ctrl+M" />
                 </MenuItem>
                 <MenuItem Header="Settings" Command="commands:FlasherCommands.Settings" />
+                <MenuItem Header="About" Command="commands:FlasherCommands.About" />
             </Menu>
             <views:AppToolBar />
         </StackPanel>

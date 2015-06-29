@@ -5,7 +5,6 @@ using MicroFlasher.Views;
 using MicroFlasher.Views.Operations;
 using MicroFlasher.Views.SerialMonitor;
 using Atmega.Hex;
-using MicroFlasher.Commands;
 using Microsoft.Win32;
 
 namespace MicroFlasher {
@@ -172,6 +171,14 @@ namespace MicroFlasher {
 
         private void SerialMonitor(object sender, ExecutedRoutedEventArgs e) {
             var dlg = new SerialMonitorWindow {
+                DataContext = _model,
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+
+        private void AboutCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new AboutWindow {
                 DataContext = _model,
                 Owner = this
             };

@@ -16,6 +16,7 @@ namespace MicroFlasher.Commands {
         private readonly static RoutedCommand _writeLockBitsDevice = new RoutedUICommand();
         private readonly static RoutedCommand _writeFuseBitsDevice = new RoutedUICommand();
         private readonly static RoutedCommand _clearLog = new RoutedUICommand();
+        private readonly static RoutedCommand _about = new RoutedUICommand();
 
         public static RoutedCommand OpenEeprom {
             get { return _openEeprom; }
@@ -67,6 +68,10 @@ namespace MicroFlasher.Commands {
 
         public static RoutedCommand ClearLog {
             get { return _clearLog; }
+        }
+
+        public static RoutedCommand About {
+            get { return _about; }
         }
     }
 }
