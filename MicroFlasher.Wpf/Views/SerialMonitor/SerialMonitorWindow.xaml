@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:commands="clr-namespace:MicroFlasher.Commands"
         xmlns:serialMonitor="clr-namespace:MicroFlasher.Views.SerialMonitor"
+        xmlns:controls="clr-namespace:MicroFlasher.Views.Controls"
         Title="Serial Monitor"
         Height="300" Width="500"
         MinHeight="300" MinWidth="500"
@@ -55,10 +56,8 @@
         </StatusBar>
         <DockPanel LastChildFill="True" DockPanel.Dock="Bottom">
             <Button Content="Send" HorizontalAlignment="Center" DockPanel.Dock="Right" Click="Button_Click" Margin="0" Padding="10" />
-            <TextBox x:Name="MessageToSend" VerticalContentAlignment="Center"
+            <controls:SpecialCharsTextBox x:Name="MessageToSend" VerticalContentAlignment="Center"
                      FontFamily="Consolas" FontSize="16"
-                     PreviewKeyDown="MessageToSend_OnPreviewKeyDown"
-                     PreviewKeyUp="MessageToSend_OnPreviewKeyUp"
                      KeyDown="MessageToSend_OnKeyDown"
                      LostKeyboardFocus="MessageToSend_OnLostKeyboardFocus"
                      ToolTip="Enter message to be sent" />
