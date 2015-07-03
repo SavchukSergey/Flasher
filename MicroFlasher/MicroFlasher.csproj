@@ -68,11 +68,14 @@
     <Compile Include="IO\IAvrChannel.cs" />
     <Compile Include="IO\SerialPortChannel.cs" />
     <Compile Include="IProgrammer.cs" />
+    <Compile Include="Monitor\SerialMonitor.cs" />
+    <Compile Include="Monitor\SerialMonitorMessage.cs" />
     <Compile Include="ProgrammingSession.cs" />
     <Compile Include="ProgressTrackerProgrammer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpiMaster.cs" />
     <Compile Include="SpiMasterChannel.cs" />
+    <Compile Include="StatisticsChannel.cs" />
     <Compile Include="StkV1Programmer.cs" />
     <Compile Include="STKv1\StkDeviceCode.cs" />
     <Compile Include="STKv1\StkFailedException.cs" />
