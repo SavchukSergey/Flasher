@@ -270,19 +270,25 @@ namespace MicroFlasher.Models {
         }
 
         private static bool VerifyBlocks(IProgrammer programmer, HexBlocks blocks, AvrMemoryType memType, DeviceOperation op) {
-            if (blocks.Blocks.All(block => VerifyBlock(programmer, block, memType))) {
+            if (blocks.Blocks.All(block => VerifyBlock(programmer, block, memType, op))) {
                 return true;
             }
             op.Complete();
-            op.CurrentState = string.Format("{0} memory verification failed", memType);
             op.Status = DeviceOperationStatus.Error;
             return false;
         }
 
-        private static bool VerifyBlock(IProgrammer programmer, HexBlock block, AvrMemoryType memType) {
+        private static bool VerifyBlock(IProgrammer programmer, HexBlock block, AvrMemoryType memType, DeviceOperation op) {
             var actual = new byte[block.Data.Length];
             programmer.ReadPage(block.Address, memType, actual, 0, actual.Length);
-            return !block.Data.Where((t, i) => t != actual[i]).Any();
+            for (var i = 0; i < block.Data.Length; i++) {
+                var t = block.Data[i];
+                if (t != actual[i]) {
+                    op.CurrentState = string.Format("Verification failed at {0}:{1:x4}", memType, i + block.Address);
+                    return false;
+                }
+            }
+            return true;
         }
 
         public async Task<bool> ReadDeviceAsync(DeviceOperation op) {
