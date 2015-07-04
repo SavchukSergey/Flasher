@@ -1,19 +1,22 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using MicroFlasher.Models;
 
 namespace MicroFlasher.Views.Operations {
     public abstract class BaseDeviceOperationWindow : Window {
 
-        private Task _task;
         private readonly CancellationTokenSource _source = new CancellationTokenSource();
         private DateTime _start;
+        private bool? _result;
 
         protected BaseDeviceOperationWindow() {
             Loaded += BaseDeviceOperationWindow_Loaded;
+            PreviewKeyDown += BaseDeviceOperationWindow_PreviewKeyDown;
             WindowStartupLocation = WindowStartupLocation.CenterOwner;
             ResizeMode = ResizeMode.NoResize;
         }
@@ -22,6 +25,7 @@ namespace MicroFlasher.Views.Operations {
             var op = DeviceOperation;
             try {
                 var res = await WatchAndExecute(op);
+                _result = res;
                 if (res) {
                     Close();
                 } else {
@@ -39,8 +43,22 @@ namespace MicroFlasher.Views.Operations {
                 op.Status = DeviceOperationStatus.Error;
             }
             if (op.Status == DeviceOperationStatus.Error) {
+                _result = false;
                 op.Complete();
             }
+        }
+
+        private void BaseDeviceOperationWindow_PreviewKeyDown(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Escape) {
+                if (_result.HasValue) {
+                    Close();
+                }
+            }
+        }
+
+        protected override void OnClosing(CancelEventArgs e) {
+            DialogResult = _result;
+            base.OnClosing(e);
         }
 
         protected DeviceOperation DeviceOperation {
