@@ -64,6 +64,7 @@
     <Compile Include="Converters\GridLengthConverter.cs" />
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\ProgressStateConverter.cs" />
+    <Compile Include="KeyUtils.cs" />
     <Compile Include="Models\AboutModel.cs" />
     <Compile Include="Models\BaseProgrammerConfig.cs" />
     <Compile Include="Models\ComBitBangConfig.cs" />

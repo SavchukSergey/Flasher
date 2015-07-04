@@ -2,6 +2,8 @@
 
 namespace MicroFlasher.Hex {
     public class HexBoardByte : INotifyPropertyChanged {
+
+        private readonly HexBoardLine _line;
         private byte? _value;
 
         public byte? Value {
@@ -26,8 +28,21 @@ namespace MicroFlasher.Hex {
             }
         }
 
-        public static implicit operator HexBoardByte(byte? val) {
-            return new HexBoardByte { Value = val };
+        public void SetHigh(byte val) {
+            val = (byte)((val & 0x0f) << 4);
+            if (_value.HasValue) {
+                Value = (byte?)((_value & 0x0f) | val);
+            } else {
+                Value = val;
+            }
+        }
+
+        public void SetLow(byte val) {
+            if (_value.HasValue) {
+                Value = (byte?)((_value & 0xf0) | val);
+            } else {
+                Value = val;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

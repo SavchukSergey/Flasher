@@ -10,7 +10,7 @@ namespace MicroFlasher.Hex {
 
         private readonly ObservableCollection<HexBoardLine> _lines = new ObservableCollection<HexBoardLine>();
 
-        private HexBoardLine FindLine(int adr) {
+        public HexBoardLine FindLine(int adr) {
             adr = (adr >> 4) << 4;
             return _lines.FirstOrDefault(item => item.Address == adr);
         }
@@ -35,11 +35,11 @@ namespace MicroFlasher.Hex {
             get {
                 var line = FindLine(address);
                 if (line == null) return null;
-                return line.Bytes[address % 16].Value;
+                return line[address];
             }
             set {
                 var line = EnsureLine(address);
-                line.Bytes[address % 16] = value;
+                line[address] = value;
             }
         }
 
@@ -165,5 +165,6 @@ namespace MicroFlasher.Hex {
             Lines.Add(new HexBoardLine { Address = 0 });
             OnPropertyChanged("Size");
         }
+
     }
 }

@@ -15,12 +15,25 @@ namespace MicroFlasher.Hex {
 
         public HexBoardLine() {
             for (var i = 0; i < _bytes.Length; i++) {
-                _bytes[i] = new HexBoardByte();
-                _bytes[i].PropertyChanged += (sender, args) => {
-                    OnPropertyChanged("Characters");
-                };
+                var bt = new HexBoardByte();
+                bt.PropertyChanged += bt_PropertyChanged;
+                _bytes[i] = bt;
             }
         }
+
+        public byte? this[int address] {
+            get {
+                return Bytes[address % 16].Value;
+            }
+            set {
+                Bytes[address % 16].Value = value;
+            }
+        }
+
+        private void bt_PropertyChanged(object sender, PropertyChangedEventArgs e) {
+            OnPropertyChanged("Characters");
+        }
+
 
         public string Characters {
             get {

@@ -24,20 +24,27 @@
         <Button Click="ButtonBase_OnClick" Content="Clear" Style="{StaticResource HexBoardButton}" Visibility="{Binding CanClear, ElementName=Grid, Converter={StaticResource BooleanToVisibilityConverter}}"/>
     </StackPanel>
 
-    <DataGrid Grid.Row="1" ItemsSource="{Binding Path=Lines}" IsReadOnly="True" AutoGenerateColumns="False"
-                  FontFamily="Consolas" 
-                  FontWeight="Bold"
-                  CanUserResizeColumns="False"
-                  CanUserSortColumns="false"
-                  CanUserResizeRows="false"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserReorderColumns="False"
-                  VerticalScrollBarVisibility="Visible"
-                  HorizontalGridLinesBrush="#a0a0a0"
-                  VerticalGridLinesBrush="#a0a0a0"
-                  AreRowDetailsFrozen="False"
-                  >
+    <DataGrid x:Name="DataGrid" Grid.Row="1" ItemsSource="{Binding Path=Lines}" IsReadOnly="True" AutoGenerateColumns="False"
+        PreviewKeyDown="DataGrid_OnPreviewKeyDown"
+        FontFamily="Consolas" 
+        FontWeight="Bold"
+        CanUserResizeColumns="False"
+        CanUserSortColumns="false"
+        CanUserResizeRows="false"
+        CanUserAddRows="False"
+        CanUserDeleteRows="False"
+        CanUserReorderColumns="False"
+        EnableColumnVirtualization="False"
+        EnableRowVirtualization="True"
+        FrozenColumnCount="1"
+        RowDetailsVisibilityMode="Collapsed"
+        VerticalScrollBarVisibility="Visible"
+        HorizontalGridLinesBrush="#a0a0a0"
+        VerticalGridLinesBrush="#a0a0a0"
+        AreRowDetailsFrozen="False"
+        SelectionUnit="Cell"
+        SelectionMode="Single"
+        >
         <DataGrid.Columns>
             <DataGridTextColumn Header="Address" Binding="{Binding Path=Address, StringFormat=X4}" Foreground="#800000">
                 <DataGridTextColumn.ElementStyle>

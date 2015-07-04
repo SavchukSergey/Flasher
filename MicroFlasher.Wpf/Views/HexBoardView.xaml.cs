@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using MicroFlasher.Hex;
 
 namespace MicroFlasher.Views {
@@ -38,5 +39,70 @@ namespace MicroFlasher.Views {
             }
         }
 
+        private HexBoardByte _focusedByte;
+        private bool _high;
+
+        private void DataGrid_OnPreviewKeyDown(object sender, KeyEventArgs e) {
+            var hex = KeyUtils.GetHexDigit(e.Key);
+            if (!hex.HasValue && e.Key != Key.Space && e.Key != Key.Delete && e.Key != Key.Back) return;
+
+            var direction = e.Key != Key.Back ? 1 : -1;
+
+            var grid = sender as DataGrid;
+            if (grid == null) return;
+            var board = Board;
+            if (board == null) return;
+
+            var cellInfo = grid.CurrentCell;
+
+            if (cellInfo.Item == null) return;
+
+            var cell = cellInfo.Column.GetCellContent(cellInfo.Item);
+
+            if (cell == null) return;
+            var line = cell.DataContext as HexBoardLine;
+            if (line == null) return;
+
+            var col = cellInfo.Column;
+            var byteIndex = col.DisplayIndex - 1;
+            if (byteIndex < 0 || byteIndex > 15) return;
+
+            var bt = line.Bytes[byteIndex];
+            if (bt != _focusedByte) {
+                _high = true;
+            }
+            _focusedByte = bt;
+
+            var nextAdr = line.Address + byteIndex + direction;
+            if (hex.HasValue) {
+                if (_high) {
+                    _focusedByte.SetHigh((byte)hex.Value);
+                } else {
+                    _focusedByte.SetLow((byte)hex.Value);
+                    SelectByAddress(nextAdr);
+                }
+                _high = !_high;
+            } else {
+                _focusedByte.Value = null;
+                SelectByAddress(nextAdr);
+            }
+        }
+
+        private void SelectByAddress(int address) {
+            var board = Board;
+            if (board == null) return;
+            var line = board.FindLine(address);
+            if (line == null) return;
+            var nextCol = DataGrid.Columns[(address & 0x0f) + 1];
+            DataGrid.CurrentCell = new DataGridCellInfo(line, nextCol);
+            DataGrid.SelectedCells.Clear();
+            DataGrid.SelectedCells.Add(DataGrid.CurrentCell);
+        }
+
+        public HexBoard Board {
+            get {
+                return DataContext as HexBoard;
+            }
+        }
     }
 }
