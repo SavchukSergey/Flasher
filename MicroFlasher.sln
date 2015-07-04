@@ -5,6 +5,7 @@ VisualStudioVersion = 12.0.40418.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "artifacts", "artifacts", "{478F1F1C-402E-4AB4-8313-BF46553D3A5D}"
 	ProjectSection(SolutionItems) = preProject
+		Artifacts\CommonAssemblyInfo.cs = Artifacts\CommonAssemblyInfo.cs
 		Artifacts\release.cmd = Artifacts\release.cmd
 	EndProjectSection
 EndProject

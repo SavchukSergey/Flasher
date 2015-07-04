@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Artifacts\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AvrMemoryType.cs" />
     <Compile Include="AvrSignature.cs" />
     <Compile Include="AvrSpi\AvrSpiClient.cs" />
