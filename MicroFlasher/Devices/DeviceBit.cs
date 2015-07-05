@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 namespace MicroFlasher.Devices {
-    public class DeviceBit {
+    public class DeviceBit : INotifyPropertyChanged {
+        private bool _value;
 
         public int Address { get; set; }
 
@@ -16,7 +19,15 @@ namespace MicroFlasher.Devices {
 
         public bool? Constant { get; set; }
 
-        public bool Value { get; set; }
+        public bool Value {
+            get { return _value; }
+            set {
+                if (_value != value) {
+                    _value = value;
+                    OnPropertyChanged("Value");
+                }
+            }
+        }
 
         public bool Hidden { get; set; }
 
@@ -66,6 +77,13 @@ namespace MicroFlasher.Devices {
         private static int ParseInt(string val) {
             if (val.StartsWith("0x")) return int.Parse(val.Substring(2), NumberStyles.HexNumber);
             return int.Parse(val);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName) {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

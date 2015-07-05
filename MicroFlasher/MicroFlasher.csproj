@@ -75,6 +75,7 @@
     <Compile Include="Monitor\SerialMonitorMessage.cs" />
     <Compile Include="ProgrammingSession.cs" />
     <Compile Include="ProgressTrackerProgrammer.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpiMaster.cs" />
     <Compile Include="SpiMasterChannel.cs" />

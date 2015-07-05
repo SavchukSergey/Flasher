@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using Atmega.Hex;
@@ -9,6 +10,27 @@ namespace MicroFlasher.Hex {
     public class HexBoard : INotifyPropertyChanged {
 
         private readonly ObservableCollection<HexBoardLine> _lines = new ObservableCollection<HexBoardLine>();
+
+        public HexBoard() {
+            _lines.CollectionChanged += LinesOnCollectionChanged;
+        }
+
+        private void LinesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args) {
+            if (args.OldItems != null) {
+                foreach (HexBoardLine oldItem in args.OldItems) {
+                    oldItem.DataChanged -= OnLineDataChanged;
+                }
+            }
+            if (args.NewItems != null) {
+                foreach (HexBoardLine newItem in args.NewItems) {
+                    newItem.DataChanged += OnLineDataChanged;
+                }
+            }
+        }
+
+        private void OnLineDataChanged(object sender, EventArgs e) {
+            OnDataChanged();
+        }
 
         public HexBoardLine FindLine(int adr) {
             adr = (adr >> 4) << 4;
@@ -58,13 +80,6 @@ namespace MicroFlasher.Hex {
                 }
             }
             return res;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName) {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public static HexBoard From(byte[] data, int targetStart = 0) {
@@ -166,5 +181,30 @@ namespace MicroFlasher.Hex {
             OnPropertyChanged("Size");
         }
 
+        public HexBoard Clone() {
+            var res = new HexBoard();
+            foreach (var line in Lines) {
+                res.Lines.Add(line.Clone());
+            }
+            return res;
+        }
+
+        #region Events
+
+        public event EventHandler DataChanged;
+
+        protected virtual void OnDataChanged() {
+            var handler = DataChanged;
+            if (handler != null) handler(this, new EventArgs());
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName) {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using MicroFlasher.Commands;
-using MicroFlasher.Devices;
 using MicroFlasher.Models;
 using MicroFlasher.Views.Operations;
 
@@ -19,7 +18,7 @@ namespace MicroFlasher.Views {
         }
 
         private void SaveCommand(object sender, ExecutedRoutedEventArgs e) {
-            var deviceBits = (DeviceBits)DeviceBitsView.DataContext;
+            var deviceBits = ((DeviceBitsModel)DeviceBitsView.DataContext).DeviceBits;
             deviceBits.ApplyTo(Model.LocksHexBoard);
 
             FlasherCommands.WriteLockBits.Execute(null, Owner);
@@ -40,7 +39,7 @@ namespace MicroFlasher.Views {
             lockBits.ApplyFrom(locksData);
 
             DeviceBitsView.DataContext = new DeviceBitsModel {
-                HexBoard = Model.LocksHexBoard,
+                HexBoard = Model.LocksHexBoard.Clone(),
                 DeviceBits = lockBits
             };
 

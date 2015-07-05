@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MicroFlasher.Hex;
+using MicroFlasher.Models;
 
 namespace MicroFlasher.Views {
     /// <summary>
@@ -16,6 +18,7 @@ namespace MicroFlasher.Views {
         public HexBoardView() {
             InitializeComponent();
         }
+
 
         public string Title {
             get { return (string)GetValue(TitleProperty); }
@@ -104,5 +107,6 @@ namespace MicroFlasher.Views {
                 return DataContext as HexBoard;
             }
         }
+
     }
 }

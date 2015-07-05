@@ -71,7 +71,8 @@
             <DataGridTextColumn Header="0E" Binding="{Binding Path=Bytes[14].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
             <DataGridTextColumn Header="0F" Binding="{Binding Path=Bytes[15].Value, StringFormat=X2}" ElementStyle="{StaticResource ByteStyle}" />
 
-            <DataGridTextColumn Binding="{Binding Path=Characters}" Width="*" Foreground="#ff00ff" Visibility="{Binding ShowCharacters, ElementName=Grid, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <DataGridTextColumn Binding="{Binding Path=Characters}" Width="*" Foreground="#ff00ff"
+                                Visibility="{Binding ShowCharacters, ElementName=Grid, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <DataGridTextColumn.ElementStyle>
                     <Style TargetType="TextBlock">
                         <Setter Property="Padding" Value="10, 0, 10, 0"/>

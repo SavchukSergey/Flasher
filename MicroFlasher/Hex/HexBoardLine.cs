@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -32,8 +33,8 @@ namespace MicroFlasher.Hex {
 
         private void bt_PropertyChanged(object sender, PropertyChangedEventArgs e) {
             OnPropertyChanged("Characters");
+            OnDataChanged();
         }
-
 
         public string Characters {
             get {
@@ -51,9 +52,26 @@ namespace MicroFlasher.Hex {
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public event EventHandler DataChanged;
+
         protected virtual void OnPropertyChanged(string propertyName = null) {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected virtual void OnDataChanged() {
+            var handler = DataChanged;
+            if (handler != null) handler(this, new EventArgs());
+        }
+
+        public HexBoardLine Clone() {
+            var res = new HexBoardLine {
+                Address = Address
+            };
+            for (var i = 0; i < _bytes.Length; i++) {
+                res.Bytes[i].Value = _bytes[i].Value;
+            }
+            return res;
         }
     }
 }
