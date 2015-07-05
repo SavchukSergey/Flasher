@@ -13,7 +13,12 @@ namespace MicroFlasher.Views {
 
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(HexBoardView), new PropertyMetadata(""));
         public static readonly DependencyProperty CanClearProperty = DependencyProperty.Register("CanClear", typeof(bool), typeof(HexBoardView), new PropertyMetadata(true));
-        public static readonly DependencyProperty ShowCharactersProperty = DependencyProperty.Register("ShowCharacters", typeof(bool), typeof(HexBoardView), new PropertyMetadata(true));
+        public static readonly DependencyProperty ShowCharactersProperty = DependencyProperty.Register("ShowCharacters", typeof(bool), typeof(HexBoardView), new PropertyMetadata(true, PropertyChangedCallback));
+
+        private static void PropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args) {
+            var board = (HexBoardView)dependencyObject;
+            board.CharactersColumn.Visibility = Convert.ToBoolean(args.NewValue) ? Visibility.Visible : Visibility.Collapsed;
+        }
 
         public HexBoardView() {
             InitializeComponent();
