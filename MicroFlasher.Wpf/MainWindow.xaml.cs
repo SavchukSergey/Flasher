@@ -81,8 +81,8 @@ namespace MicroFlasher {
                     DataContext = new FlasherOperationModel(_model),
                     Owner = this
                 };
-                dlg.ShowDialog();
-                if (_model.Config.AutoVerify) {
+                var writeResult = dlg.ShowDialog();
+                if (writeResult == true && _model.Config.AutoVerify) {
                     VerifyDeviceCommand(this, null);
                 }
             }
