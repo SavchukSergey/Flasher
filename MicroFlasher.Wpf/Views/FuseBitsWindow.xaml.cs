@@ -39,7 +39,10 @@ namespace MicroFlasher.Views {
             var fusesData = Model.FusesHexBoard;
             fuseBits.ApplyFrom(fusesData);
 
-            DeviceBitsView.DataContext = fuseBits;
+            DeviceBitsView.DataContext = new DeviceBitsModel {
+                HexBoard = Model.FusesHexBoard,
+                DeviceBits = fuseBits
+            };
         }
 
         protected FlasherModel Model {

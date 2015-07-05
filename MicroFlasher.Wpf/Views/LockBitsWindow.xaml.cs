@@ -39,7 +39,11 @@ namespace MicroFlasher.Views {
             var locksData = Model.LocksHexBoard;
             lockBits.ApplyFrom(locksData);
 
-            DeviceBitsView.DataContext = lockBits;
+            DeviceBitsView.DataContext = new DeviceBitsModel {
+                HexBoard = Model.LocksHexBoard,
+                DeviceBits = lockBits
+            };
+
         }
 
         protected FlasherModel Model {

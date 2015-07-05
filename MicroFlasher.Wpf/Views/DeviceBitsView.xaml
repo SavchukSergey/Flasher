@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:devices="clr-namespace:MicroFlasher.Devices;assembly=MicroFlasher"
              xmlns:views="clr-namespace:MicroFlasher.Views"
+             xmlns:models="clr-namespace:MicroFlasher.Models"
              Loaded="DeviceBitsView_OnLoaded"
              DataContextChanged="DeviceBitsView_OnDataContextChanged"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance devices:DeviceBits}">
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance models:DeviceBitsModel}">
     <StackPanel Orientation="Vertical">
-        <ItemsControl ItemsSource="{Binding Path=Groups}" CheckBox.Checked="OnCheckChanged" CheckBox.Unchecked="OnCheckChanged"  >
+        <ItemsControl ItemsSource="{Binding Path=DeviceBits.Groups}" CheckBox.Checked="OnCheckChanged" CheckBox.Unchecked="OnCheckChanged"  >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical" Margin="5" ToolTip="{Binding Path=Description}" Background="Transparent">

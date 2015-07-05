@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using MicroFlasher.Devices;
 using MicroFlasher.Hex;
+using MicroFlasher.Models;
 
 namespace MicroFlasher.Views {
     /// <summary>
@@ -14,9 +15,9 @@ namespace MicroFlasher.Views {
         }
 
         private void RefreshBoard() {
-            var deviceBits = DataContext as DeviceBits;
+            var deviceBits = DeviceBits;
             if (deviceBits != null) {
-                var board = new HexBoard();
+                var board = Board ?? new HexBoard();
                 deviceBits.ApplyTo(board);
                 BoardView.DataContext = board;
             }
@@ -32,6 +33,25 @@ namespace MicroFlasher.Views {
 
         private void DeviceBitsView_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e) {
             RefreshBoard();
+        }
+
+        private DeviceBitsModel Model {
+            get { return DataContext as DeviceBitsModel; }
+        }
+
+        private HexBoard Board {
+            get {
+                var m = Model;
+                return m != null ? m.HexBoard : null;
+            }
+        }
+
+
+        private DeviceBits DeviceBits {
+            get {
+                var m = Model;
+                return m != null ? m.DeviceBits : null;
+            }
         }
     }
 }

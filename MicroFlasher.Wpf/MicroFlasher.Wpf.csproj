@@ -73,6 +73,7 @@
     <Compile Include="Models\ComBitBangConfig.cs" />
     <Compile Include="Models\ComBitBangPinConfig.cs" />
     <Compile Include="Models\ComPortSettings.cs" />
+    <Compile Include="Models\DeviceBitsModel.cs" />
     <Compile Include="Models\FlasherOperationModel.cs" />
     <Compile Include="Models\ProgrammerType.cs" />
     <Compile Include="Models\StubConfig.cs" />
