@@ -27,7 +27,7 @@ namespace MicroFlasher.Devices {
                     bt = (byte)(bt & Mask);
                     return true;
                 case 2:
-                    if ((address & 0x01) > 0) {
+                    if ((address & 0x01) == 0) {
                         bt = (byte)(bt & Mask);
                     } else {
                         bt = (byte)(bt & Mask >> 8);
