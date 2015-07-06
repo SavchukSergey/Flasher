@@ -646,6 +646,9 @@
   </device>
   <!-- PIC16F676. Осторожно, калибровочная константа будет стерта-->
   <device name="PIC16F676" ram="64" stkCode="0x01">
+    <masks>
+      <mask start="0x400e" wordSize="2" mask="0x31ff" />
+    </masks>
     <flash size="2048" />
     <eeprom size="128" />
     <lockBits page="2" location="flash">

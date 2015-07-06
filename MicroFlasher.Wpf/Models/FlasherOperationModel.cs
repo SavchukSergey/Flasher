@@ -8,7 +8,7 @@ namespace MicroFlasher.Models {
 
         public FlasherOperationModel(FlasherModel flasher) {
             _flasher = flasher;
-            _deviceOperation = new ObservableDeviceOperation(new CancellationTokenSource());
+            _deviceOperation = new ObservableDeviceOperation(flasher.Config.Device, new CancellationTokenSource());
         }
 
         public FlasherModel Flasher {

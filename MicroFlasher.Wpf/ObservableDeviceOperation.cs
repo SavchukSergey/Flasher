@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using MicroFlasher.Annotations;
+using MicroFlasher.Devices;
 
 namespace MicroFlasher {
     public class ObservableDeviceOperation : DeviceOperation, INotifyPropertyChanged {
@@ -15,8 +16,8 @@ namespace MicroFlasher {
         private DeviceOperationStatus _status;
         private TimeSpan _timeSpan;
 
-        public ObservableDeviceOperation(CancellationTokenSource cancellationTokenSource)
-            : base(cancellationTokenSource) {
+        public ObservableDeviceOperation(DeviceInfo device, CancellationTokenSource cancellationTokenSource)
+            : base(device, cancellationTokenSource) {
         }
 
         public override TimeSpan ExecutionTime {

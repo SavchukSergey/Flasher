@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using MicroFlasher.STKv1;
@@ -12,6 +11,7 @@ namespace MicroFlasher.Devices {
         private DeviceEepromParameters _eeprom = new DeviceEepromParameters();
         private DeviceBits _lockBits = new DeviceBits();
         private DeviceBits _fuseBits = new DeviceBits();
+        private readonly IList<MemoryMask> _memoryMasks = new List<MemoryMask>();
 
         public string Name { get; set; }
 
@@ -31,6 +31,10 @@ namespace MicroFlasher.Devices {
             get { return _fuseBits; }
         }
 
+        public IList<MemoryMask> Masks {
+            get { return _memoryMasks; }
+        }
+
         public int RamSize { get; set; }
 
         public AvrSignature Signature { get; set; }
@@ -47,7 +51,7 @@ namespace MicroFlasher.Devices {
             var xLockBits = node.Element("lockBits");
             var xFuseBits = node.Element("fuseBits");
             var xStkCode = node.Attribute("stkCode");
-            return new DeviceInfo {
+            var res = new DeviceInfo {
                 Name = xName != null ? xName.Value : "unknown",
                 _flash = xFlash != null ? DeviceFlashParameters.From(xFlash) : new DeviceFlashParameters(),
                 _eeprom = xEeprom != null ? DeviceEepromParameters.From(xEeprom) : new DeviceEepromParameters(),
@@ -57,18 +61,34 @@ namespace MicroFlasher.Devices {
                 _fuseBits = xFuseBits != null ? DeviceBits.Parse(xFuseBits) : new DeviceBits(),
                 StkCode = xStkCode != null ? ParseStkCode(xStkCode.Value) : StkDeviceCode.None,
             };
+
+            var xMasks = node.Element("masks");
+            if (xMasks != null) {
+                foreach (var xMask in xMasks.Elements()) {
+                    var mask = MemoryMask.From(xMask);
+                    res.Masks.Add(mask);
+                }
+            }
+            return res;
+        }
+
+        public bool Verify(AvrMemoryType memType, int address, byte value1, byte value2) {
+            foreach (var mask in Masks) {
+                var ch1 = mask.Process(address, memType, ref value1);
+                var ch2 = mask.Process(address, memType, ref value2);
+                if (ch1 || ch2) {
+                    return value1 == value2;
+                }
+            }
+            return value1 == value2;
         }
 
         private static StkDeviceCode ParseStkCode(string val) {
             StkDeviceCode res;
             if (Enum.TryParse(val, true, out res)) return res;
-            return (StkDeviceCode) ParseInt(val);
+            return (StkDeviceCode)DeviceInfoUtils.ParseInt(val);
         }
 
-        private static int ParseInt(string val) {
-            if (val.StartsWith("0x")) return int.Parse(val.Substring(2), NumberStyles.HexNumber);
-            return int.Parse(val);
-        }
 
         public static IList<DeviceInfo> List() {
             var xDoc = XDocument.Load("devices.xml");

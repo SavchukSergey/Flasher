@@ -12,6 +12,6 @@
             <TextBlock Margin="0,0,10,0">Execution time:</TextBlock>
             <TextBlock Text="{Binding Path=ExecutionTime, StringFormat=mm\\:ss\\.f}" />
         </StackPanel>
-        <TextBlock Text="{Binding CurrentState}" />
+        <TextBlock Text="{Binding CurrentState}" TextWrapping="WrapWithOverflow" />
     </StackPanel>
 </UserControl>

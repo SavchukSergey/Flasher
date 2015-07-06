@@ -3,7 +3,6 @@
 namespace MicroFlasher.Hex {
     public class HexBoardByte : INotifyPropertyChanged {
 
-        private readonly HexBoardLine _line;
         private byte? _value;
 
         public byte? Value {

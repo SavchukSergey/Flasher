@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Threading;
+using MicroFlasher.Devices;
 
 namespace MicroFlasher {
     public class DeviceOperation {
-
         private readonly CancellationTokenSource _cancellationTokenSource;
+        private readonly DeviceInfo _device;
 
-        public DeviceOperation(CancellationTokenSource cancellationTokenSource) {
+        public DeviceOperation(DeviceInfo device, CancellationTokenSource cancellationTokenSource) {
+            _device = device;
             _cancellationTokenSource = cancellationTokenSource;
         }
+
+        public DeviceInfo Device { get { return _device; } }
 
         public virtual int FlashDone { get; set; }
 

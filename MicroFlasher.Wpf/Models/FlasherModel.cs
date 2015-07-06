@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Atmega.Hex;
+using MicroFlasher.Devices;
 using MicroFlasher.Hex;
 
 namespace MicroFlasher.Models {
@@ -279,12 +280,14 @@ namespace MicroFlasher.Models {
         }
 
         private static bool VerifyBlock(IProgrammer programmer, HexBlock block, AvrMemoryType memType, DeviceOperation op) {
-            var actual = new byte[block.Data.Length];
-            programmer.ReadPage(block.Address, memType, actual, 0, actual.Length);
+            var actualData = new byte[block.Data.Length];
+            programmer.ReadPage(block.Address, memType, actualData, 0, actualData.Length);
             for (var i = 0; i < block.Data.Length; i++) {
-                var t = block.Data[i];
-                if (t != actual[i]) {
-                    op.CurrentState = string.Format("Verification failed at {0}:{1:x4}", memType, i + block.Address);
+                var actual = actualData[i];
+                var expected = block.Data[i];
+                var address = i + block.Address;
+                if (!op.Device.Verify(memType, address, actual, expected)) {
+                    op.CurrentState = string.Format("Verification failed at {0}:0x{1:x4}.\r\nExpected 0x{2:x2} but was 0x{3:x2}", memType, i + block.Address, expected, actual);
                     return false;
                 }
             }
@@ -367,5 +370,6 @@ namespace MicroFlasher.Models {
                 channel.Close();
             }
         }
+
     }
 }
