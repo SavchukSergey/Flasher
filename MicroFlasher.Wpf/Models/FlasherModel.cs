@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using Atmega.Hex;
-using MicroFlasher.Devices;
 using MicroFlasher.Hex;
 
 namespace MicroFlasher.Models {
@@ -15,7 +13,8 @@ namespace MicroFlasher.Models {
         private HexBoard _fusesHexBoard = new HexBoard();
         private HexBoard _locksHexBoard = new HexBoard();
 
-        private const int MAX_EEPROM_BLOCK_SIZE = 32;
+        private const int MIN_EEPROM_BLOCK_SIZE = 32;
+        private const int MIN_FLASH_BLOCK_SIZE = 128;
 
         public FlasherModel() {
             _eepromHexBoard[0] = null;
@@ -169,8 +168,8 @@ namespace MicroFlasher.Models {
         public bool WriteDevice(DeviceOperation op) {
             var device = Config.Device;
 
-            var flashBlocks = FlashHexBoard.SplitBlocks(device.Flash.PageSize);
-            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize, MAX_EEPROM_BLOCK_SIZE);
+            var flashBlocks = FlashHexBoard.SplitBlocks(device.Flash.PageSize, MIN_FLASH_BLOCK_SIZE);
+            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize, MIN_EEPROM_BLOCK_SIZE);
 
             op.FlashSize += flashBlocks.TotalBytes;
             op.EepromSize += eepromBlocks.TotalBytes;
@@ -228,8 +227,10 @@ namespace MicroFlasher.Models {
         }
 
         public bool VerifyDevice(DeviceOperation op) {
-            var eepromBlocks = EepromHexBoard.SplitBlocks();
-            var flashBlocks = FlashHexBoard.SplitBlocks();
+            var device = Config.Device;
+
+            var flashBlocks = FlashHexBoard.SplitBlocks(device.Flash.PageSize, MIN_FLASH_BLOCK_SIZE);
+            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize, MIN_EEPROM_BLOCK_SIZE);
 
             op.FlashSize += flashBlocks.TotalBytes;
             op.EepromSize += eepromBlocks.TotalBytes;

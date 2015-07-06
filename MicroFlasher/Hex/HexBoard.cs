@@ -134,45 +134,37 @@ namespace MicroFlasher.Hex {
             return res;
         }
 
-        public HexBlocks SplitBlocks(int pageSize = 1, int maxBlockSize = int.MaxValue) {
+        public HexBlocks SplitBlocks(int pageSize = 1, int minBlockSize = 0) {
             pageSize = Math.Max(1, pageSize);
+            var blockSize = Math.Max(pageSize, minBlockSize);
+
             var res = new HexBlocks();
-            var blockStart = 0;
-            var address = 0;
-            var bytes = new List<byte>();
+            HexBlock block = null;
 
             var allBytes = Lines
-                .SelectMany(l => l.Bytes.Select((b, i) => new HexBlockByte { Address = l.Address + i, Byte = b.Value }))
-                .Where(item => item.Byte.HasValue);
+                .SelectMany(l => l.Bytes.Select((b, i) => new HexBlockByte { Address = l.Address + i, Byte = b.Value }));
             foreach (var bt in allBytes) {
-                if (bt.Address != address && (bt.Address / pageSize == address / pageSize)) {
-                    while (address != bt.Address) {
-                        bytes.Add(0xff);
-                        address++;
-                    }
+                if (!bt.Byte.HasValue) continue;
+                if (block != null && (block.Address / blockSize) != (bt.Address / blockSize)) {
+                    block = null;
                 }
+                if (block == null) {
+                    block = CreateBlock((bt.Address / blockSize) * blockSize, blockSize);
+                    res.Blocks.Add(block);
+                }
+                block.Data[bt.Address - block.Address] = bt.Byte.Value;
 
-                if (bt.Address != address || bytes.Count > maxBlockSize) {
-                    if (bytes.Count > 0) {
-                        res.Blocks.Add(new HexBlock {
-                            Address = blockStart,
-                            Data = bytes.ToArray()
-                        });
-                        bytes = new List<byte>();
-                    }
-                    blockStart = bt.Address;
-                    address = blockStart;
-                }
-                if (bt.Byte.HasValue) bytes.Add(bt.Byte.Value);
-                address++;
             }
-            if (bytes.Count != 0) {
-                res.Blocks.Add(new HexBlock {
-                    Address = blockStart,
-                    Data = bytes.ToArray()
-                });
-            }
+
             return res;
+        }
+
+        private static HexBlock CreateBlock(int start, int size) {
+            var block = new HexBlock { Address = start, Data = new byte[size] };
+            for (var i = 0; i < size; i++) {
+                block.Data[i] = 0xff;
+            }
+            return block;
         }
 
         public void Clear() {

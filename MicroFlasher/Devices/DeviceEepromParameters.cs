@@ -13,7 +13,7 @@ namespace MicroFlasher.Devices {
             var size = xSize != null ? int.Parse(xSize.Value) : 0;
             return new DeviceEepromParameters {
                 Size = size,
-                PageSize = xPage != null ? int.Parse(xPage.Value) : size,
+                PageSize = xPage != null ? int.Parse(xPage.Value) : 1
             };
         }
     }
