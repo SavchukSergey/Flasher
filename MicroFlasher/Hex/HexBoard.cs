@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using Atmega.Hex;
+using MicroFlasher.Annotations;
 
 namespace MicroFlasher.Hex {
     public class HexBoard : INotifyPropertyChanged {
@@ -134,29 +136,76 @@ namespace MicroFlasher.Hex {
             return res;
         }
 
-        public HexBlocks SplitBlocks(int pageSize = 1, int minBlockSize = 0) {
+        public HexBlocks SplitBlocks(int pageSize = 1) {
             pageSize = Math.Max(1, pageSize);
-            var blockSize = Math.Max(pageSize, minBlockSize);
-
+            var sp = new Queue<BlockInfo>(JoinBlocks(GetPages(pageSize), pageSize));
             var res = new HexBlocks();
             HexBlock block = null;
-
-            var allBytes = Lines
-                .SelectMany(l => l.Bytes.Select((b, i) => new HexBlockByte { Address = l.Address + i, Byte = b.Value }));
-            foreach (var bt in allBytes) {
-                if (!bt.Byte.HasValue) continue;
-                if (block != null && (block.Address / blockSize) != (bt.Address / blockSize)) {
-                    block = null;
+            foreach (var line in _lines) {
+                for (var index = 0; index < line.Bytes.Length; index++) {
+                    var bt = line.Bytes[index];
+                    if (bt.Value.HasValue) {
+                        var address = line.Address + index;
+                        if (block != null && (address < block.Address || address > block.Address + block.Data.Length)) {
+                            block = null;
+                        }
+                        if (block == null) {
+                            var info = sp.Dequeue();
+                            block = CreateBlock(info.Address, info.Length);
+                            res.Blocks.Add(block);
+                        }
+                        block.Data[address - block.Address] = bt.Value.Value;
+                    }
                 }
-                if (block == null) {
-                    block = CreateBlock((bt.Address / blockSize) * blockSize, blockSize);
-                    res.Blocks.Add(block);
-                }
-                block.Data[bt.Address - block.Address] = bt.Byte.Value;
-
             }
 
             return res;
+        }
+
+        private class BlockInfo {
+
+            public int Address;
+
+            public int Length;
+        }
+
+        private IEnumerable<int> GetPages(int pageSize = 1) {
+            var prevKey = new int?();
+            foreach (var line in _lines) {
+                for (var i = 0; i < line.Bytes.Length; i++) {
+                    var bt = line.Bytes[i];
+                    if (bt.Value.HasValue) {
+                        var address = line.Address + i;
+                        var key = (address / pageSize) * pageSize;
+                        if (prevKey == null || prevKey.Value != key) {
+                            yield return key;
+                            prevKey = key;
+                        }
+                    }
+                }
+            }
+        }
+
+        private static IEnumerable<BlockInfo> JoinBlocks(IEnumerable<int> pages, int pageSize) {
+            BlockInfo prev = null;
+            foreach (var page in pages) {
+                BlockInfo block = null;
+                if (prev != null) {
+                    var prevEnd = prev.Address + prev.Length;
+                    if (prevEnd == page) {
+                        prev.Length += pageSize;
+                        block = prev;
+                    }
+                }
+                block = block ?? new BlockInfo {
+                    Address = page,
+                    Length = pageSize
+                };
+                if (block != prev) {
+                    yield return block;
+                    prev = block;
+                }
+            }
         }
 
         private static HexBlock CreateBlock(int start, int size) {

@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroFlasher.Wpf", "MicroFl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroFlasher", "MicroFlasher\MicroFlasher.csproj", "{0C30F079-3B8D-4B53-92F8-6ABF036C430F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroFlasher.Tests", "MicroFlasher.Tests\MicroFlasher.Tests.csproj", "{74867C17-633F-4328-9448-FADC277D784D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{0C30F079-3B8D-4B53-92F8-6ABF036C430F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C30F079-3B8D-4B53-92F8-6ABF036C430F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C30F079-3B8D-4B53-92F8-6ABF036C430F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74867C17-633F-4328-9448-FADC277D784D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74867C17-633F-4328-9448-FADC277D784D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74867C17-633F-4328-9448-FADC277D784D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74867C17-633F-4328-9448-FADC277D784D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

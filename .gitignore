@@ -11,3 +11,6 @@
 /MicroFlasher.Wpf/obj/
 /Artifacts/release/
 /MicroFlasher.Wpf/MicroFlasher.Wpf.csproj.user
+
+/MicroFlasher.Tests/bin/
+/MicroFlasher.Tests/obj/
