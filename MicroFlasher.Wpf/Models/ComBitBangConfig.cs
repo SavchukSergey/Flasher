@@ -48,6 +48,10 @@ namespace MicroFlasher.Models {
             _misoPin.ReadFromConfig();
         }
 
+        public override string ConnectionName {
+            get { return ComPortSettings.ComPort; }
+        }
+
         public override IProgrammer CreateProgrammer(DeviceInfo device) {
             return new AvrSpiProgrammer(new AvrSpiClient(CreateChannel()));
         }

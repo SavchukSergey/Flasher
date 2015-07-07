@@ -34,6 +34,10 @@ namespace MicroFlasher.Models {
             UseReset = GetConfigBool(true, "UseReset");
         }
 
+        public override string ConnectionName {
+            get { return ComPortSettings.ComPort + (UseReset ? " (with reset)" : ""); }
+        }
+
         public override IProgrammer CreateProgrammer(DeviceInfo device) {
             return new StkV1Programmer(new StkV1Client(CreateChannel()), device, UseReset);
         }

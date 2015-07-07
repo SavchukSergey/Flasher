@@ -8,6 +8,8 @@ namespace MicroFlasher.Models {
             : base(keyPrefix) {
         }
 
+        public abstract string ConnectionName { get; }
+
         public abstract IProgrammer CreateProgrammer(DeviceInfo device);
 
         public abstract IAvrChannel CreateChannel();

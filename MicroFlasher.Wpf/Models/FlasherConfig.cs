@@ -62,6 +62,13 @@ namespace MicroFlasher.Models {
             }
         }
 
+        public string ConnectionName {
+            get {
+                var config = GetProgrammerConfig();
+                return config.ConnectionName;
+            }
+        }
+
         public override void ReadFromConfig() {
             _stkv1.ReadFromConfig();
             _comBitBang.ReadFromConfig();

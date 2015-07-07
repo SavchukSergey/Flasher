@@ -87,6 +87,13 @@
                     <TextBlock Text="{Binding Path=Config.Device.Name}" />
                 </StackPanel>
             </StatusBarItem>
+            <Separator />
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Connection:</TextBlock>
+                    <TextBlock Text="{Binding Path=Config.ConnectionName}" />
+                </StackPanel>
+            </StatusBarItem>
         </StatusBar>
         <Grid Background="SlateGray">
             <Grid>

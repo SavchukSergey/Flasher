@@ -13,6 +13,10 @@ namespace MicroFlasher.Models {
         public override void ReadFromConfig() {
         }
 
+        public override string ConnectionName {
+            get { return "---"; }
+        }
+
         public override IProgrammer CreateProgrammer(DeviceInfo device) {
             return StubProgrammer.Instance;
         }
