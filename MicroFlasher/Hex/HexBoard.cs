@@ -136,7 +136,7 @@ namespace MicroFlasher.Hex {
             return res;
         }
 
-        public HexBlocks SplitBlocks(int pageSize = 1) {
+        public HexBlocks SplitBlocks(int pageSize) {
             pageSize = Math.Max(1, pageSize);
             var sp = new Queue<BlockInfo>(JoinBlocks(GetPages(pageSize), pageSize));
             var res = new HexBlocks();
@@ -247,5 +247,13 @@ namespace MicroFlasher.Hex {
         }
 
         #endregion
+
+        public void LoadFrom(HexBoard hexBoard) {
+            Lines.Clear();
+            foreach (var line in hexBoard.Lines) {
+                Lines.Add(line.Clone());
+            }
+            OnPropertyChanged("Size");
+        }
     }
 }

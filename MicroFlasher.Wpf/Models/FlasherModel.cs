@@ -249,12 +249,52 @@ namespace MicroFlasher.Models {
             return true;
         }
 
-        public bool EraseDevice(DeviceOperation op) {
-            var eepromBlocks = EepromHexBoard.SplitBlocks();
-            var flashBlocks = FlashHexBoard.SplitBlocks();
+        public bool VerifyFuseBits(DeviceOperation op) {
+            var device = Config.Device;
 
-            op.FlashSize += flashBlocks.TotalBytes;
-            op.EepromSize += eepromBlocks.TotalBytes;
+            var fuseBlocks = FusesHexBoard.SplitBlocks(1);
+
+            op.FusesSize += fuseBlocks.TotalBytes;
+
+            using (var programmer = CreateProgrammer(op)) {
+                using (programmer.Start()) {
+                    if (!VerifyBlocks(programmer, fuseBlocks, device.FuseBits.Location ?? AvrMemoryType.FuseBits, op)) {
+                        return false;
+                    }
+                }
+            }
+            op.Complete();
+            op.CurrentState = "Everything is done";
+
+            return true;
+        }
+
+        public bool VerifyLockBits(DeviceOperation op) {
+            var device = Config.Device;
+
+            var lockBlocks = LocksHexBoard.SplitBlocks(1);
+
+            op.LocksSize += lockBlocks.TotalBytes;
+
+            using (var programmer = CreateProgrammer(op)) {
+                using (programmer.Start()) {
+                    if (!VerifyBlocks(programmer, lockBlocks, device.LockBits.Location ?? AvrMemoryType.LockBits, op)) {
+                        return false;
+                    }
+                }
+            }
+            op.Complete();
+            op.CurrentState = "Everything is done";
+
+            return true;
+        }
+
+        public bool EraseDevice(DeviceOperation op)
+        {
+            var device = Config.Device;
+
+            op.FlashSize += device.Flash.Size;
+            op.EepromSize += device.Eeprom.Size;
 
             using (var programmer = CreateProgrammer(op)) {
                 using (programmer.Start()) {
@@ -302,6 +342,14 @@ namespace MicroFlasher.Models {
 
         public async Task<bool> VerifyDeviceAsync(DeviceOperation op) {
             return await Task.Run(() => VerifyDevice(op), op.CancellationToken);
+        }
+
+        public async Task<bool> VerifyLockBitsAsync(DeviceOperation op) {
+            return await Task.Run(() => VerifyLockBits(op), op.CancellationToken);
+        }
+
+        public async Task<bool> VerifyFuseBitsAsync(DeviceOperation op) {
+            return await Task.Run(() => VerifyFuseBits(op), op.CancellationToken);
         }
 
         public async Task<bool> EraseDeviceAsync(DeviceOperation op) {

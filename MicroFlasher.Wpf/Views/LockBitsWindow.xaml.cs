@@ -9,6 +9,7 @@ namespace MicroFlasher.Views {
     /// Interaction logic for LockBitsWindow.xaml
     /// </summary>
     public partial class LockBitsWindow : Window {
+
         public LockBitsWindow() {
             InitializeComponent();
         }
@@ -18,8 +19,7 @@ namespace MicroFlasher.Views {
         }
 
         private void SaveCommand(object sender, ExecutedRoutedEventArgs e) {
-            var deviceBits = ((DeviceBitsModel)DeviceBitsView.DataContext).DeviceBits;
-            deviceBits.ApplyTo(Model.LocksHexBoard);
+            Model.LocksHexBoard.LoadFrom(((DeviceBitsModel)DeviceBitsView.DataContext).HexBoard);
 
             FlasherCommands.WriteLockBits.Execute(null, Owner);
             Close(); 
@@ -42,7 +42,6 @@ namespace MicroFlasher.Views {
                 HexBoard = Model.LocksHexBoard.Clone(),
                 DeviceBits = lockBits
             };
-
         }
 
         protected FlasherModel Model {

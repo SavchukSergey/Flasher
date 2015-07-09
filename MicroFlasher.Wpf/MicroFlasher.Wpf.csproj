@@ -87,6 +87,12 @@
     <Compile Include="Views\Controls\SpecialCharsTextBox.xaml.cs">
       <DependentUpon>SpecialCharsTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Operations\VerifyLockBitsWindow.xaml.cs">
+      <DependentUpon>VerifyLockBitsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Operations\VerifyFuseBitsWindow.xaml.cs">
+      <DependentUpon>VerifyFuseBitsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SerialMonitor\MonitorToolBar.xaml.cs">
       <DependentUpon>MonitorToolBar.xaml</DependentUpon>
     </Compile>
@@ -185,6 +191,14 @@
     <Page Include="Views\Controls\SpecialCharsTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Operations\VerifyLockBitsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Operations\VerifyFuseBitsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SerialMonitor\MonitorToolBar.xaml">
       <Generator>MSBuild:Compile</Generator>

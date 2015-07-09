@@ -9,7 +9,7 @@ namespace MicroFlasher.Views {
     /// Interaction logic for FuseBitsWindow.xaml
     /// </summary>
     public partial class FuseBitsWindow : Window {
-        
+
         public FuseBitsWindow() {
             InitializeComponent();
         }
@@ -19,8 +19,7 @@ namespace MicroFlasher.Views {
         }
 
         private void SaveCommand(object sender, ExecutedRoutedEventArgs e) {
-            var deviceBits = ((DeviceBitsModel)DeviceBitsView.DataContext).DeviceBits;
-            deviceBits.ApplyTo(Model.FusesHexBoard);
+            Model.FusesHexBoard.LoadFrom(((DeviceBitsModel)DeviceBitsView.DataContext).HexBoard);
 
             FlasherCommands.WriteFuseBits.Execute(null, Owner);
             Close();

@@ -96,6 +96,23 @@ namespace MicroFlasher {
             dlg.ShowDialog();
         }
 
+        private void VerifyLockBitsCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new VerifyLockBitsWindow {
+                DataContext = new FlasherOperationModel(_model),
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+
+        private void VerifyFuseBitsCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new VerifyFuseBitsWindow {
+                DataContext = new FlasherOperationModel(_model),
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+
+
         private void SettingsCommand(object sender, ExecutedRoutedEventArgs e) {
             var settings = FlasherConfig.Read();
             var oldDevice = settings.Device.Name;
@@ -146,7 +163,9 @@ namespace MicroFlasher {
                     DataContext = new FlasherOperationModel(Model),
                     Owner = this
                 };
-                dlg.ShowDialog();
+                if (dlg.ShowDialog() == true && _model.Config.AutoVerify) {
+                    VerifyLockBitsCommand(this, null);
+                };
             }
         }
 
@@ -157,7 +176,9 @@ namespace MicroFlasher {
                     DataContext = new FlasherOperationModel(Model),
                     Owner = this
                 };
-                dlg.ShowDialog();
+                if (dlg.ShowDialog() == true && _model.Config.AutoVerify) {
+                    VerifyFuseBitsCommand(this, null);
+                };
             }
         }
 
