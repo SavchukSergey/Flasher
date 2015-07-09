@@ -91,19 +91,29 @@ namespace MicroFlasher {
         }
 
         private void WriteFlashCommand(object sender, ExecutedRoutedEventArgs e) {
-            var dlg = new WriteFlashWindow {
-                DataContext = new FlasherOperationModel(_model),
-                Owner = this
-            };
-            dlg.ShowDialog();
+            var msgResult = MessageBox.Show("Are you sure you want start writing flash. Device may become unoperable", "Flash confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (msgResult == MessageBoxResult.Yes) {
+                var dlg = new WriteFlashWindow {
+                    DataContext = new FlasherOperationModel(Model),
+                    Owner = this
+                };
+                if (dlg.ShowDialog() == true && _model.Config.AutoVerify) {
+                    VerifyFlashCommand(this, null);
+                };
+            }
         }
 
         private void WriteEepromCommand(object sender, ExecutedRoutedEventArgs e) {
-            var dlg = new WriteEepromWindow {
-                DataContext = new FlasherOperationModel(_model),
-                Owner = this
-            };
-            dlg.ShowDialog();
+            var msgResult = MessageBox.Show("Are you sure you want start writing eeprom. Device may become unoperable", "Eeprom confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (msgResult == MessageBoxResult.Yes) {
+                var dlg = new WriteEepromWindow {
+                    DataContext = new FlasherOperationModel(Model),
+                    Owner = this
+                };
+                if (dlg.ShowDialog() == true && _model.Config.AutoVerify) {
+                    VerifyEepromCommand(this, null);
+                };
+            }
         }
 
         private void WriteLockBitsCommand(object sender, ExecutedRoutedEventArgs e) {
