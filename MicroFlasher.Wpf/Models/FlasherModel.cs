@@ -8,6 +8,8 @@ using MicroFlasher.Hex;
 namespace MicroFlasher.Models {
     public class FlasherModel : INotifyPropertyChanged {
 
+        public const int EEPROM_MAX_SUPERPAGE = 32;
+
         private HexBoard _eepromHexBoard = new HexBoard();
         private HexBoard _flashHexBoard = new HexBoard();
         private HexBoard _fusesHexBoard = new HexBoard();
@@ -166,7 +168,7 @@ namespace MicroFlasher.Models {
             var device = Config.Device;
 
             var flashBlocks = FlashHexBoard.SplitBlocks(device.Flash.PageSize);
-            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize);
+            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize, EEPROM_MAX_SUPERPAGE);
 
             op.FlashSize += flashBlocks.TotalBytes;
             op.EepromSize += eepromBlocks.TotalBytes;
@@ -209,7 +211,7 @@ namespace MicroFlasher.Models {
         public bool WriteEeprom(DeviceOperation op) {
             var device = Config.Device;
 
-            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize);
+            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize, EEPROM_MAX_SUPERPAGE);
 
             op.EepromSize += eepromBlocks.TotalBytes;
 

@@ -136,9 +136,9 @@ namespace MicroFlasher.Hex {
             return res;
         }
 
-        public HexBlocks SplitBlocks(int pageSize) {
+        public HexBlocks SplitBlocks(int pageSize, int maxSuperPage = int.MaxValue) {
             pageSize = Math.Max(1, pageSize);
-            var sp = new Queue<BlockInfo>(JoinBlocks(GetPages(pageSize), pageSize));
+            var sp = new Queue<BlockInfo>(JoinBlocks(GetPages(pageSize), pageSize, maxSuperPage));
             var res = new HexBlocks();
             HexBlock block = null;
             foreach (var line in _lines) {
@@ -146,7 +146,7 @@ namespace MicroFlasher.Hex {
                     var bt = line.Bytes[index];
                     if (bt.Value.HasValue) {
                         var address = line.Address + index;
-                        if (block != null && (address < block.Address || address > block.Address + block.Data.Length)) {
+                        if (block != null && (address < block.Address || address >= block.Address + block.Data.Length)) {
                             block = null;
                         }
                         if (block == null) {
@@ -186,25 +186,28 @@ namespace MicroFlasher.Hex {
             }
         }
 
-        private static IEnumerable<BlockInfo> JoinBlocks(IEnumerable<int> pages, int pageSize) {
-            BlockInfo prev = null;
+        private static IEnumerable<BlockInfo> JoinBlocks(IEnumerable<int> pages, int pageSize, int maxSuperPage) {
+            BlockInfo current = null;
             foreach (var page in pages) {
-                BlockInfo block = null;
-                if (prev != null) {
-                    var prevEnd = prev.Address + prev.Length;
+                if (current != null) {
+                    var prevEnd = current.Address + current.Length;
                     if (prevEnd == page) {
-                        prev.Length += pageSize;
-                        block = prev;
+                        if (current.Length + pageSize <= maxSuperPage) {
+                            current.Length += pageSize;
+                            continue;
+                        }
                     }
                 }
-                block = block ?? new BlockInfo {
+                if (current != null) {
+                    yield return current;
+                }
+                current = new BlockInfo {
                     Address = page,
                     Length = pageSize
                 };
-                if (block != prev) {
-                    yield return block;
-                    prev = block;
-                }
+            }
+            if (current != null) {
+                yield return current;
             }
         }
 
