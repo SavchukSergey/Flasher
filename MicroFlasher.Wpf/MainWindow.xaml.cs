@@ -96,6 +96,22 @@ namespace MicroFlasher {
             dlg.ShowDialog();
         }
 
+        private void VerifyFlashCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new VerifyFlashWindow {
+                DataContext = new FlasherOperationModel(_model),
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+
+        private void VerifyEepromCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new VerifyEepromWindow {
+                DataContext = new FlasherOperationModel(_model),
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+
         private void VerifyLockBitsCommand(object sender, ExecutedRoutedEventArgs e) {
             var dlg = new VerifyLockBitsWindow {
                 DataContext = new FlasherOperationModel(_model),
@@ -111,7 +127,6 @@ namespace MicroFlasher {
             };
             dlg.ShowDialog();
         }
-
 
         private void SettingsCommand(object sender, ExecutedRoutedEventArgs e) {
             var settings = FlasherConfig.Read();

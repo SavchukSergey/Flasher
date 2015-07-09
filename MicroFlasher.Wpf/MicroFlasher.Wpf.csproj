@@ -67,6 +67,7 @@
     <Compile Include="Converters\GridLengthConverter.cs" />
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\ProgressStateConverter.cs" />
+    <Compile Include="Converters\SizeToBoolConverter.cs" />
     <Compile Include="KeyUtils.cs" />
     <Compile Include="Models\AboutModel.cs" />
     <Compile Include="Models\BaseProgrammerConfig.cs" />
@@ -86,6 +87,12 @@
     </Compile>
     <Compile Include="Views\Controls\SpecialCharsTextBox.xaml.cs">
       <DependentUpon>SpecialCharsTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Operations\VerifyEepromWindow.xaml.cs">
+      <DependentUpon>VerifyEepromWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Operations\VerifyFlashWindow.xaml.cs">
+      <DependentUpon>VerifyFlashWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Operations\VerifyLockBitsWindow.xaml.cs">
       <DependentUpon>VerifyLockBitsWindow.xaml</DependentUpon>
@@ -191,6 +198,14 @@
     <Page Include="Views\Controls\SpecialCharsTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Operations\VerifyEepromWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Operations\VerifyFlashWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Operations\VerifyLockBitsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

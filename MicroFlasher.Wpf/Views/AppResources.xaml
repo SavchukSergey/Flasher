@@ -60,6 +60,7 @@
     </Style>
     <converters:ProgressStateConverter x:Key="ProgressStateConverter" />
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converters:SizeToBoolConverter x:Key="SizeToBoolConverter" />
     <x:Array x:Key="OuputComPins" Type="io:ComPinType">
         <io:ComPinType>Rts</io:ComPinType>
         <io:ComPinType>Dtr</io:ComPinType>

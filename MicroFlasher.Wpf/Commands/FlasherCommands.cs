@@ -13,8 +13,12 @@ namespace MicroFlasher.Commands {
         private readonly static RoutedCommand _resetDevice = new RoutedCommand();
         private readonly static RoutedCommand _serialMonitor = new RoutedCommand();
         private readonly static RoutedCommand _settings = new RoutedCommand();
-        private readonly static RoutedCommand _writeLockBitsDevice = new RoutedUICommand();
-        private readonly static RoutedCommand _writeFuseBitsDevice = new RoutedUICommand();
+        private readonly static RoutedCommand _writeLockBits = new RoutedUICommand();
+        private readonly static RoutedCommand _writeFuseBits = new RoutedUICommand();
+        private readonly static RoutedCommand _verifyLockBits = new RoutedUICommand();
+        private readonly static RoutedCommand _verifyFuseBits = new RoutedUICommand();
+        private readonly static RoutedCommand _verifyFlash = new RoutedUICommand();
+        private readonly static RoutedCommand _verifyEeprom = new RoutedUICommand();
         private readonly static RoutedCommand _clearLog = new RoutedUICommand();
         private readonly static RoutedCommand _about = new RoutedUICommand();
 
@@ -38,21 +42,53 @@ namespace MicroFlasher.Commands {
             get { return _verifyDevice; }
         }
 
-        public static RoutedCommand WriteLockBits {
-            get { return _writeLockBitsDevice; }
+        #region Flash
+
+        public static RoutedCommand VerifyFlash {
+            get { return _verifyFlash; }
+        }
+
+        #endregion
+
+        #region Eeprom
+        
+        public static RoutedCommand VerifyEeprom {
+            get { return _verifyEeprom; }
+        }
+
+        #endregion
+
+        #region Fuses
+
+        public static RoutedCommand FuseBits {
+            get { return _fuseBitsDevice; }
         }
 
         public static RoutedCommand WriteFuseBits {
-            get { return _writeFuseBitsDevice; }
+            get { return _writeFuseBits; }
         }
+
+        public static RoutedCommand VerifyFuseBits {
+            get { return _verifyFuseBits; }
+        }
+
+        #endregion
+
+        #region Locks
 
         public static RoutedCommand LockBits {
             get { return _lockBitsDevice; }
         }
 
-        public static RoutedCommand FuseBits {
-            get { return _fuseBitsDevice; }
+        public static RoutedCommand WriteLockBits {
+            get { return _writeLockBits; }
         }
+
+        public static RoutedCommand VerifyLockBits {
+            get { return _verifyLockBits; }
+        }
+
+        #endregion
 
         public static RoutedCommand ResetDevice {
             get { return _resetDevice; }

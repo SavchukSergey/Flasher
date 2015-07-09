@@ -249,6 +249,46 @@ namespace MicroFlasher.Models {
             return true;
         }
 
+        public bool VerifyFlash(DeviceOperation op) {
+            var device = Config.Device;
+
+            var flashBlocks = FlashHexBoard.SplitBlocks(device.Flash.PageSize);
+
+            op.FlashSize += flashBlocks.TotalBytes;
+
+            using (var programmer = CreateProgrammer(op)) {
+                using (programmer.Start()) {
+                    if (!VerifyBlocks(programmer, flashBlocks, AvrMemoryType.Flash, op)) {
+                        return false;
+                    }
+                }
+            }
+            op.Complete();
+            op.CurrentState = "Everything is done";
+
+            return true;
+        }
+
+        public bool VerifyEeprom(DeviceOperation op) {
+            var device = Config.Device;
+
+            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize);
+
+            op.EepromSize += eepromBlocks.TotalBytes;
+
+            using (var programmer = CreateProgrammer(op)) {
+                using (programmer.Start()) {
+                    if (!VerifyBlocks(programmer, eepromBlocks, AvrMemoryType.Eeprom, op)) {
+                        return false;
+                    }
+                }
+            }
+            op.Complete();
+            op.CurrentState = "Everything is done";
+
+            return true;
+        }
+
         public bool VerifyFuseBits(DeviceOperation op) {
             var device = Config.Device;
 
@@ -289,8 +329,7 @@ namespace MicroFlasher.Models {
             return true;
         }
 
-        public bool EraseDevice(DeviceOperation op)
-        {
+        public bool EraseDevice(DeviceOperation op) {
             var device = Config.Device;
 
             op.FlashSize += device.Flash.Size;
@@ -342,6 +381,14 @@ namespace MicroFlasher.Models {
 
         public async Task<bool> VerifyDeviceAsync(DeviceOperation op) {
             return await Task.Run(() => VerifyDevice(op), op.CancellationToken);
+        }
+
+        public async Task<bool> VerifyFlashAsync(DeviceOperation op) {
+            return await Task.Run(() => VerifyFlash(op), op.CancellationToken);
+        }
+
+        public async Task<bool> VerifyEepromAsync(DeviceOperation op) {
+            return await Task.Run(() => VerifyEeprom(op), op.CancellationToken);
         }
 
         public async Task<bool> VerifyLockBitsAsync(DeviceOperation op) {
