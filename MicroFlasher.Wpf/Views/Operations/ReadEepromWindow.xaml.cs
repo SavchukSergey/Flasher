@@ -2,16 +2,16 @@
 
 namespace MicroFlasher.Views.Operations {
     /// <summary>
-    /// Interaction logic for ReadLocksWindow.xaml
+    /// Interaction logic for ReadEepromWindow.xaml
     /// </summary>
-    public partial class ReadLocksWindow : BaseDeviceOperationWindow {
+    public partial class ReadEepromWindow : BaseDeviceOperationWindow {
 
-        public ReadLocksWindow() {
+        public ReadEepromWindow() {
             InitializeComponent();
         }
 
         protected override Task<bool> Execute(DeviceOperation op) {
-            return Model.ReadLocksAsync(op);
+            return Model.ReadEepromAsync(op);
         }
     }
 }

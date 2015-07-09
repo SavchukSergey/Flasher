@@ -66,6 +66,8 @@ namespace MicroFlasher {
             }
         }
 
+        #region Read
+        
         private void ReadDeviceCommand(object sender, ExecutedRoutedEventArgs e) {
             var dlg = new ReadDeviceWindow {
                 DataContext = new FlasherOperationModel(_model),
@@ -73,6 +75,40 @@ namespace MicroFlasher {
             };
             dlg.ShowDialog();
         }
+
+        private void ReadFlashCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new ReadFlashWindow {
+                DataContext = new FlasherOperationModel(_model),
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+
+        private void ReadEepromCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new ReadEepromWindow {
+                DataContext = new FlasherOperationModel(_model),
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+
+        private void ReadLockBitsCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new ReadLockBitsWindow {
+                DataContext = new FlasherOperationModel(_model),
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+
+        private void ReadFuseBitsCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new ReadFuseBitsWindow {
+                DataContext = new FlasherOperationModel(_model),
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+        
+        #endregion
 
         #region Write
 

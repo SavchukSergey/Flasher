@@ -26,7 +26,7 @@ namespace MicroFlasher.Views {
         }
 
         private void LockBitsWindow_OnLoaded(object sender, RoutedEventArgs e) {
-            var dlg = new ReadLocksWindow {
+            var dlg = new ReadLockBitsWindow {
                 DataContext = new FlasherOperationModel(Model),
                 Owner = this
             };

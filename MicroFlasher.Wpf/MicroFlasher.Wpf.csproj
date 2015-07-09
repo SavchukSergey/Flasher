@@ -88,8 +88,14 @@
     <Compile Include="Views\Controls\SpecialCharsTextBox.xaml.cs">
       <DependentUpon>SpecialCharsTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Operations\ReadEepromWindow.xaml.cs">
+      <DependentUpon>ReadEepromWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Operations\VerifyEepromWindow.xaml.cs">
       <DependentUpon>VerifyEepromWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Operations\ReadFlashWindow.xaml.cs">
+      <DependentUpon>ReadFlashWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Operations\VerifyFlashWindow.xaml.cs">
       <DependentUpon>VerifyFlashWindow.xaml</DependentUpon>
@@ -115,11 +121,11 @@
     <Compile Include="Views\FuseBitsWindow.xaml.cs">
       <DependentUpon>FuseBitsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Operations\ReadLocksWindow.xaml.cs">
-      <DependentUpon>ReadLocksWindow.xaml</DependentUpon>
+    <Compile Include="Views\Operations\ReadLockBitsWindow.xaml.cs">
+      <DependentUpon>ReadLockBitsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Operations\ReadFusesWindow.xaml.cs">
-      <DependentUpon>ReadFusesWindow.xaml</DependentUpon>
+    <Compile Include="Views\Operations\ReadFuseBitsWindow.xaml.cs">
+      <DependentUpon>ReadFuseBitsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Operations\ResetDeviceWindow.xaml.cs">
       <DependentUpon>ResetDeviceWindow.xaml</DependentUpon>
@@ -205,7 +211,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Operations\ReadEepromWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Operations\VerifyEepromWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Operations\ReadFlashWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -241,11 +255,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Operations\ReadLocksWindow.xaml">
+    <Page Include="Views\Operations\ReadLockBitsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Operations\ReadFusesWindow.xaml">
+    <Page Include="Views\Operations\ReadFuseBitsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

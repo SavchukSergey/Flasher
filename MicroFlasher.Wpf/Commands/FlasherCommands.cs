@@ -4,21 +4,26 @@ namespace MicroFlasher.Commands {
     public class FlasherCommands {
 
         private readonly static RoutedCommand _openEeprom = new RoutedCommand();
-        private readonly static RoutedCommand _readDevice = new RoutedCommand();
-        private readonly static RoutedCommand _writeDevice = new RoutedCommand();
         private readonly static RoutedCommand _eraseDevice = new RoutedCommand();
-        private readonly static RoutedCommand _verifyDevice = new RoutedCommand();
         private readonly static RoutedCommand _lockBitsDevice = new RoutedCommand();
         private readonly static RoutedCommand _fuseBitsDevice = new RoutedCommand();
         private readonly static RoutedCommand _resetDevice = new RoutedCommand();
         private readonly static RoutedCommand _serialMonitor = new RoutedCommand();
         private readonly static RoutedCommand _settings = new RoutedCommand();
-        
+
+        private readonly static RoutedCommand _readDevice = new RoutedCommand();
+        private readonly static RoutedCommand _readFlash = new RoutedUICommand();
+        private readonly static RoutedCommand _readEeprom = new RoutedUICommand();
+        private readonly static RoutedCommand _readLockBits = new RoutedUICommand();
+        private readonly static RoutedCommand _readFuseBits = new RoutedUICommand();
+
+        private readonly static RoutedCommand _writeDevice = new RoutedCommand();
         private readonly static RoutedCommand _writeFlash = new RoutedUICommand();
         private readonly static RoutedCommand _writeEeprom = new RoutedUICommand();
         private readonly static RoutedCommand _writeLockBits = new RoutedUICommand();
         private readonly static RoutedCommand _writeFuseBits = new RoutedUICommand();
-        
+
+        private readonly static RoutedCommand _verifyDevice = new RoutedCommand();
         private readonly static RoutedCommand _verifyFlash = new RoutedUICommand();
         private readonly static RoutedCommand _verifyEeprom = new RoutedUICommand();
         private readonly static RoutedCommand _verifyLockBits = new RoutedUICommand();
@@ -49,6 +54,10 @@ namespace MicroFlasher.Commands {
 
         #region Flash
 
+        public static RoutedCommand ReadFlash {
+            get { return _readFlash; }
+        }
+
         public static RoutedCommand WriteFlash {
             get { return _writeFlash; }
         }
@@ -60,6 +69,10 @@ namespace MicroFlasher.Commands {
         #endregion
 
         #region Eeprom
+
+        public static RoutedCommand ReadEeprom {
+            get { return _readEeprom; }
+        }
 
         public static RoutedCommand WriteEeprom {
             get { return _writeEeprom; }
@@ -77,6 +90,10 @@ namespace MicroFlasher.Commands {
             get { return _fuseBitsDevice; }
         }
 
+        public static RoutedCommand ReadFuseBits {
+            get { return _readFuseBits; }
+        }
+
         public static RoutedCommand WriteFuseBits {
             get { return _writeFuseBits; }
         }
@@ -91,6 +108,10 @@ namespace MicroFlasher.Commands {
 
         public static RoutedCommand LockBits {
             get { return _lockBitsDevice; }
+        }
+
+        public static RoutedCommand ReadLockBits {
+            get { return _readLockBits; }
         }
 
         public static RoutedCommand WriteLockBits {

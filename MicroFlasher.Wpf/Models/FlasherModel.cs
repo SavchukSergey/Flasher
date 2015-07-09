@@ -131,6 +131,8 @@ namespace MicroFlasher.Models {
             return true;
         }
 
+        #region Read
+
         public bool ReadDevice(DeviceOperation op) {
             var device = Config.Device;
             var flashSize = device.Flash.Size;
@@ -163,6 +165,46 @@ namespace MicroFlasher.Models {
 
             return true;
         }
+
+        public bool ReadFlash(DeviceOperation op) {
+            var device = Config.Device;
+            var flashSize = device.Flash.Size;
+            op.FlashSize += flashSize;
+
+            var flashData = new byte[flashSize];
+            using (var programmer = CreateProgrammer(op)) {
+                using (programmer.Start()) {
+                    programmer.ReadPage(0, AvrMemoryType.Flash, flashData, 0, flashSize);
+                }
+            }
+            op.CurrentState = "Everything is done";
+
+            FlashHexBoard = HexBoard.From(flashData);
+
+            return true;
+        }
+
+        public bool ReadEeprom(DeviceOperation op) {
+            var device = Config.Device;
+            var eepromSize = device.Eeprom.Size;
+            op.EepromSize += eepromSize;
+
+            var eepData = new byte[eepromSize];
+            using (var programmer = CreateProgrammer(op)) {
+                using (programmer.Start()) {
+                    programmer.ReadPage(0, AvrMemoryType.Eeprom, eepData, 0, eepromSize);
+                }
+            }
+            op.CurrentState = "Everything is done";
+
+            EepromHexBoard = HexBoard.From(eepData);
+
+            return true;
+        }
+
+        #endregion
+
+        #region Write
 
         public bool WriteDevice(DeviceOperation op) {
             var device = Config.Device;
@@ -262,6 +304,10 @@ namespace MicroFlasher.Models {
 
             return true;
         }
+
+        #endregion
+
+        #region Verify
 
         public bool VerifyDevice(DeviceOperation op) {
             var device = Config.Device;
@@ -369,6 +415,8 @@ namespace MicroFlasher.Models {
             return true;
         }
 
+        #endregion
+
         public bool EraseDevice(DeviceOperation op) {
             var device = Config.Device;
 
@@ -443,6 +491,13 @@ namespace MicroFlasher.Models {
             return await Task.Run(() => EraseDevice(op), op.CancellationToken);
         }
 
+        public async Task<bool> ReadFlashAsync(DeviceOperation op) {
+            return await Task.Run(() => ReadFlash(op), op.CancellationToken);
+        }
+
+        public async Task<bool> ReadEepromAsync(DeviceOperation op) {
+            return await Task.Run(() => ReadEeprom(op), op.CancellationToken);
+        }
         public async Task<bool> ReadFusesAsync(DeviceOperation op) {
             return await Task.Run(() => ReadFuses(op), op.CancellationToken);
         }

@@ -2,16 +2,16 @@
 
 namespace MicroFlasher.Views.Operations {
     /// <summary>
-    /// Interaction logic for ReadFusesWindow.xaml
+    /// Interaction logic for ReadLockBitsWindow.xaml
     /// </summary>
-    public partial class ReadFusesWindow : BaseDeviceOperationWindow {
+    public partial class ReadLockBitsWindow : BaseDeviceOperationWindow {
 
-        public ReadFusesWindow() {
+        public ReadLockBitsWindow() {
             InitializeComponent();
         }
 
         protected override Task<bool> Execute(DeviceOperation op) {
-            return Model.ReadFusesAsync(op);
+            return Model.ReadLocksAsync(op);
         }
     }
 }

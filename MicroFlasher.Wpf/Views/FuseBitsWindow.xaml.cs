@@ -26,7 +26,7 @@ namespace MicroFlasher.Views {
         }
 
         private void FuseBitsWindow_OnLoaded(object sender, RoutedEventArgs e) {
-            var dlg = new ReadFusesWindow {
+            var dlg = new ReadFuseBitsWindow {
                 DataContext = new FlasherOperationModel(Model),
                 Owner = this
             };
