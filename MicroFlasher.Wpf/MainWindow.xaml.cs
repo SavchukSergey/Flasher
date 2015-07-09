@@ -74,6 +74,8 @@ namespace MicroFlasher {
             dlg.ShowDialog();
         }
 
+        #region Write
+
         private void WriteDeviceCommand(object sender, ExecutedRoutedEventArgs e) {
             var msgResult = MessageBox.Show("Are you sure you want start writing to the device. All previous data will be lost", "Write confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (msgResult == MessageBoxResult.Yes) {
@@ -87,6 +89,52 @@ namespace MicroFlasher {
                 }
             }
         }
+
+        private void WriteFlashCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new WriteFlashWindow {
+                DataContext = new FlasherOperationModel(_model),
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+
+        private void WriteEepromCommand(object sender, ExecutedRoutedEventArgs e) {
+            var dlg = new WriteEepromWindow {
+                DataContext = new FlasherOperationModel(_model),
+                Owner = this
+            };
+            dlg.ShowDialog();
+        }
+
+        private void WriteLockBitsCommand(object sender, ExecutedRoutedEventArgs e) {
+            var msgResult = MessageBox.Show("Are you sure you want start writing lock bits. Data may become unreadable", "Lock bits confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (msgResult == MessageBoxResult.Yes) {
+                var dlg = new WriteLocksWindow {
+                    DataContext = new FlasherOperationModel(Model),
+                    Owner = this
+                };
+                if (dlg.ShowDialog() == true && _model.Config.AutoVerify) {
+                    VerifyLockBitsCommand(this, null);
+                };
+            }
+        }
+
+        private void WriteFuseBitsCommand(object sender, ExecutedRoutedEventArgs e) {
+            var msgResult = MessageBox.Show("Are you sure you want start writing fuse bits. Device may become unoperable", "Fuse bits confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (msgResult == MessageBoxResult.Yes) {
+                var dlg = new WriteFusesWindow {
+                    DataContext = new FlasherOperationModel(Model),
+                    Owner = this
+                };
+                if (dlg.ShowDialog() == true && _model.Config.AutoVerify) {
+                    VerifyFuseBitsCommand(this, null);
+                };
+            }
+        }
+
+        #endregion
+
+        #region Verify
 
         private void VerifyDeviceCommand(object sender, ExecutedRoutedEventArgs e) {
             var dlg = new VerifyDeviceWindow {
@@ -128,6 +176,8 @@ namespace MicroFlasher {
             dlg.ShowDialog();
         }
 
+        #endregion
+
         private void SettingsCommand(object sender, ExecutedRoutedEventArgs e) {
             var settings = FlasherConfig.Read();
             var oldDevice = settings.Device.Name;
@@ -168,32 +218,6 @@ namespace MicroFlasher {
                     Owner = this
                 };
                 dlg.ShowDialog();
-            }
-        }
-
-        private void WriteLockBitsCommand(object sender, ExecutedRoutedEventArgs e) {
-            var msgResult = MessageBox.Show("Are you sure you want start writing lock bits. Data may become unreadable", "Lock bits confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (msgResult == MessageBoxResult.Yes) {
-                var dlg = new WriteLocksWindow {
-                    DataContext = new FlasherOperationModel(Model),
-                    Owner = this
-                };
-                if (dlg.ShowDialog() == true && _model.Config.AutoVerify) {
-                    VerifyLockBitsCommand(this, null);
-                };
-            }
-        }
-
-        private void WriteFuseBitsCommand(object sender, ExecutedRoutedEventArgs e) {
-            var msgResult = MessageBox.Show("Are you sure you want start writing fuse bits. Device may become unoperable", "Fuse bits confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (msgResult == MessageBoxResult.Yes) {
-                var dlg = new WriteFusesWindow {
-                    DataContext = new FlasherOperationModel(Model),
-                    Owner = this
-                };
-                if (dlg.ShowDialog() == true && _model.Config.AutoVerify) {
-                    VerifyFuseBitsCommand(this, null);
-                };
             }
         }
 

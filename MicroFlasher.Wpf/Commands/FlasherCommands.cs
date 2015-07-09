@@ -13,12 +13,17 @@ namespace MicroFlasher.Commands {
         private readonly static RoutedCommand _resetDevice = new RoutedCommand();
         private readonly static RoutedCommand _serialMonitor = new RoutedCommand();
         private readonly static RoutedCommand _settings = new RoutedCommand();
+        
+        private readonly static RoutedCommand _writeFlash = new RoutedUICommand();
+        private readonly static RoutedCommand _writeEeprom = new RoutedUICommand();
         private readonly static RoutedCommand _writeLockBits = new RoutedUICommand();
         private readonly static RoutedCommand _writeFuseBits = new RoutedUICommand();
-        private readonly static RoutedCommand _verifyLockBits = new RoutedUICommand();
-        private readonly static RoutedCommand _verifyFuseBits = new RoutedUICommand();
+        
         private readonly static RoutedCommand _verifyFlash = new RoutedUICommand();
         private readonly static RoutedCommand _verifyEeprom = new RoutedUICommand();
+        private readonly static RoutedCommand _verifyLockBits = new RoutedUICommand();
+        private readonly static RoutedCommand _verifyFuseBits = new RoutedUICommand();
+
         private readonly static RoutedCommand _clearLog = new RoutedUICommand();
         private readonly static RoutedCommand _about = new RoutedUICommand();
 
@@ -44,6 +49,10 @@ namespace MicroFlasher.Commands {
 
         #region Flash
 
+        public static RoutedCommand WriteFlash {
+            get { return _writeFlash; }
+        }
+
         public static RoutedCommand VerifyFlash {
             get { return _verifyFlash; }
         }
@@ -51,7 +60,11 @@ namespace MicroFlasher.Commands {
         #endregion
 
         #region Eeprom
-        
+
+        public static RoutedCommand WriteEeprom {
+            get { return _writeEeprom; }
+        }
+
         public static RoutedCommand VerifyEeprom {
             get { return _verifyEeprom; }
         }

@@ -187,6 +187,44 @@ namespace MicroFlasher.Models {
             return true;
         }
 
+        public bool WriteFlash(DeviceOperation op) {
+            var device = Config.Device;
+
+            var flashBlocks = FlashHexBoard.SplitBlocks(device.Flash.PageSize);
+
+            op.FlashSize += flashBlocks.TotalBytes;
+
+            using (var programmer = CreateProgrammer(op)) {
+                using (programmer.Start()) {
+                    foreach (var block in flashBlocks.Blocks) {
+                        programmer.WritePage(block.Address, AvrMemoryType.Flash, block.Data, 0, block.Data.Length);
+                    }
+                }
+            }
+            op.CurrentState = "Everything is done";
+
+            return true;
+        }
+
+        public bool WriteEeprom(DeviceOperation op) {
+            var device = Config.Device;
+
+            var eepromBlocks = EepromHexBoard.SplitBlocks(device.Eeprom.PageSize);
+
+            op.EepromSize += eepromBlocks.TotalBytes;
+
+            using (var programmer = CreateProgrammer(op)) {
+                using (programmer.Start()) {
+                    foreach (var block in eepromBlocks.Blocks) {
+                        programmer.WritePage(block.Address, AvrMemoryType.Eeprom, block.Data, 0, block.Data.Length);
+                    }
+                }
+            }
+            op.CurrentState = "Everything is done";
+
+            return true;
+        }
+
         public bool WriteFuses(DeviceOperation op) {
             var device = Config.Device;
 
@@ -409,6 +447,14 @@ namespace MicroFlasher.Models {
 
         public async Task<bool> ReadLocksAsync(DeviceOperation op) {
             return await Task.Run(() => ReadLocks(op), op.CancellationToken);
+        }
+
+        public async Task<bool> WriteFlashAsync(DeviceOperation op) {
+            return await Task.Run(() => WriteFlash(op), op.CancellationToken);
+        }
+
+        public async Task<bool> WriteEepromAsync(DeviceOperation op) {
+            return await Task.Run(() => WriteEeprom(op), op.CancellationToken);
         }
 
         public async Task<bool> WriteLocksAsync(DeviceOperation op) {

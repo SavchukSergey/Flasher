@@ -100,6 +100,12 @@
     <Compile Include="Views\Operations\VerifyFuseBitsWindow.xaml.cs">
       <DependentUpon>VerifyFuseBitsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Operations\WriteEepromWindow.xaml.cs">
+      <DependentUpon>WriteEepromWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Operations\WriteFlashWindow.xaml.cs">
+      <DependentUpon>WriteFlashWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SerialMonitor\MonitorToolBar.xaml.cs">
       <DependentUpon>MonitorToolBar.xaml</DependentUpon>
     </Compile>
@@ -212,6 +218,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Operations\VerifyFuseBitsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Operations\WriteEepromWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Operations\WriteFlashWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
