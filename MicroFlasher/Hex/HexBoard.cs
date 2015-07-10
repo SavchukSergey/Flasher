@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using Atmega.Hex;
-using MicroFlasher.Annotations;
 
 namespace MicroFlasher.Hex {
     public class HexBoard : INotifyPropertyChanged {

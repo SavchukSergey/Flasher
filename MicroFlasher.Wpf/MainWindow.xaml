@@ -58,43 +58,43 @@
     <DockPanel LastChildFill="True" x:Name="Root" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
         <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
             <Menu VerticalAlignment="Top">
-                <MenuItem Header="File">
-                    <MenuItem Header="Open Flash..." Command="ApplicationCommands.Open" />
-                    <MenuItem Header="Open Eeprom..." Command="commands:FlasherCommands.OpenEeprom" />
-                    <MenuItem Header="Save..." Command="ApplicationCommands.Save" />
+                <MenuItem Header="_File">
+                    <MenuItem Header="Open _Program..." Command="ApplicationCommands.Open" />
+                    <MenuItem Header="Open _Eeprom..." Command="commands:FlasherCommands.OpenEeprom" />
+                    <MenuItem Header="_Save..." Command="ApplicationCommands.Save" />
                 </MenuItem>
-                <MenuItem Header="Device">
-                    <MenuItem Header="Erase" Command="commands:FlasherCommands.EraseDevice" />
-                    <MenuItem Header="Lock Bits" Command="commands:FlasherCommands.LockBits" InputGestureText="Ctrl+L" />
-                    <MenuItem Header="Fuse Bits" Command="commands:FlasherCommands.FuseBits" InputGestureText="Ctrl+F" />
+                <MenuItem Header="_Device">
+                    <MenuItem Header="_Erase" Command="commands:FlasherCommands.EraseDevice" />
+                    <MenuItem Header="_Lock Bits" Command="commands:FlasherCommands.LockBits" InputGestureText="Ctrl+L" />
+                    <MenuItem Header="_Fuse Bits" Command="commands:FlasherCommands.FuseBits" InputGestureText="Ctrl+F" />
                     <Separator />
-                    <MenuItem Header="Reset Device" Command="commands:FlasherCommands.ResetDevice" />
+                    <MenuItem Header="_Reset Device" Command="commands:FlasherCommands.ResetDevice" />
                     <Separator />
-                    <MenuItem Header="Serial Monitor" Command="commands:FlasherCommands.SerialMonitor" InputGestureText="Ctrl+M" />
+                    <MenuItem Header="Serial _Monitor" Command="commands:FlasherCommands.SerialMonitor" InputGestureText="Ctrl+M" />
                 </MenuItem>
-                <MenuItem Header="Read">
+                <MenuItem Header="_Read">
                     <MenuItem Header="Read" Command="commands:FlasherCommands.ReadDevice" InputGestureText="Ctrl+R" />
-                    <MenuItem Header="Read Flash" Command="commands:FlasherCommands.ReadFlash" />
-                    <MenuItem Header="Read Eeprom" Command="commands:FlasherCommands.ReadEeprom" />
-                    <MenuItem Header="Read Lock Bits" Command="commands:FlasherCommands.ReadLockBits" />
-                    <MenuItem Header="Read Fuse Bits" Command="commands:FlasherCommands.ReadFuseBits" />
+                    <MenuItem Header="Read _Program" Command="commands:FlasherCommands.ReadFlash" />
+                    <MenuItem Header="Read _Eeprom" Command="commands:FlasherCommands.ReadEeprom" />
+                    <MenuItem Header="Read _Lock Bits" Command="commands:FlasherCommands.ReadLockBits" />
+                    <MenuItem Header="Read _Fuse Bits" Command="commands:FlasherCommands.ReadFuseBits" />
                 </MenuItem>
-                <MenuItem Header="Write">
-                    <MenuItem Header="Write" Command="commands:FlasherCommands.WriteDevice" InputGestureText="Ctrl+W" />
-                    <MenuItem Header="Write Flash" Command="commands:FlasherCommands.WriteFlash" IsEnabled="{Binding Path=FlashHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
-                    <MenuItem Header="Write Eeprom" Command="commands:FlasherCommands.WriteEeprom" IsEnabled="{Binding Path=EepromHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
-                    <MenuItem Header="Write Lock Bits" Command="commands:FlasherCommands.WriteLockBits" IsEnabled="{Binding Path=LocksHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
-                    <MenuItem Header="Write Fuse Bits" Command="commands:FlasherCommands.WriteFuseBits" IsEnabled="{Binding Path=FusesHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
+                <MenuItem Header="_Write">
+                    <MenuItem Header="Write" Command="commands:FlasherCommands.WriteDevice" InputGestureText="Ctrl+W" IsEnabled="{Binding Path=TotalSize, Converter={StaticResource SizeToBoolConverter}}" />
+                    <MenuItem Header="Write _Program" Command="commands:FlasherCommands.WriteFlash" IsEnabled="{Binding Path=FlashHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
+                    <MenuItem Header="Write _Eeprom" Command="commands:FlasherCommands.WriteEeprom" IsEnabled="{Binding Path=EepromHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
+                    <MenuItem Header="Write _Lock Bits" Command="commands:FlasherCommands.WriteLockBits" IsEnabled="{Binding Path=LocksHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
+                    <MenuItem Header="Write _Fuse Bits" Command="commands:FlasherCommands.WriteFuseBits" IsEnabled="{Binding Path=FusesHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
                 </MenuItem>                
-                <MenuItem Header="Verify">
-                    <MenuItem Header="Verify" Command="commands:FlasherCommands.VerifyDevice" InputGestureText="Ctrl+V" />
-                    <MenuItem Header="Verify Flash" Command="commands:FlasherCommands.VerifyFlash" IsEnabled="{Binding Path=FlashHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
-                    <MenuItem Header="Verify Eeprom" Command="commands:FlasherCommands.VerifyEeprom" IsEnabled="{Binding Path=EepromHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
-                    <MenuItem Header="Verify Lock Bits" Command="commands:FlasherCommands.VerifyLockBits" IsEnabled="{Binding Path=LocksHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
-                    <MenuItem Header="Verify Fuse Bits" Command="commands:FlasherCommands.VerifyFuseBits" IsEnabled="{Binding Path=FusesHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
+                <MenuItem Header="_Verify">
+                    <MenuItem Header="Verify" Command="commands:FlasherCommands.VerifyDevice" InputGestureText="Ctrl+V" IsEnabled="{Binding Path=TotalSize, Converter={StaticResource SizeToBoolConverter}}" />
+                    <MenuItem Header="Verify _Program" Command="commands:FlasherCommands.VerifyFlash" IsEnabled="{Binding Path=FlashHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
+                    <MenuItem Header="Verify _Eeprom" Command="commands:FlasherCommands.VerifyEeprom" IsEnabled="{Binding Path=EepromHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
+                    <MenuItem Header="Verify _Lock Bits" Command="commands:FlasherCommands.VerifyLockBits" IsEnabled="{Binding Path=LocksHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
+                    <MenuItem Header="Verify _Fuse Bits" Command="commands:FlasherCommands.VerifyFuseBits" IsEnabled="{Binding Path=FusesHexBoard.Size, Converter={StaticResource SizeToBoolConverter}}" />
                 </MenuItem>
-                <MenuItem Header="Settings" Command="commands:FlasherCommands.Settings" />
-                <MenuItem Header="About" Command="commands:FlasherCommands.About" />
+                <MenuItem Header="_Settings" Command="commands:FlasherCommands.Settings" />
+                <MenuItem Header="_About" Command="commands:FlasherCommands.About" />
             </Menu>
             <views:AppToolBar />
         </StackPanel>

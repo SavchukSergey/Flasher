@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:commands="clr-namespace:MicroFlasher.Commands"
+             xmlns:models="clr-namespace:MicroFlasher.Models"
              mc:Ignorable="d" 
-             d:DesignHeight="64" d:DesignWidth="650">
+             d:DesignHeight="64" d:DesignWidth="650" d:DataContext="{d:DesignInstance models:FlasherModel}">
     <ToolBarTray Orientation="Horizontal">
         <ToolBar>
             <Button Command="ApplicationCommands.Open">
@@ -28,13 +29,13 @@
                     <TextBlock>Read Device</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Command="commands:FlasherCommands.WriteDevice">
+            <Button Command="commands:FlasherCommands.WriteDevice" IsEnabled="{Binding Path=TotalSize, Converter={StaticResource SizeToBoolConverter}}" >
                 <StackPanel>
                     <Image Source="../Icons/write.png" />
                     <TextBlock>Write Device</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Command="commands:FlasherCommands.VerifyDevice">
+            <Button Command="commands:FlasherCommands.VerifyDevice" IsEnabled="{Binding Path=TotalSize, Converter={StaticResource SizeToBoolConverter}}" >
                 <StackPanel>
                     <Image Source="../Icons/verify.png" />
                     <TextBlock>Verify Device</TextBlock>

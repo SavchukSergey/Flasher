@@ -10,16 +10,16 @@ namespace MicroFlasher.Models {
 
         public const int EEPROM_MAX_SUPERPAGE = 32;
 
-        private HexBoard _eepromHexBoard = new HexBoard();
-        private HexBoard _flashHexBoard = new HexBoard();
-        private HexBoard _fusesHexBoard = new HexBoard();
-        private HexBoard _locksHexBoard = new HexBoard();
+        private HexBoard _eepromHexBoard;
+        private HexBoard _flashHexBoard;
+        private HexBoard _fusesHexBoard;
+        private HexBoard _locksHexBoard;
 
         public FlasherModel() {
-            _eepromHexBoard[0] = null;
-            _flashHexBoard[0] = null;
-            _fusesHexBoard[0] = null;
-            _locksHexBoard[0] = null;
+            FlashHexBoard = new HexBoard();
+            EepromHexBoard = new HexBoard();
+            FusesHexBoard = new HexBoard();
+            LocksHexBoard = new HexBoard();
         }
 
         public void OpenFlash(string filePath) {
@@ -32,13 +32,34 @@ namespace MicroFlasher.Models {
             EepromHexBoard = HexBoard.From(hexFile);
         }
 
+        private void board_PropertyChanged(object sender, PropertyChangedEventArgs e) {
+            if (e.PropertyName == "Size") {
+                OnPropertyChanged("TotalSize");
+            }
+        }
+
+        public int TotalSize {
+            get { return FlashHexBoard.Size + EepromHexBoard.Size + FusesHexBoard.Size + LocksHexBoard.Size; }
+        }
+
+        #region Boards
+
         public HexBoard EepromHexBoard {
             get {
                 return _eepromHexBoard;
             }
             set {
-                _eepromHexBoard = value;
-                OnPropertyChanged();
+                if (_eepromHexBoard != value) {
+                    if (_eepromHexBoard != null) {
+                        _eepromHexBoard.PropertyChanged -= board_PropertyChanged;
+                    }
+                    _eepromHexBoard = value;
+                    if (_eepromHexBoard != null) {
+                        _eepromHexBoard.PropertyChanged += board_PropertyChanged;
+                    }
+                    OnPropertyChanged();
+                    OnPropertyChanged("TotalSize");
+                }
             }
         }
 
@@ -47,8 +68,17 @@ namespace MicroFlasher.Models {
                 return _flashHexBoard;
             }
             set {
-                _flashHexBoard = value;
-                OnPropertyChanged();
+                if (_flashHexBoard != value) {
+                    if (_flashHexBoard != null) {
+                        _flashHexBoard.PropertyChanged -= board_PropertyChanged;
+                    }
+                    _flashHexBoard = value;
+                    if (_flashHexBoard != null) {
+                        _flashHexBoard.PropertyChanged += board_PropertyChanged;
+                    }
+                    OnPropertyChanged();
+                    OnPropertyChanged("TotalSize");
+                }
             }
         }
 
@@ -57,8 +87,17 @@ namespace MicroFlasher.Models {
                 return _fusesHexBoard;
             }
             set {
-                _fusesHexBoard = value;
-                OnPropertyChanged();
+                if (_fusesHexBoard != value) {
+                    if (_fusesHexBoard != null) {
+                        _fusesHexBoard.PropertyChanged -= board_PropertyChanged;
+                    }
+                    _fusesHexBoard = value;
+                    if (_fusesHexBoard != null) {
+                        _fusesHexBoard.PropertyChanged += board_PropertyChanged;
+                    }
+                    OnPropertyChanged();
+                    OnPropertyChanged("TotalSize");
+                }
             }
         }
 
@@ -67,10 +106,21 @@ namespace MicroFlasher.Models {
                 return _locksHexBoard;
             }
             set {
-                _locksHexBoard = value;
-                OnPropertyChanged();
+                if (_locksHexBoard != value) {
+                    if (_locksHexBoard != null) {
+                        _locksHexBoard.PropertyChanged -= board_PropertyChanged;
+                    }
+                    _locksHexBoard = value;
+                    if (_locksHexBoard != null) {
+                        _locksHexBoard.PropertyChanged += board_PropertyChanged;
+                    }
+                    OnPropertyChanged();
+                    OnPropertyChanged("TotalSize");
+                }
             }
         }
+
+        #endregion
 
         private FlasherConfig _config;
         public FlasherConfig Config {
