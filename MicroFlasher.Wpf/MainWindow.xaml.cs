@@ -67,7 +67,7 @@ namespace MicroFlasher {
         }
 
         #region Read
-        
+
         private void ReadDeviceCommand(object sender, ExecutedRoutedEventArgs e) {
             var dlg = new ReadDeviceWindow {
                 DataContext = new FlasherOperationModel(_model),
@@ -107,7 +107,7 @@ namespace MicroFlasher {
             };
             dlg.ShowDialog();
         }
-        
+
         #endregion
 
         #region Write
@@ -115,11 +115,19 @@ namespace MicroFlasher {
         private void WriteDeviceCommand(object sender, ExecutedRoutedEventArgs e) {
             var msgResult = MessageBox.Show("Are you sure you want start writing to the device. All previous data will be lost", "Write confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (msgResult == MessageBoxResult.Yes) {
-                var dlg = new WriteDeviceWindow {
+                if (_model.Config.AutoErase) {
+                    var eraseDlg = new EraseDeviceWindow {
+                        DataContext = new FlasherOperationModel(_model),
+                        Owner = this
+                    };
+                    if (eraseDlg.ShowDialog() != true) return;
+                }
+
+                var writeDlg = new WriteDeviceWindow {
                     DataContext = new FlasherOperationModel(_model),
                     Owner = this
                 };
-                var writeResult = dlg.ShowDialog();
+                var writeResult = writeDlg.ShowDialog();
                 if (writeResult == true && _model.Config.AutoVerify) {
                     VerifyDeviceCommand(this, null);
                 }
@@ -129,11 +137,20 @@ namespace MicroFlasher {
         private void WriteFlashCommand(object sender, ExecutedRoutedEventArgs e) {
             var msgResult = MessageBox.Show("Are you sure you want start writing flash. Device may become unoperable", "Flash confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (msgResult == MessageBoxResult.Yes) {
-                var dlg = new WriteFlashWindow {
+
+                if (_model.Config.AutoErase) {
+                    var eraseDlg = new EraseDeviceWindow {
+                        DataContext = new FlasherOperationModel(_model),
+                        Owner = this
+                    };
+                    if (eraseDlg.ShowDialog() != true) return;
+                }
+
+                var writeDlg = new WriteFlashWindow {
                     DataContext = new FlasherOperationModel(Model),
                     Owner = this
                 };
-                if (dlg.ShowDialog() == true && _model.Config.AutoVerify) {
+                if (writeDlg.ShowDialog() == true && _model.Config.AutoVerify) {
                     VerifyFlashCommand(this, null);
                 };
             }

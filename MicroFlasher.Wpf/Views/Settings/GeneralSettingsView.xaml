@@ -10,6 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -19,6 +20,9 @@
 
         <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=AutoVerify}">Verify after write:</Label>
         <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding Path=AutoVerify}" Content=""/>
+
+        <Label Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=AutoErase}">Erase before write:</Label>
+        <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding Path=AutoErase}" Content=""/>
 
     </Grid>
 </UserControl>
