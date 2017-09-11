@@ -1,108 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0C30F079-3B8D-4B53-92F8-6ABF036C430F}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MicroFlasher</RootNamespace>
-    <AssemblyName>MicroFlasher</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>net45</TargetFramework>
+    <Description />
+    <Copyright>Copyright © 2017</Copyright>
+    <Company />
+    <AssemblyVersion>1.0.12.1</AssemblyVersion>
+    <FileVersion>1.0.12.1</FileVersion>
+    <Version>1.0.12</Version>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Atmega, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Atmega">
       <HintPath>..\references\Atmega.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\Artifacts\CommonAssemblyInfo.cs">
-      <Link>Properties\CommonAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="AvrMemoryType.cs" />
-    <Compile Include="AvrSignature.cs" />
-    <Compile Include="AvrSpi\AvrSpiClient.cs" />
-    <Compile Include="AvrSpi\AvrSpiProgrammer.cs" />
-    <Compile Include="DeviceOperation.cs" />
-    <Compile Include="DeviceOperationStatus.cs" />
-    <Compile Include="Devices\DeviceBit.cs" />
-    <Compile Include="Devices\DeviceBits.cs" />
-    <Compile Include="Devices\DeviceBitsGroup.cs" />
-    <Compile Include="Devices\DeviceByte.cs" />
-    <Compile Include="Devices\DeviceByteBits.cs" />
-    <Compile Include="Devices\DeviceEepromParameters.cs" />
-    <Compile Include="Devices\DeviceFlashParameters.cs" />
-    <Compile Include="Devices\DeviceInfo.cs" />
-    <Compile Include="Devices\DeviceInfoUtils.cs" />
-    <Compile Include="Devices\MemoryMask.cs" />
-    <Compile Include="Hex\HexBlock.cs" />
-    <Compile Include="Hex\HexBlocks.cs" />
-    <Compile Include="Hex\HexBoard.cs" />
-    <Compile Include="Hex\HexBoardByte.cs" />
-    <Compile Include="Hex\HexBoardLine.cs" />
-    <Compile Include="IO\ComPin.cs" />
-    <Compile Include="IO\ComPinType.cs" />
-    <Compile Include="IO\IAvrChannel.cs" />
-    <Compile Include="IO\SerialPortChannel.cs" />
-    <Compile Include="IProgrammer.cs" />
-    <Compile Include="Monitor\SerialMonitor.cs" />
-    <Compile Include="Monitor\SerialMonitorMessage.cs" />
-    <Compile Include="ProgrammingSession.cs" />
-    <Compile Include="ProgressTrackerProgrammer.cs" />
-    <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpiMaster.cs" />
-    <Compile Include="SpiMasterChannel.cs" />
-    <Compile Include="StatisticsChannel.cs" />
-    <Compile Include="StkV1Programmer.cs" />
-    <Compile Include="STKv1\StkDeviceCode.cs" />
-    <Compile Include="STKv1\StkFailedException.cs" />
-    <Compile Include="STKv1\StkFuseBits.cs" />
-    <Compile Include="STKv1\StkFuseBitsExt.cs" />
-    <Compile Include="STKv1\StkNoSyncException.cs" />
-    <Compile Include="STKv1\StkV1Client.cs" />
-    <Compile Include="STKv1\StkV1Command.cs" />
-    <Compile Include="STKv1\StkV1DeviceParameters.cs" />
-    <Compile Include="STKv1\StkV1DeviceParametersExt.cs" />
-    <Compile Include="STKv1\StkV1Parameter.cs" />
-    <Compile Include="STKv1\StkV1Response.cs" />
-    <Compile Include="STKv1\StkVersion.cs" />
-    <Compile Include="StubChannel.cs" />
-    <Compile Include="StubProgrammer.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
