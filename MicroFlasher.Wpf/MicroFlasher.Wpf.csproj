@@ -1,406 +1,54 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{15EF3696-CF7A-4AD2-AE4F-AEF418DB09D4}</ProjectGuid>
+    <LanguageTargets>$(MSBuildExtensionsPath)\$(VisualStudioVersion)\Bin\Microsoft.CSharp.targets</LanguageTargets>
+    <TargetFramework>net47</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MicroFlasher</RootNamespace>
-    <AssemblyName>flasher</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
+    <StartupObject />
+    <ApplicationIcon />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Icons\main.ico</ApplicationIcon>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Atmega, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\references\Atmega.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
+    <!-- App.xaml -->
     <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </ApplicationDefinition>
-    <Compile Include="..\Artifacts\CommonAssemblyInfo.cs">
-      <Link>Properties\CommonAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Converters\GridLengthConverter.cs" />
-    <Compile Include="Converters\EnumToVisibilityConverter.cs" />
-    <Compile Include="Converters\ProgressStateConverter.cs" />
-    <Compile Include="Converters\SizeToBoolConverter.cs" />
-    <Compile Include="KeyUtils.cs" />
-    <Compile Include="Models\AboutModel.cs" />
-    <Compile Include="Models\BaseProgrammerConfig.cs" />
-    <Compile Include="Models\ComBitBangConfig.cs" />
-    <Compile Include="Models\ComBitBangPinConfig.cs" />
-    <Compile Include="Models\ComPortSettings.cs" />
-    <Compile Include="Models\DeviceBitsModel.cs" />
-    <Compile Include="Models\FlasherOperationModel.cs" />
-    <Compile Include="Models\ProgrammerType.cs" />
-    <Compile Include="Models\StubConfig.cs" />
-    <Compile Include="ObservableDeviceOperation.cs" />
-    <Compile Include="Models\BaseConfig.cs" />
-    <Compile Include="Models\FlasherConfig.cs" />
-    <Compile Include="Models\StkV1Config.cs" />
-    <Compile Include="Views\AboutWindow.xaml.cs">
-      <DependentUpon>AboutWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\SpecialCharsTextBox.xaml.cs">
-      <DependentUpon>SpecialCharsTextBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\ReadEepromWindow.xaml.cs">
-      <DependentUpon>ReadEepromWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\VerifyEepromWindow.xaml.cs">
-      <DependentUpon>VerifyEepromWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\ReadFlashWindow.xaml.cs">
-      <DependentUpon>ReadFlashWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\VerifyFlashWindow.xaml.cs">
-      <DependentUpon>VerifyFlashWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\VerifyLockBitsWindow.xaml.cs">
-      <DependentUpon>VerifyLockBitsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\VerifyFuseBitsWindow.xaml.cs">
-      <DependentUpon>VerifyFuseBitsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\WriteEepromWindow.xaml.cs">
-      <DependentUpon>WriteEepromWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\WriteFlashWindow.xaml.cs">
-      <DependentUpon>WriteFlashWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SerialMonitor\MonitorToolBar.xaml.cs">
-      <DependentUpon>MonitorToolBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DeviceBitsView.xaml.cs">
-      <DependentUpon>DeviceBitsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FuseBitsWindow.xaml.cs">
-      <DependentUpon>FuseBitsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\ReadLockBitsWindow.xaml.cs">
-      <DependentUpon>ReadLockBitsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\ReadFuseBitsWindow.xaml.cs">
-      <DependentUpon>ReadFuseBitsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\ResetDeviceWindow.xaml.cs">
-      <DependentUpon>ResetDeviceWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\WriteLocksWindow.xaml.cs">
-      <DependentUpon>WriteLocksWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\WriteFusesWindow.xaml.cs">
-      <DependentUpon>WriteFusesWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SerialMonitor\SerialMonitorWindow.xaml.cs">
-      <DependentUpon>SerialMonitorWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\GeneralSettingsView.xaml.cs">
-      <DependentUpon>GeneralSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\StkV1SettingsView.xaml.cs">
-      <DependentUpon>StkV1SettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\BaseDeviceOperationWindow.cs" />
-    <Compile Include="Views\Settings\ComBitBangSettingsView.xaml.cs">
-      <DependentUpon>ComBitBangSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\ComPortSettingsView.xaml.cs">
-      <DependentUpon>ComPortSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DeviceOperationView.xaml.cs">
-      <DependentUpon>DeviceOperationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\HexBoardView.xaml.cs">
-      <DependentUpon>HexBoardView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\LockBitsWindow.xaml.cs">
-      <DependentUpon>LockBitsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\EraseDeviceWindow.xaml.cs">
-      <DependentUpon>EraseDeviceWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\ReadDeviceWindow.xaml.cs">
-      <DependentUpon>ReadDeviceWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SettingsWindow.xaml.cs">
-      <DependentUpon>SettingsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AppToolBar.xaml.cs">
-      <DependentUpon>AppToolBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\ConnectionView.xaml.cs">
-      <DependentUpon>ConnectionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\DeviceView.xaml.cs">
-      <DependentUpon>DeviceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\VerifyDeviceWindow.xaml.cs">
-      <DependentUpon>VerifyDeviceWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Operations\WriteDeviceWindow.xaml.cs">
-      <DependentUpon>WriteDeviceWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+
+    <!-- XAML elements -->
+    <Page Include="**\*.xaml" Exclude="App.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Commands\FlasherCommands.cs" />
-    <Compile Include="Models\FlasherModel.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Views\AboutWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AppResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\SpecialCharsTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Operations\ReadEepromWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\VerifyEepromWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\ReadFlashWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\VerifyFlashWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\VerifyLockBitsWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\VerifyFuseBitsWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\WriteEepromWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\WriteFlashWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\SerialMonitor\MonitorToolBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\DeviceBitsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FuseBitsWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\ReadLockBitsWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\ReadFuseBitsWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\ResetDeviceWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\WriteLocksWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\WriteFusesWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\SerialMonitor\SerialMonitorWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\GeneralSettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings\StkV1SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\ComBitBangSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\ComPortSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DeviceOperationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\HexBoardView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\LockBitsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Operations\EraseDeviceWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Operations\ReadDeviceWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SettingsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AppToolBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\ConnectionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\DeviceView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Operations\VerifyDeviceWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Operations\WriteDeviceWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MicroFlasher\MicroFlasher.csproj">
-      <Project>{0c30f079-3b8d-4b53-92f8-6abf036c430f}</Project>
-      <Name>MicroFlasher</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Remove="Icons\**\*.png" />
+    <None Remove="Icons\**\*.ico" />
+    <Resource Include="Icons\**\*.png" />
+    <Resource Include="Icons\**\*.ico" />
+    <None Remove="devices.xml" />
     <Content Include="devices.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </Content>
-    <Resource Include="Icons\about.png" />
-    <Resource Include="Icons\clear.png" />
-    <Resource Include="Icons\serial-monitor.png" />
-    <Resource Include="Icons\main.ico" />
-    <Resource Include="Icons\reset.png" />
-    <Resource Include="Icons\fuse-bits.png" />
-    <Resource Include="Icons\erase.png" />
-    <Resource Include="Icons\verify.png" />
-    <Resource Include="Icons\main.png" />
-    <Resource Include="Icons\lock-bits.png" />
-    <Resource Include="Icons\save.png" />
-    <Resource Include="Icons\open.png" />
-    <Resource Include="Icons\read.png" />
-    <Resource Include="Icons\write.png" />
-    <Resource Include="Icons\settings.png" />
+
+    <ProjectReference Include="..\MicroFlasher\MicroFlasher.csproj" />
+    <Compile Update="**\*.xaml.cs" SubType="Code" DependentUpon="%(Filename)" />
+
+    <!-- Resources -->
+    <EmbeddedResource Update="Properties\Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
+    <Compile Update="Properties\Resources.Designer.cs" AutoGen="True" DependentUpon="Resources.resx" DesignTime="True" />
+
+    <!-- Settings -->
+    <None Update="Properties\Settings.settings" Generator="SettingsSingleFileGenerator" LastGenOutput="Settings.Designer.cs" />
+    <Compile Update="Properties\Settings.Designer.cs" AutoGen="True" DependentUpon="Settings.settings" />
+
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <ItemGroup>
+    <Reference Include="Atmega">
+      <HintPath>..\references\Atmega.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
 </Project>
